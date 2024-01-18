@@ -5,8 +5,6 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,7 +34,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     
-    gyro = new AHRS(SerialPort.Port.kMXP);
+    gyro = new AHRS(Constants.GyroPort);
   }
 
   /**
