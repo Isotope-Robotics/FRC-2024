@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,6 +31,10 @@ public class Robot extends TimedRobot {
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   private final Swerve swerve = new Swerve();
 
+  //Encoder
+  private RelativeEncoder encoder;
+  private CANSparkMax motor;
+
 
 
 
@@ -39,6 +47,12 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
+    //canID's
+    motor = new CANSparkMax(5, MotorType.kBrushless);
+    encoder = motor.getAlternateEncoder(4027);
+    encoder.setPosition(0.0);
+
 
     swerve.zeroHeading();
   }
@@ -104,6 +118,7 @@ public class Robot extends TimedRobot {
     if(Constants.Controllers.driver1.getLeftBumperPressed()){
       swerve.zeroHeading();
     }
+    SmartDashboard.putNumber("name",encoder.getPosition());
   }
 
   /** This function is called once when the robot is disabled. */
