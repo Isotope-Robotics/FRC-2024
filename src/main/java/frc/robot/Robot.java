@@ -5,9 +5,15 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.geometry.Translation2d;
+import frc.robot.Subsystems.Swerve;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,7 +27,12 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  private AHRS gyro;
+  //Swerve Varibles
+  public static final CTREConfigs ctreConfigs = new CTREConfigs();
+  private final Swerve swerve = new Swerve();
+
+
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -33,8 +44,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
-    
-    gyro = new AHRS(Constants.GyroPort);
+    swerve.zeroHeading();
   }
 
   /**
@@ -80,11 +90,25 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+
+  }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //By Default Swerve Is Field Relative
+    if(Constants.Controllers.driver1.getAButtonPressed()){
+      SwerveDrive(false);
+    } else {
+      SwerveDrive(true);
+    }
+
+    //Zero Heading if Left Bumper is Pushed
+    if(Constants.Controllers.driver1.getLeftBumperPressed()){
+      swerve.zeroHeading();
+    }
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
@@ -109,4 +133,18 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
+
+
+  //To Drive With Controllers
+  private void SwerveDrive(boolean isFieldRel){
+    //Controller Deadbands (Translation, Strafe, Rotation)
+    final var xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftY(), Constants.Controllers.stickDeadband);
+    final var ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftX(), Constants.Controllers.stickDeadband);
+    final var rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRightX(), Constants.Controllers.stickDeadband);
+
+    //Drive Function
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed), rot * Constants.Swerve.maxAngularVelocity, isFieldRel, true);
+  }
 }
+
+
