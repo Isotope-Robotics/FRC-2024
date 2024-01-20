@@ -22,10 +22,10 @@ public class Intake {
     public static final PIDController wristPID = new PIDController(Constants.Intake.kP, Constants.Intake.kI, Constants.Intake.kD);
 
     public Intake() {
-        //Motor Declarations
+//Motor Declarations
         wristMotor = new CANSparkMax(Constants.Intake.wristMotorID, MotorType.kBrushless);
         intakeMotor = new CANSparkMax(Constants.Intake.intakeMotorID, MotorType.kBrushless);
-
+        
         //Idle Mode Declarations
         wristMotor.setIdleMode(Constants.Intake.Brake);
         intakeMotor.setIdleMode(Constants.Intake.Coast);
@@ -33,7 +33,7 @@ public class Intake {
         //Limit Switch (Photo Eye) Declarations
         noteIntaked = new DigitalInput(8);
         wristLimit = new DigitalInput(0);
-
+    
         //Encoders Declarations
         wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
 
@@ -43,7 +43,6 @@ public class Intake {
 
     //Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
-        // gets whether a note has been intaken
         if (noteIntaked.get()) {
             return true;
         } else {
@@ -51,9 +50,8 @@ public class Intake {
         }
     }
 
-    //Returns Limit Switch for Wrist Limit
+//Returns Limit Switch for Wrist Limit
     public boolean getWristLimit() {
-        // gets whether the wrist limitswitch is hit
         if (wristLimit.get()) {
             return true;
         } else {
@@ -61,21 +59,18 @@ public class Intake {
         }
     }
 
-    //Stops intake motors
+//Stops intake motors
     public void intakeStop() {
-        // Stop the intake motor
         intakeMotor.set(0);
     }
 
-    //Stops wrist motors
+//Stops wrist motors
     public void wristStop() {
-        // Stop moving the wrist
         wristMotor.set(0);
     }
 
-    //Wrist up movement control
+//Wrist up movement control
     public void wristUp() {
-        // Set wrist back up to start, if it hits the limit switch stop it
         if (getWristLimit()) {
             wristStop();
         }
@@ -84,15 +79,13 @@ public class Intake {
         }
     }
 
-    //Wrist down movement control
+//Wrist down movement control
     public void wristDown() {
-        // Set wrist position down to the floor for intaking
         intakeMotor.set(wristPID.calculate(wristEncoder.getPosition(), 60));
     }
 
-    //Intake speed set
+//Intake speed set
     public void intakeStart(double speed) {
-        // Set the intake motor to intake off the floor (adjust the speed as needed)
         intakeMotor.set(speed);
     }
 
