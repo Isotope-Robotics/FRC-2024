@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import com.revrobotics.SparkRelativeEncoder;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Swerve;
 
 /**
@@ -41,6 +44,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     swerve.zeroHeading();
+
+    Intake.wristEncoder = Intake.wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
+    Intake.wristEncoder.setPosition(0.0);
   }
 
   /**

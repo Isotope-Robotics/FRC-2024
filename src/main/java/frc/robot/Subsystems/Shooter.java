@@ -1,31 +1,31 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class Shooter extends SubsystemBase {
+public class Shooter  {
 
     private CANSparkMax shooterMotor1;
     private CANSparkMax shooterMotor2;
 
     public Shooter() {
+        shooterMotor1 = new CANSparkMax(Constants.Shooter.shooterMotor1ID, MotorType.kBrushless);
+        shooterMotor2 = new CANSparkMax(Constants.Shooter.shooterMotor2ID, MotorType.kBrushless);
     }
 
-    public void shoot() {
+    public void shoot(double leftSpeed, double rightSpeed) {
         // Set both shooter motors to shoot (adjust the speed as needed)
-        shooterMotor1.set(0.8);
-        shooterMotor2.set(0.8);
+        shooterMotor1.set(leftSpeed);
+        shooterMotor2.set(rightSpeed);
     }
 
-    public void stopShooter() {
+    public void stop() {
         // Stop both shooter motors
         shooterMotor1.set(0);
         shooterMotor2.set(0);
     }
 
-    @Override
-    public void periodic() {
-        // The periodic method is called every loop, put code here that you want to run periodically
-    }
+    
 }

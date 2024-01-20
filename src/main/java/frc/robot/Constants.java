@@ -23,6 +23,16 @@ public class Constants {
         public static final double stickDeadband = 0.1;
     }
 
+    public static final class Shooter {
+        public static final int shooterMotor1ID = 1;
+        public static final int shooterMotor2ID = 6;
+    }
+
+    public static final class Intake {
+        public static final int wristMotorID = 10;
+        public static final int intakeMotorID = 11;
+    }
+
     //Swerve Module Constants Class
     public static final class Swerve {
         // Pigeon CAN ID
