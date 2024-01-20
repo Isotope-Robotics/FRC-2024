@@ -26,10 +26,6 @@ public class Shooter  {
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
 
-        //Sets Config to Flash Memory
-        shooterMotor1.burnFlash();
-        shooterMotor2.burnFlash();
-
         //Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);

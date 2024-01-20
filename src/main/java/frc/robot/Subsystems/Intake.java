@@ -30,10 +30,6 @@ public class Intake {
         wristMotor.setIdleMode(Constants.Intake.Brake);
         intakeMotor.setIdleMode(Constants.Intake.Coast);
 
-        //Sets Config to Flash Memory
-        wristMotor.burnFlash();
-        intakeMotor.burnFlash();
-
         //Limit Switch (Photo Eye) Declarations
         noteIntaked = new DigitalInput(8);
         wristLimit = new DigitalInput(0);
