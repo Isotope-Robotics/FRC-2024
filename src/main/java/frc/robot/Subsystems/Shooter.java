@@ -27,5 +27,9 @@ public class Shooter  {
         shooterMotor2.set(0);
     }
 
-    
+    public void sourceIntake(double speed) {
+        // Set both shooter motors to intake through the source (adjust the speed as needed)
+        shooterMotor1.set(-speed);
+        shooterMotor2.set(-speed);
+    }
 }

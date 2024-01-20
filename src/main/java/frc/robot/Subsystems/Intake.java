@@ -33,6 +33,7 @@ public class Intake {
     }
 
     public boolean getNoteIntaked() {
+        // gets whether a note has been intaken
         if (noteIntaked.get()) {
             return true;
         } else {
@@ -41,6 +42,7 @@ public class Intake {
     }
 
     public boolean getWristLimit() {
+        // gets whether the wrist limitswitch is hit
         if (wristLimit.get()) {
             return true;
         } else {
@@ -49,14 +51,17 @@ public class Intake {
     }
 
     public void intakeStop() {
+        // Stop the intake motor
         intakeMotor.set(0);
     }
 
     public void wristStop() {
+        // Stop moving the wrist
         wristMotor.set(0);
     }
 
     public void wristUp() {
+        // Set wrist back up to start, if it hits the limit switch stop it
         if (getWristLimit()) {
             wristStop();
         }
@@ -66,10 +71,12 @@ public class Intake {
     }
 
     public void wristDown() {
+        // Set wrist position down to the floor for intaking
         intakeMotor.set(wristPID.calculate(wristEncoder.getPosition(), 60));
     }
 
     public void intakeStart(double speed) {
+        // Set the intake motor to intake off the floor (adjust the speed as needed)
         intakeMotor.set(speed);
     }
 
