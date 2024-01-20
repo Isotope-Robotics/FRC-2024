@@ -2,6 +2,7 @@ package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -27,11 +28,13 @@ public class Intake {
     public Intake() {
         wristMotor = new CANSparkMax(Constants.Intake.wristMotorID, MotorType.kBrushless);
         intakeMotor = new CANSparkMax(Constants.Intake.intakeMotorID, MotorType.kBrushless);
-        wristEncoder = wristMotor.getEncoder();
         noteIntaked = new DigitalInput(8);
         wristLimit = new DigitalInput(0);
+        wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
+        wristEncoder.setPosition(0.0);
     }
 
+    //Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
         if (noteIntaked.get()) {
             return true;
@@ -40,6 +43,7 @@ public class Intake {
         }
     }
 
+    //Returns Limit Switch for Wrist Limit
     public boolean getWristLimit() {
         if (wristLimit.get()) {
             return true;
@@ -48,14 +52,17 @@ public class Intake {
         }
     }
 
+    //Stops intake motors
     public void intakeStop() {
         intakeMotor.set(0);
     }
 
+    //Stops wrist motors
     public void wristStop() {
         wristMotor.set(0);
     }
 
+    //Wrist up movement control
     public void wristUp() {
         if (getWristLimit()) {
             wristStop();
@@ -65,10 +72,12 @@ public class Intake {
         }
     }
 
+    //Wrist down movement control
     public void wristDown() {
         intakeMotor.set(wristPID.calculate(wristEncoder.getPosition(), 60));
     }
 
+    //Intake speed set
     public void intakeStart(double speed) {
         intakeMotor.set(speed);
     }
