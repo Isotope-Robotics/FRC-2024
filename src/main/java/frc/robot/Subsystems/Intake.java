@@ -22,11 +22,26 @@ public class Intake {
     public static final PIDController wristPID = new PIDController(Constants.Intake.kP, Constants.Intake.kI, Constants.Intake.kD);
 
     public Intake() {
+        //Motor Declarations
         wristMotor = new CANSparkMax(Constants.Intake.wristMotorID, MotorType.kBrushless);
         intakeMotor = new CANSparkMax(Constants.Intake.intakeMotorID, MotorType.kBrushless);
+
+        //Idle Mode Declarations
+        wristMotor.setIdleMode(Constants.Intake.Brake);
+        intakeMotor.setIdleMode(Constants.Intake.Coast);
+
+        //Sets Config to Flash Memory
+        wristMotor.burnFlash();
+        intakeMotor.burnFlash();
+
+        //Limit Switch (Photo Eye) Declarations
         noteIntaked = new DigitalInput(8);
         wristLimit = new DigitalInput(0);
+
+        //Encoders Declarations
         wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
+
+        //Zero Out Encoder Positions
         wristEncoder.setPosition(0.0);
     }
 

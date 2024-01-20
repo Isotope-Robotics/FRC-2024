@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -26,17 +27,25 @@ public class Constants {
     public static final class Shooter {
         public static final int shooterMotor1ID = 1;
         public static final int shooterMotor2ID = 6;
+
         public static final double kP = 0.015;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
+
+        public static final IdleMode Brake = IdleMode.kBrake;
+        public static final IdleMode Coast = IdleMode.kCoast;
     }
 
     public static final class Intake {
         public static final int wristMotorID = 10;
         public static final int intakeMotorID = 11;
+        
         public static final double kP = 0.015;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
+
+        public static final IdleMode Brake = IdleMode.kBrake;
+        public static final IdleMode Coast = IdleMode.kCoast;
     }
 
     //Swerve Module Constants Class
