@@ -19,11 +19,7 @@ public class Intake {
     public static DigitalInput noteIntaked;
     public static DigitalInput wristLimit;
 
-    private static final double kP = 0.015;
-    private static final double kI = 0;
-    private static final double kD = 0;
-
-    public static final PIDController wristPID = new PIDController(kP, kI, kD);
+    public static final PIDController wristPID = new PIDController(Constants.Intake.kP, Constants.Intake.kI, Constants.Intake.kD);
 
     public Intake() {
         wristMotor = new CANSparkMax(Constants.Intake.wristMotorID, MotorType.kBrushless);

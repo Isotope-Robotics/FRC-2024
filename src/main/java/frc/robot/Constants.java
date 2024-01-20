@@ -26,11 +26,17 @@ public class Constants {
     public static final class Shooter {
         public static final int shooterMotor1ID = 1;
         public static final int shooterMotor2ID = 6;
+        public static final double kP = 0.015;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
     }
 
     public static final class Intake {
         public static final int wristMotorID = 10;
         public static final int intakeMotorID = 11;
+        public static final double kP = 0.015;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
     }
 
     //Swerve Module Constants Class
