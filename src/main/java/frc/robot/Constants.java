@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -26,11 +27,25 @@ public class Constants {
     public static final class Shooter {
         public static final int shooterMotor1ID = 1;
         public static final int shooterMotor2ID = 6;
+
+        public static final double kP = 0.015;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+
+        public static final IdleMode Brake = IdleMode.kBrake;
+        public static final IdleMode Coast = IdleMode.kCoast;
     }
 
     public static final class Intake {
         public static final int wristMotorID = 10;
         public static final int intakeMotorID = 11;
+        
+        public static final double kP = 0.015;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+
+        public static final IdleMode Brake = IdleMode.kBrake;
+        public static final IdleMode Coast = IdleMode.kCoast;
     }
 
     //Swerve Module Constants Class
@@ -90,21 +105,21 @@ public class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         // Drive Motor PID Values
-        public static final double driveKP = 0.12; // TODO: This must be tuned to specific robot
+        public static final double driveKP = 0.12;
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;
 
         // Drive Motor Characterization Values From SYSID
-        public static final double driveKS = 0.32; // TODO: This must be tuned to specific robot
+        public static final double driveKS = 0.32;
         public static final double driveKV = 1.51;
         public static final double driveKA = 0.27;
 
         // Swerve Profiling Values
         // Meters per Second
-        public static final double maxSpeed = 4.5; // TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 4.5;
         // Radians per Second
-        public static final double maxAngularVelocity = 10.0; // TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 10.0;
 
         // Neutral Modes
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -112,7 +127,7 @@ public class Constants {
 
         // Module Specific Constants
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { // TODO: This must be tuned to specific robot
+        public static final class Mod0 { 
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 1;
@@ -122,7 +137,7 @@ public class Constants {
         }
 
         /* Front Right Module - Module 1 */
-        public static final class Mod1 { // TODO: This must be tuned to specific robot
+        public static final class Mod1 {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
@@ -132,7 +147,7 @@ public class Constants {
         }
 
         /* Back Left Module - Module 2 */
-        public static final class Mod2 { // TODO: This must be tuned to specific robot
+        public static final class Mod2 {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
@@ -142,7 +157,7 @@ public class Constants {
         }
 
         /* Back Right Module - Module 3 */
-        public static final class Mod3 { // TODO: This must be tuned to specific robot
+        public static final class Mod3 {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
@@ -152,8 +167,7 @@ public class Constants {
         }
     }
 
-    public static final class AutoConstants { // TODO: The below constants are used in the example auto, and must be
-                                              // tuned to specific robot
+    public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;

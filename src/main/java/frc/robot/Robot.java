@@ -30,9 +30,6 @@ public class Robot extends TimedRobot {
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   private final Swerve swerve = new Swerve();
 
-
-
-
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -44,9 +41,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     swerve.zeroHeading();
-
-    Intake.wristEncoder = Intake.wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
-    Intake.wristEncoder.setPosition(0.0);
   }
 
   /**
