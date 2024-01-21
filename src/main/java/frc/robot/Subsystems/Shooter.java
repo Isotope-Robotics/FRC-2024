@@ -17,18 +17,18 @@ public class Shooter {
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
 
-    public Shooter() {
+    public Shooter(int shooter1CANID, int shooter2CANID) {
         // Motor Declarations
-        shooterMotor1 = new CANSparkMax(Constants.Shooter.shooterMotor1ID, MotorType.kBrushless);
-        shooterMotor2 = new CANSparkMax(Constants.Shooter.shooterMotor2ID, MotorType.kBrushless);
+        shooterMotor1 = new CANSparkMax(shooter1CANID, MotorType.kBrushless);
+        shooterMotor2 = new CANSparkMax(shooter2CANID, MotorType.kBrushless);
 
         // Idle Mode Declarations
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
 
         // Encoders Declarations
-        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
-        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
+        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
 
         // Zero Out Encoder Positions
         shooter1Encoder.setPosition(0);

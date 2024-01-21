@@ -21,10 +21,10 @@ public class Intake {
 
     public static final PIDController wristPID = new PIDController(Constants.Intake.kP, Constants.Intake.kI, Constants.Intake.kD);
 
-    public Intake() {
+    public Intake(int wristMotorCANID, int intakeMotorCANID) {
 //Motor Declarations
-        wristMotor = new CANSparkMax(Constants.Intake.wristMotorID, MotorType.kBrushless);
-        intakeMotor = new CANSparkMax(Constants.Intake.intakeMotorID, MotorType.kBrushless);
+        wristMotor = new CANSparkMax(wristMotorCANID, MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(intakeMotorCANID, MotorType.kBrushless);
         
         //Idle Mode Declarations
         wristMotor.setIdleMode(Constants.Intake.Brake);
@@ -35,7 +35,7 @@ public class Intake {
         wristLimit = new DigitalInput(0);
     
         //Encoders Declarations
-        wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 4096);
+        wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
 
         //Zero Out Encoder Positions
         wristEncoder.setPosition(0.0);

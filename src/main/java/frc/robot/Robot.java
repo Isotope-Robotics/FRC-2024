@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 
 /**
@@ -29,6 +30,12 @@ public class Robot extends TimedRobot {
   //Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   private final Swerve swerve = new Swerve();
+
+  //Shooter Varibles
+  private final Shooter shooter = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
+
+  //Intake Varibles
+  private final Intake intake = new Intake(Constants.Intake.wristMotorID, Constants.Intake.intakeMotorID);
 
   /**
    * This function is run when the robot is first started up and should be used for any

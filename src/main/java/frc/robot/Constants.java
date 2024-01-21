@@ -48,6 +48,11 @@ public class Constants {
         public static final IdleMode Coast = IdleMode.kCoast;
     }
 
+    public static final class Encoders {
+        public static final int NEO_ENCODER_COUNTS = 42;
+        public static final int FALCON_ENCODER_COUNTS = 2048;
+    }
+
     //Swerve Module Constants Class
     public static final class Swerve {
         // Pigeon CAN ID
