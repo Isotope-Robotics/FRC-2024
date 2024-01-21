@@ -47,7 +47,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
+    //Zero Gyro Heading for Swerve
     swerve.zeroHeading();
+
+    //Zero Shooter and Intake Encoders
+    shooter.zeroEncoders();
+    intake.zeroEncoders();
   }
 
   /**

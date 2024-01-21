@@ -29,10 +29,6 @@ public class Shooter {
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-
-        // Zero Out Encoder Positions
-        shooter1Encoder.setPosition(0);
-        shooter2Encoder.setPosition(0);
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
@@ -48,6 +44,13 @@ public class Shooter {
         shooterMotor1.set(0);
         shooterMotor2.set(0);
         SmartDashboard.putNumber("Shooter is Stopped", 0);
+    }
+
+    public void zeroEncoders() {
+        // Zero Out Encoder Positions
+        shooter1Encoder.setPosition(0);
+        shooter2Encoder.setPosition(0);
+        System.err.println("Zeroed Shooter Encoders");
     }
 
     // Set both shooter motors to intake through the source (adjust the speed as

@@ -37,8 +37,7 @@ public class Intake {
         //Encoders Declarations
         wristEncoder = wristMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
 
-        //Zero Out Encoder Positions
-        wristEncoder.setPosition(0.0);
+       
     }
 
     //Photoelectric Sensor for sensing a note in the intake
@@ -67,6 +66,12 @@ public class Intake {
 //Stops wrist motors
     public void wristStop() {
         wristMotor.set(0);
+    }
+
+    public void zeroEncoders(){
+         //Zero Out Encoder Positions
+        wristEncoder.setPosition(0.0);
+        System.err.println("Zeroed Intake Encoders");
     }
 
 //Wrist up movement control
