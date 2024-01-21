@@ -3,6 +3,9 @@ package frc.robot;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -13,14 +16,15 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Lib.Util.FalconSwerveConstants;
 import frc.robot.Lib.Util.SwerveModuleConstants;
+import frc.robot.Subsystems.Swerve;
 
 public class Constants {
 
-    //Operator Controllers Constants Class
+    // Operator Controllers Constants Class
     public static final class Controllers {
         public static final XboxController driver1 = new XboxController(0);
         public static final XboxController driver2 = new XboxController(1);
-        
+
         public static final double stickDeadband = 0.1;
     }
 
@@ -39,7 +43,7 @@ public class Constants {
     public static final class Intake {
         public static final int wristMotorID = 10;
         public static final int intakeMotorID = 11;
-        
+
         public static final double kP = 0.015;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
@@ -53,7 +57,7 @@ public class Constants {
         public static final int FALCON_ENCODER_COUNTS = 2048;
     }
 
-    //Swerve Module Constants Class
+    // Swerve Module Constants Class
     public static final class Swerve {
         // Pigeon CAN ID
         public static final int pigeonId = 1;
@@ -132,7 +136,7 @@ public class Constants {
 
         // Module Specific Constants
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { 
+        public static final class Mod0 {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 1;
@@ -170,6 +174,16 @@ public class Constants {
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
+
+        //For Pathplanner Config - DO NOT USE ANYWHERE EXCEPT FOR THE CONFIG IN AUTO!!
+        public static final Translation2d front_offset = new Translation2d(wheelBase / 2.0, trackWidth / 2.0);
+
+        public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
+                new PIDConstants(5.0, 0, 0), // Translation constants
+                new PIDConstants(5.0, 0, 0), // Rotation constants
+                maxSpeed,
+                front_offset.getNorm(), // Drive base radius (distance from center to furthest module)
+                new ReplanningConfig());
     }
 
     public static final class AutoConstants {
