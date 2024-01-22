@@ -38,10 +38,10 @@ public class Robot extends TimedRobot {
   public Swerve swerve = new Swerve();
 
   // Shooter Varibles
-  private final Shooter shooter = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
+  private final Shooter shooter = Shooter.getInstance();
 
   // Intake Varibles
-  private final Intake intake = new Intake(Constants.Intake.wristMotorID, Constants.Intake.intakeMotorID);
+  private final Intake intake = Intake.getInstance();
 
   /**
    * This function is run when the robot is first started up and should be used

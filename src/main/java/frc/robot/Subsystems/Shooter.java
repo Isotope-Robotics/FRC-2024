@@ -17,6 +17,8 @@ public class Shooter {
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
 
+    private static Shooter m_Instance = null;
+
     public Shooter(int shooter1CANID, int shooter2CANID) {
         // Motor Declarations
         shooterMotor1 = new CANSparkMax(shooter1CANID, MotorType.kBrushless);
@@ -59,5 +61,13 @@ public class Shooter {
         shooterMotor1.set(-speed);
         shooterMotor2.set(-speed);
         SmartDashboard.putNumber("Shooter Speed", speed);
+    }
+
+    //Returns Instance Of Shooter
+    public static Shooter getInstance(){
+        if (m_Instance == null){
+            m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
+        }
+        return m_Instance;
     }
 }

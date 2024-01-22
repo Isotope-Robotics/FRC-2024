@@ -6,18 +6,22 @@ import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.Constants;
 
-public class Intake {
+public class Intake extends SubsystemBase{
 
     public static CANSparkMax wristMotor;
     public static CANSparkMax intakeMotor;
     public static RelativeEncoder wristEncoder;
     public static DigitalInput noteIntaked;
     public static DigitalInput wristLimit;
+    
+    private static Intake m_Instance = null;
 
     public static final PIDController wristPID = new PIDController(Constants.Intake.kP, Constants.Intake.kI,
             Constants.Intake.kD);
@@ -93,6 +97,15 @@ public class Intake {
     // Intake speed set
     public void intakeStart(double speed) {
         intakeMotor.set(speed);
+    }
+
+    //Returns Instance Of Intake
+    public static Intake getInstance(){
+        if (m_Instance == null){
+            m_Instance = new Intake(Constants.Intake.wristMotorID, Constants.Intake.intakeMotorID);
+        }
+
+        return m_Instance;
     }
 
 }
