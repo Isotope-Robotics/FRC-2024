@@ -4,143 +4,185 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  
+  private Command m_AutonomousCommand;
+  private RobotContainer auto_RobotContainer;
 
-  //Swerve Varibles
+  // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
-  private final Swerve swerve = new Swerve();
+  public Swerve swerve = new Swerve();
 
-  //Shooter Varibles
+  // Shooter Varibles
   private final Shooter shooter = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
 
-  //Intake Varibles
+  // Intake Varibles
   private final Intake intake = new Intake(Constants.Intake.wristMotorID, Constants.Intake.intakeMotorID);
 
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
   @Override
   public void robotInit() {
-   
+    //Robot Container for Auto Commands
+    auto_RobotContainer = new RobotContainer();
 
-
-    //Zero Gyro Heading for Swerve
+    // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
 
-    //Zero Shooter and Intake Encoders
+    // Zero Shooter and Intake Encoders
     shooter.zeroEncoders();
     intake.zeroEncoders();
   }
 
   /**
-   * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
+   * This function is called every 20 ms, no matter the mode. Use this for items
+   * like diagnostics
    * that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and
    * SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    //Command Scheduler ONLY for Auto
+    CommandScheduler.getInstance().run();
+  }
 
   /**
-   * This autonomous (along with the chooser code above) shows how to select between different
-   * autonomous modes using the dashboard. The sendable chooser code works with the Java
-   * SmartDashboard. If you prefer the LabVIEW Dashboard, remove all of the chooser code and
-   * uncomment the getString line to get the auto name from the text box below the Gyro
+   * This autonomous (along with the chooser code above) shows how to select
+   * between different
+   * autonomous modes using the dashboard. The sendable chooser code works with
+   * the Java
+   * SmartDashboard. If you prefer the LabVIEW Dashboard, remove all of the
+   * chooser code and
+   * uncomment the getString line to get the auto name from the text box below the
+   * Gyro
    *
-   * <p>You can add additional auto modes by adding additional comparisons to the switch structure
-   * below with additional strings. If using the SendableChooser make sure to add them to the
+   * <p>
+   * You can add additional auto modes by adding additional comparisons to the
+   * switch structure
+   * below with additional strings. If using the SendableChooser make sure to add
+   * them to the
    * chooser code above as well.
    */
   @Override
   public void autonomousInit() {
-  
+    m_AutonomousCommand = auto_RobotContainer.getAutonomousCommand();
+
+    // schedule the autonomous command (example)
+    if (m_AutonomousCommand != null) {
+      m_AutonomousCommand.schedule();
+    }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-   
+
   }
 
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-
+    //Destory Auto Commands When Switching To TeleOP
+    if (m_AutonomousCommand != null) {
+      m_AutonomousCommand.cancel();
+    }
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //By Default Swerve Is Field Relative
-    if(Constants.Controllers.driver1.getAButtonPressed()){
+    // By Default Swerve Is Field Relative
+    if (Constants.Controllers.driver1.getAButtonPressed()) {
       SwerveDrive(false);
     } else {
       SwerveDrive(true);
     }
 
-    //Zero Heading if Left Bumper is Pushed
-    if(Constants.Controllers.driver1.getLeftBumperPressed()){
+    // Zero Heading if Left Bumper is Pushed
+    if (Constants.Controllers.driver1.getLeftBumperPressed()) {
       swerve.zeroHeading();
     }
   }
 
   /** This function is called once when the robot is disabled. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   /** This function is called periodically when disabled. */
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   /** This function is called once when test mode is enabled. */
   @Override
-  public void testInit() {}
+  public void testInit() {
+    CommandScheduler.getInstance().cancelAll();
+  }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
-  public void simulationInit() {}
+  public void simulationInit() {
+  }
 
   /** This function is called periodically whilst in simulation. */
   @Override
-  public void simulationPeriodic() {}
+  public void simulationPeriodic() {
+  }
 
+  // To Drive With Controllers
+  private void SwerveDrive(boolean isFieldRel) {
+    // Controller Deadbands (Translation, Strafe, Rotation)
+    final var xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftY(),
+        Constants.Controllers.stickDeadband);
+    final var ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftX(),
+        Constants.Controllers.stickDeadband);
+    final var rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRightX(),
+        Constants.Controllers.stickDeadband);
 
-  //To Drive With Controllers
-  private void SwerveDrive(boolean isFieldRel){
-    //Controller Deadbands (Translation, Strafe, Rotation)
-    final var xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftY(), Constants.Controllers.stickDeadband);
-    final var ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftX(), Constants.Controllers.stickDeadband);
-    final var rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRightX(), Constants.Controllers.stickDeadband);
+    // Drive Function
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, true);
+  }
 
-    //Drive Function
-    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed), rot * Constants.Swerve.maxAngularVelocity, isFieldRel, true);
+  // Adding Auto Commands to Auto Selector
+  public void generateAutos() {
+    SmartDashboard.putData("Example Auto", new PathPlannerAuto("ExampleAuto"));
   }
 }
-
-
