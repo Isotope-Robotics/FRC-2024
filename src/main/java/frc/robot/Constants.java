@@ -29,8 +29,20 @@ public class Constants {
     }
 
     public static final class Shooter {
-        public static final int shooterMotor1ID = 1;
-        public static final int shooterMotor2ID = 6;
+        public static final int shooterMotor1ID = 10;
+        public static final int shooterMotor2ID = 11;
+
+        public static final double kP = 0.015;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+
+        public static final IdleMode Brake = IdleMode.kBrake;
+        public static final IdleMode Coast = IdleMode.kCoast;
+    }
+
+    public static final class Climber {
+        public static final int masterMotorID = 16;
+        public static final int followerMotorID = 17;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
