@@ -57,22 +57,18 @@ public class Shooter {
 
     // Set both shooter motors to intake through the source (adjust the speed as
     // needed)
-    public void sourceIntake(double speed) {
-        shooterMotor1.set(-speed);
-        shooterMotor2.set(-speed);
-        SmartDashboard.putNumber("Shooter Speed", speed);
-=======
+
     public void sourceIntake(double motor1Speed, double motor2Speed) {
-        // Set both shooter motors to intake through the source (adjust the speed as needed)
         shooterMotor1.set(-motor1Speed);
         shooterMotor2.set(-motor2Speed);
         SmartDashboard.putNumber("Shooter 1 Speed", motor1Speed);
         SmartDashboard.putNumber("Shooter 2 Speed", motor2Speed);
+
     }
 
-    //Returns Instance Of Shooter
-    public static Shooter getInstance(){
-        if (m_Instance == null){
+    // Returns Instance Of Shooter
+    public static Shooter getInstance() {
+        if (m_Instance == null) {
             m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
         }
         return m_Instance;
