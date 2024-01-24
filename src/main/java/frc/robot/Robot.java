@@ -4,22 +4,20 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.revrobotics.SparkRelativeEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
-import frc.robot.Subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +32,12 @@ public class Robot extends TimedRobot {
   private Command m_AutonomousCommand;
   private RobotContainer auto_RobotContainer;
 
+    //controller
+    private XboxController controller;
+    private CANSparkMax leftShooterMotor;
+    private CANSparkMax rightShooterMotor;
+  
+
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   public Swerve swerve = new Swerve();
@@ -43,6 +47,13 @@ public class Robot extends TimedRobot {
 
   // Intake Varibles
   private final Intake intake = Intake.getInstance();
+
+  public void controls() {
+    controller = new XboxController(0); // Change the port number as per your setup
+    leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the motor ID as per your setup
+    rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the motor ID as per your setup
+}
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -129,6 +140,16 @@ public class Robot extends TimedRobot {
     } else {
       SwerveDrive(true);
     }
+     //// Get the controller axis values
+ double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
+
+ // Map the controller output to motor speeds
+ double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
+ double rightMotorSpeed = shooterSpeed;
+
+ // Set the motor speeds :D
+ leftShooterMotor.set(leftMotorSpeed);
+ rightShooterMotor.set(rightMotorSpeed);
 
     // Zero Heading if Left Bumper is Pushed
     if (Constants.Controllers.driver1.getLeftBumperPressed()) {
