@@ -25,6 +25,5 @@
       }
     },
   ],
-  "java.test.defaultConfig": "WPIlibUnitTests",
-  "CodeGPT.apiKey": "CodeGPT Plus Beta"
+  "java.test.defaultConfig": "WPIlibUnitTests"
 }
