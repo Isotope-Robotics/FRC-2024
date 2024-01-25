@@ -33,14 +33,14 @@ public class Robot extends TimedRobot {
   private RobotContainer auto_RobotContainer;
 
     //controller
-    private XboxController controller;
-    private CANSparkMax leftShooterMotor;
-    private CANSparkMax rightShooterMotor;
+   // private XboxController controller;
+   // private CANSparkMax leftShooterMotor;
+    //private CANSparkMax rightShooterMotor;
   
 
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
-  public Swerve swerve = new Swerve();
+  public Swerve swerve;
 
   // Shooter Varibles
  // private final Shooter shooter = Shooter.getInstance();
@@ -49,9 +49,9 @@ public class Robot extends TimedRobot {
  // private final Intake intake = Intake.getInstance();
 
   public void controls() {
-    controller = new XboxController(0); // Change the port number as per your setup
-    leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the motor ID as per your setup
-    rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the motor ID as per your setup
+  //  controller = new XboxController(0); // Change the port number as per your setup
+   // leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the motor ID as per your setup
+    //rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the motor ID as per your setup
 }
 
 
@@ -62,11 +62,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    swerve = new Swerve();
     //Robot Container for Auto Commands
-    auto_RobotContainer = new RobotContainer();
+    //auto_RobotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
-    swerve.zeroHeading();
+    //swerve.zeroHeading();
 
     // Zero Shooter and Intake Encoders
    // shooter.zeroEncoders();
@@ -86,7 +87,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //Command Scheduler ONLY for Auto
-    CommandScheduler.getInstance().run();
+    //CommandScheduler.getInstance().run();
   }
 
   /**
@@ -135,26 +136,24 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // By Default Swerve Is Field Relative
-    if (Constants.Controllers.driver1.getAButtonPressed()) {
+   
       SwerveDrive(false);
-    } else {
-      SwerveDrive(true);
-    }
+   
      //// Get the controller axis values
- double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
+ //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
 
  // Map the controller output to motor speeds
- double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
- double rightMotorSpeed = shooterSpeed;
+ //double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
+// double rightMotorSpeed = shooterSpeed;
 
  // Set the motor speeds :D
- leftShooterMotor.set(leftMotorSpeed);
- rightShooterMotor.set(rightMotorSpeed);
+ //leftShooterMotor.set(leftMotorSpeed);
+ //rightShooterMotor.set(rightMotorSpeed);
 
     // Zero Heading if Left Bumper is Pushed
-    if (Constants.Controllers.driver1.getLeftBumperPressed()) {
-      swerve.zeroHeading();
-    }
+   // if (Constants.Controllers.driver1.getLeftBumperPressed()) {
+    //  swerve.zeroHeading();
+   // }
   }
 
   /** This function is called once when the robot is disabled. */
@@ -191,16 +190,16 @@ public class Robot extends TimedRobot {
   // To Drive With Controllers
   private void SwerveDrive(boolean isFieldRel) {
     // Controller Deadbands (Translation, Strafe, Rotation)
-    final var xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftY(),
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
         Constants.Controllers.stickDeadband);
-    final var ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getLeftX(),
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
-    final var rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRightX(),
+    final double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(2),
         Constants.Controllers.stickDeadband);
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, true);
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
   // Adding Auto Commands to Auto Selector

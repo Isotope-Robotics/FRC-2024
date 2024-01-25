@@ -45,9 +45,16 @@ public class SwerveModule {
         resetToAbsolute();
 
         // Drive Motor Config
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
-        mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
-        mDriveMotor.getConfigurator().setPosition(0.0);
+        if (this.moduleNumber == 0) {
+            mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
+            mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig1);
+            mDriveMotor.getConfigurator().setPosition(0.0);
+        } else {
+            mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
+            mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
+            mDriveMotor.getConfigurator().setPosition(0.0);
+        }
+
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop) {
@@ -60,9 +67,9 @@ public class SwerveModule {
         if (isOpenLoop) {
             driveDutyCycle.Output = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
             mDriveMotor.setControl(driveDutyCycle);
-        }
-        else {
-            driveVelocity.Velocity = Conversions.MPSToRPS(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference);
+        } else {
+            driveVelocity.Velocity = Conversions.MPSToRPS(desiredState.speedMetersPerSecond,
+                    Constants.Swerve.wheelCircumference);
             driveVelocity.FeedForward = driveFeedforward.calculate(desiredState.speedMetersPerSecond);
             mDriveMotor.setControl(driveVelocity);
         }
@@ -72,22 +79,21 @@ public class SwerveModule {
         return Rotation2d.fromRotations(angleEncoder.getAbsolutePosition().getValue());
     }
 
-    public void resetToAbsolute(){
+    public void resetToAbsolute() {
         double absolutePosition = getCANCoder().getRotations() - angleOffset.getRotations();
         mAngleMotor.setPosition(absolutePosition);
     }
 
-    public SwerveModuleState getState(){
+    public SwerveModuleState getState() {
         return new SwerveModuleState(
-            Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.Swerve.wheelCircumference),
-            Rotation2d.fromRotations(mAngleMotor.getPosition().getValue())
-        );
+                Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.Swerve.wheelCircumference),
+                Rotation2d.fromRotations(mAngleMotor.getPosition().getValue()));
     }
 
-    public SwerveModulePosition getPosition(){
+    public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(), Constants.Swerve.wheelCircumference),
-            Rotation2d.fromRotations(mAngleMotor.getPosition().getValue())
-        );
+                Conversions.rotationsToMeters(mDriveMotor.getPosition().getValue(),
+                        Constants.Swerve.wheelCircumference),
+                Rotation2d.fromRotations(mAngleMotor.getPosition().getValue()));
     }
 }

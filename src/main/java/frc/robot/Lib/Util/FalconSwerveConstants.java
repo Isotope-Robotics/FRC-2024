@@ -52,6 +52,22 @@ public class FalconSwerveConstants {
                         angleKD, driveMotorInvert, angleMotorInvert, cancoderInvert);
             }
 
+            public static final FalconSwerveConstants Falcon500Inverted(double driveGearRatio) {
+                double wheelDiameter = Units.inchesToMeters(4.0);
+                double angleGearRatio = ((150.0 / 7.0) / 1.0);
+
+                double angleKP = 100.0;
+                double angleKI = 0.0;
+                double angleKD = 0.0;
+
+                InvertedValue driveMotorInvert = InvertedValue.Clockwise_Positive;
+                InvertedValue angleMotorInvert = InvertedValue.Clockwise_Positive;
+                SensorDirectionValue cancoderInvert = SensorDirectionValue.CounterClockwise_Positive;
+
+                return new FalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI,
+                        angleKD, driveMotorInvert, angleMotorInvert, cancoderInvert);
+            }
+
             public static final class driveRatios {
                 /** SDS MK4i - (8.14 : 1) */
                 public static final double L1 = (8.14 / 1.0);
