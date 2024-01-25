@@ -39,10 +39,10 @@ public class Robot extends TimedRobot {
   public Swerve swerve = new Swerve();
 
   // Shooter Varibles
-  private final Shooter shooter = Shooter.getInstance();
+ // private final Shooter shooter = Shooter.getInstance();
 
   // Intake Varibles
-  private final Intake intake = Intake.getInstance();
+ // private final Intake intake = Intake.getInstance();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -58,8 +58,8 @@ public class Robot extends TimedRobot {
     swerve.zeroHeading();
 
     // Zero Shooter and Intake Encoders
-    shooter.zeroEncoders();
-    intake.zeroEncoders();
+   // shooter.zeroEncoders();
+   // intake.zeroEncoders();
   }
 
   /**
