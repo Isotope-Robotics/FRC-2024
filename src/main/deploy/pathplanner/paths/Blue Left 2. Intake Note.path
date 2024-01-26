@@ -3,39 +3,39 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.4521324760189377,
-        "y": 7.162822040146739
+        "x": 2.5218037165932152,
+        "y": 6.283418822761816
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.532226724286402,
-        "y": 7.175381275591709
+        "x": 1.840669786867588,
+        "y": 6.264987880287689
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Blue Left 1 End"
     },
     {
       "anchor": {
-        "x": 2.3611362636544557,
-        "y": 6.999551979362122
+        "x": 2.4828970984907563,
+        "y": 6.983737948518551
       },
       "prevControl": {
-        "x": 1.4568713116165792,
-        "y": 7.039445180568776
+        "x": -0.6172403322250253,
+        "y": 7.170275192680712
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Blue Left 2 End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Drop Intake",
-      "waypointRelativePos": 0.7,
+      "name": "Drop Intakle",
+      "waypointRelativePos": 0.05,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -49,19 +49,12 @@
       }
     },
     {
-      "name": "Start Intake",
-      "waypointRelativePos": 0.9,
+      "name": "Intake Note",
+      "waypointRelativePos": 0.95,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeNote"
-              }
-            }
-          ]
+          "commands": []
         }
       }
     }
@@ -74,7 +67,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,

@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.4828970984907563,
+        "y": 6.983737948518551
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.4990594342090944,
+        "y": 6.96452841527237
+      },
+      "isLocked": false,
+      "linkedName": "Blue Left 2 End"
+    },
+    {
+      "anchor": {
+        "x": 2.643082178394933,
+        "y": 6.39872477739943
+      },
+      "prevControl": {
+        "x": 2.601932822913264,
+        "y": 6.5427475215852695
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Shoot Note",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 572.958,
+    "maxAngularAcceleration": 572.958
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -157.8097111038775,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": null,
+  "useDefaultConstraints": true
+}
