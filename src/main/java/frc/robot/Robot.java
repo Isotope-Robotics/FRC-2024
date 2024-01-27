@@ -43,10 +43,10 @@ public class Robot extends TimedRobot {
   public Swerve swerve;
 
   // Shooter Varibles
- // private final Shooter shooter = Shooter.getInstance();
+  private final Shooter shooter = Shooter.getInstance();
 
   // Intake Varibles
- // private final Intake intake = Intake.getInstance();
+  private final Intake intake = Intake.getInstance();
 
   public void controls() {
   //  controller = new XboxController(0); // Change the port number as per your setup

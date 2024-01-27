@@ -30,8 +30,8 @@ public class Constants {
     }
 
     public static final class Shooter {
-        public static final int shooterMotor1ID = 10;
-        public static final int shooterMotor2ID = 11;
+        public static final int shooterMotor1ID = 2;
+        public static final int shooterMotor2ID = 3;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
@@ -42,8 +42,8 @@ public class Constants {
     }
 
     public static final class Climber {
-        public static final int masterMotorID = 16;
-        public static final int followerMotorID = 17;
+        public static final int masterMotorID = 4;
+        public static final int followerMotorID = 5;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
@@ -54,8 +54,8 @@ public class Constants {
     }
 
     public static final class Intake {
-        public static final int wristMotorID = 10;
-        public static final int intakeMotorID = 11;
+        public static final int wristMotorID = 7;
+        public static final int intakeMotorID = 6;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
