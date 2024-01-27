@@ -9,7 +9,16 @@ public final class ShooterCommands {
 
     private ShooterCommands(){
         throw new UnsupportedOperationException("This is a utility class");
+
+        
     }
+
+    // why does this not work :(
+    // public static Command Shoot() {
+    //         return Commands.runOnce(() -> {
+    //             m_Shooter.shoot(0.0, 0.0);
+    //         }, m_Shooter);
+    //     }
 
    
 
