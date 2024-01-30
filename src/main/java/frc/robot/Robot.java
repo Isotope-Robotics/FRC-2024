@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    swerve = new Swerve();
+    swerve = Swerve.getInstance();
     //Robot Container for Auto Commands
     //auto_RobotContainer = new RobotContainer();
 
