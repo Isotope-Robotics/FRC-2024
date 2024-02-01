@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
+import frc.robot.Subsystems.Blinkin;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +48,11 @@ public class Robot extends TimedRobot {
 
   // Intake Varibles
   private final Intake intake = Intake.getInstance();
+
+  private final Blinkin blinkin = Blinkin.getInstance();
+
+  public boolean bool = true;
+  
 
   public void controls() {
   //  controller = new XboxController(0); // Change the port number as per your setup
@@ -130,6 +136,9 @@ public class Robot extends TimedRobot {
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
     }
+
+    
+    
   }
 
   /** This function is called periodically during operator control. */
@@ -137,13 +146,45 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // By Default Swerve Is Field Relative
    
-      SwerveDrive(true);
+      SwerveDrive(false);
+
+      // if (Constants.Controllers.driver2.getAButton()) {
+      //   blinkin.scannerRed();
+      // }
+      // else if (Constants.Controllers.driver2.getXButton()) {
+      //   blinkin.confetti();
+      // }
+      // else if (Constants.Controllers.driver2.getYButton()) {
+      //   blinkin.rainbowRGB();
+      // }
+      // else if (Constants.Controllers.driver2.getBButton()) {
+      //   blinkin.fireMedium();
+      // }
+      // else {
+      //   blinkin.breathRed();
+      // }
+
+      if (Constants.Controllers.driver2.getAButton() && bool == true) {
+        blinkin.index += 0.02;
+        bool = false;
+      }
+
+      if (Constants.Controllers.driver2.getBButton() && bool == true) {
+        blinkin.index -= 0.02;
+        bool = false;
+      }
+
+      bool = true;
+
+      blinkin.index();
+
+      SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
    
      //// Get the controller axis values
  //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
 
  // Map the controller output to motor speeds
- //double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
+// double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
 // double rightMotorSpeed = shooterSpeed;
 
  // Set the motor speeds :D

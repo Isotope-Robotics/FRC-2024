@@ -29,6 +29,11 @@ public class Constants {
         public static final double stickDeadband = 0.1;
     }
 
+    public static final class Blinkin {
+        public static final int blinkinPort = 9;
+    }
+
+
     public static final class Shooter {
         public static final int shooterMotor1ID = 2;
         public static final int shooterMotor2ID = 3;
