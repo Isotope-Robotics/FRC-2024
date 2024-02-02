@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 2,
-      "y": 2
+      "x": 1.125,
+      "y": 2.3
     },
     "rotation": 0
   },
@@ -14,7 +14,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Red Right 1. Shoot Note"
+            "pathName": "Blue Right 1.  Shoot Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Right 2. Intake Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Right 3. Shoot Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         }
       ]
