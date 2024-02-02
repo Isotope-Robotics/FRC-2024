@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.28233827338822,
-        "y": 1.953469966713696
+        "x": 15.151482584649198,
+        "y": 5.552816065267547
       },
       "prevControl": null,
       "nextControl": {
-        "x": 15.26141529160085,
-        "y": 2.7030439918627236
+        "x": 15.131423655208422,
+        "y": 4.992779625822562
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red Left 1 End "
     },
     {
       "anchor": {
-        "x": 15.28233827338822,
-        "y": 3.392519479022248
+        "x": 15.340861221942355,
+        "y": 4.271366603026899
       },
       "prevControl": {
-        "x": 15.241325190873773,
-        "y": 2.3948134851890366
+        "x": 15.323602637077965,
+        "y": 4.558269521941335
       },
       "nextControl": {
-        "x": 15.323410968472844,
-        "y": 4.3916756398492165
+        "x": 15.356675525291719,
+        "y": 4.0084731023614655
       },
       "isLocked": false,
       "linkedName": null
@@ -36,12 +36,12 @@
         "y": 4.088323249759835
       },
       "prevControl": {
-        "x": 13.438598876338181,
-        "y": 3.997118374477295
+        "x": 15.055348555430909,
+        "y": 4.0534240799022685
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red Left 2. End "
     }
   ],
   "rotationTargets": [],
@@ -59,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Red Left ",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
