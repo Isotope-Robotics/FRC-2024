@@ -34,6 +34,18 @@
           "data": {
             "waitTime": 1.0
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Middle 3. Shoot Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
         }
       ]
     }

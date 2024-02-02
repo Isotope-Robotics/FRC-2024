@@ -206,55 +206,55 @@ public class Blinkin {
     }
 
     // public  void rainbowRGB() {
-    //     blinkin.set(-.99);
+    //     blinkin.set(-.13);
     // }
 
     // public  void rainbowParty() {
-    //     blinkin.set(-.97);
+    //     blinkin.set(-.11);
     // }
 
     // public  void rainbowOcean() {
-    //     blinkin.set(-.95);
+    //     blinkin.set(-.09);
     // }
 
     // public  void rainbowLava() {
-    //     blinkin.set(-.93);
+    //     blinkin.set(-.07);
     // }
 
     // public  void rainbowForest() {
-    //     blinkin.set(-.91);
+    //     blinkin.set(-.05);
     // }
 
     // public  void rainbowGlitter() {
-    //     blinkin.set(-.89);
+    //     blinkin.set(-.03);
     // }
 
     // public  void confetti() {
-    //     blinkin.set(-.87);
+    //     blinkin.set(-.01);
     // }
 
     // public  void redShot() {
-    //     blinkin.set(-.85);
+    //     blinkin.set(.01);
     // }
 
     // public  void blueShot() {
-    //     blinkin.set(-.83);
+    //     blinkin.set(.03);
     // }
 
     // public  void whiteShot() {
-    //     blinkin.set(-.81);
+    //     blinkin.set(.05);
     // }
 
     // public  void sinelonRGB() {
-    //     blinkin.set(-.79);
+    //     blinkin.set(.07);
     // }
 
     // public  void sinelonParty() {
-    //     blinkin.set(-.77);
+    //     blinkin.set(.09);
     // }
 
     // public  void sinelonOcean() {
-    //     blinkin.set(-.75);
+    //     blinkin.set(.11);
     // }
 
     // public  void sinelonLava() {
