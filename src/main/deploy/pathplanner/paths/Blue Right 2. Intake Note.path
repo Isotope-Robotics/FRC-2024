@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Blue Right 2 End "
     }
   ],
   "rotationTargets": [],
@@ -78,7 +78,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Blue Right ",
+  "folder": "Blue Right Linked ",
   "previewStartingState": null,
   "useDefaultConstraints": true
 }

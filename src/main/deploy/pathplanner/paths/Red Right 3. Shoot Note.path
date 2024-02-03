@@ -3,32 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.635991171736864,
-        "y": 7.036539787365291
+        "x": 14.217987998475996,
+        "y": 5.534481602491851
       },
       "prevControl": null,
       "nextControl": {
-        "x": 15.574267138514362,
-        "y": 6.851367687697782
+        "x": 14.155192730234997,
+        "y": 6.263285660649736
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red Right 2.0"
     },
     {
       "anchor": {
-        "x": 14.843866078714747,
-        "y": 5.719760411951903
+        "x": 15.16715078163953,
+        "y": 5.534481602491851
       },
       "prevControl": {
-        "x": 14.593866078714747,
-        "y": 7.2197604119519
+        "x": 14.91715078163953,
+        "y": 7.0344816024918515
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red Right 1 End "
+      "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
@@ -57,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -0.2567945606786678,
     "rotateFast": false
   },
   "reversed": false,
