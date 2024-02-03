@@ -1,0 +1,55 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 15.188381157279894,
+        "y": 5.609502686690648
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 14.618042715659,
+        "y": 4.984286286891259
+      },
+      "isLocked": false,
+      "linkedName": "Red middle Start "
+    },
+    {
+      "anchor": {
+        "x": 14.177830021377273,
+        "y": 5.609502686690648
+      },
+      "prevControl": {
+        "x": 14.9743030078341,
+        "y": 5.004828574590136
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Red Middle 2 End"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 572.958,
+    "maxAngularAcceleration": 572.958
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -178.6687635013849,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Red Middle Linked ",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
