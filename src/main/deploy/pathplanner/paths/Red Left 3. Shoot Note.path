@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.635991171736864,
-        "y": 7.036539787365291
+        "x": 14.218850114675057,
+        "y": 4.088323249759835
       },
       "prevControl": null,
       "nextControl": {
-        "x": 15.574267138514362,
-        "y": 6.851367687697782
+        "x": 14.157126081452555,
+        "y": 3.9031511500923264
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Red Left 2. End "
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 5.533393622797174
       },
       "prevControl": {
-        "x": 14.91286190593757,
-        "y": 7.033393622797171
+        "x": 14.586051109141064,
+        "y": 4.758305954932494
       },
       "nextControl": null,
       "isLocked": false,
@@ -61,7 +61,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Red Right Linked",
+  "folder": "Red Left Linked ",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
