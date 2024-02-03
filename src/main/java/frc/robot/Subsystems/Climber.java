@@ -2,7 +2,7 @@ package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkRelativeEncoder;
+ import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -16,6 +16,8 @@ public class Climber {
     public static CANSparkMax masterMotor;
     public static CANSparkMax followerMotor;
     public static RelativeEncoder wristEncoder;
+    public static DigitalInput climberSwitch1;
+    public static DigitalInput climberSwitch2;
 
     private static Climber m_Instance = null;
 
@@ -31,6 +33,17 @@ public class Climber {
         // Idle Mode Declarations
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
+
+        climberSwitch1 = new DigitalInput(8);
+        climberSwitch2 = new DigitalInput(3);
+    }
+
+    public boolean getmagnet() {
+        if (climberSwitch1.get()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Climbers go up

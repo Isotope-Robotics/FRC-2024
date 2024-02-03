@@ -20,6 +20,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Blinkin;
+import frc.robot.Subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -52,7 +53,8 @@ public class Robot extends TimedRobot {
 
   private final Blinkin blinkin = Blinkin.getInstance();
 
-  public boolean bool = true;
+  private final Climber climber = Climber.getInstance();
+
   
 
   public void controls() {
@@ -138,7 +140,7 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.cancel();
     }
 
-    
+     
     
   }
 
@@ -173,11 +175,28 @@ public class Robot extends TimedRobot {
       //   blinkin.index -= 0.02;
       // }
 
-      blinkin.index = Constants.Controllers.driver2.getRawAxis(0);
-
-      blinkin.index();
+     
 
       SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+      SmartDashboard.putBoolean("magnet", climber.getmagnet());
+
+      // Intake down & Start Intake
+      if (Constants.Controllers.driver2.getLeftBumper()) {
+        intake.wristDown();
+        intake.intakeStart(.5);
+      } else if (Constants.Controllers.driver2.getRightBumper()) {
+        intake.intakeStart(-.5);
+        blinkin.fireMedium();
+      } else {
+        intake.intakeStop();
+      }
+
+      shooter.shoot(Constants.Controllers.driver2.getRightTriggerAxis(), Constants.Controllers.driver2.getRightTriggerAxis());
+
+      if (Constants.Controllers.driver2.getAButton()) {
+        intake.wristUp();
+        blinkin.fireMedium();
+      }      
    
      //// Get the controller axis values
  //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
@@ -194,6 +213,8 @@ public class Robot extends TimedRobot {
    // if (Constants.Controllers.driver1.getLeftBumperPressed()) {
     //  swerve.zeroHeading();
    // }
+    
+  
   }
 
   /** This function is called once when the robot is disabled. */

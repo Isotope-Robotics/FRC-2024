@@ -13,7 +13,8 @@ public class Blinkin {
 
     private static Blinkin m_Instance = null;
 
-    public double index = -0.15;
+  //  public boolean active;
+
 
     public Blinkin() {
         blinkin = new Spark(Constants.Blinkin.blinkinPort);
@@ -23,15 +24,17 @@ public class Blinkin {
     // Blinkin color/pattern values - https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
 
 
-    public void index() {
-        blinkin.set(index);
-        if (index > -0.15) {
-            index = -0.15;
-        }
-        if (index < -0.99) {
-            index = -0.99;
-        }
-    }
+    // public void index() {
+    //     blinkin.set(index);
+    //     if (index > -0.15) {
+    //         index = -0.15;
+    //     }
+    //     if (index < -0.99) {
+    //         index = -0.99;
+    //     }
+    // }
+
+
 
     public  void rainbowRGB() {
         blinkin.set(-.99);

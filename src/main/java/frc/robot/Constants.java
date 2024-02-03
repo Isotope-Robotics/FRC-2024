@@ -60,7 +60,7 @@ public class Constants {
 
     public static final class Intake {
         public static final int wristMotor1ID = 7;
-        public static final int wristMotor2ID = 5;
+       // public static final int wristMotor2ID = 5;
         public static final int intakeMotorID = 6;
 
         public static final double kP = 0.015;
