@@ -1,10 +1,7 @@
 package frc.robot.Subsystems;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 
 
 public class Blinkin {
@@ -13,8 +10,7 @@ public class Blinkin {
 
     private static Blinkin m_Instance = null;
 
-  //  public boolean active;
-
+    public double index = -0.15;
 
     public Blinkin() {
         blinkin = new Spark(Constants.Blinkin.blinkinPort);
@@ -24,17 +20,15 @@ public class Blinkin {
     // Blinkin color/pattern values - https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
 
 
-    // public void index() {
-    //     blinkin.set(index);
-    //     if (index > -0.15) {
-    //         index = -0.15;
-    //     }
-    //     if (index < -0.99) {
-    //         index = -0.99;
-    //     }
-    // }
-
-
+    public void index() {
+        blinkin.set(index);
+        if (index > -0.15) {
+            index = -0.15;
+        }
+        if (index < -0.99) {
+            index = -0.99;
+        }
+    }
 
     public  void rainbowRGB() {
         blinkin.set(-.99);
