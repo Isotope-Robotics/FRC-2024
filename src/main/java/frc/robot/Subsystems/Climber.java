@@ -19,6 +19,9 @@ public class Climber {
 
     private static Climber m_Instance = null;
 
+    public static final PIDController motionPID = new PIDController(Constants.Climber.kP, Constants.Climber.kI,
+            Constants.Climber.kD);
+
     public Climber(int masterMotorID, int followerMotorID) {
         // Motor Declarations
         masterMotor = new CANSparkMax(masterMotorID, MotorType.kBrushless);
@@ -32,12 +35,12 @@ public class Climber {
 
     // Climbers go up
     public static void extend() {
-        masterMotor.set(0.25);
+        masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 60));
     }
 
     // Climbers go down
     public static void retract() {
-        masterMotor.set(-0.25);
+        masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 0));
     }
 
     // Returns Instance Of Climber

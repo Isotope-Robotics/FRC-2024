@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -164,17 +165,15 @@ public class Robot extends TimedRobot {
       //   blinkin.breathRed();
       // }
 
-      if (Constants.Controllers.driver2.getAButton() && bool == true) {
-        blinkin.index += 0.02;
-        bool = false;
-      }
+      // if (Constants.Controllers.driver2.getAButton()) {
+      //   blinkin.index += 0.02;
+      // }
 
-      if (Constants.Controllers.driver2.getBButton() && bool == true) {
-        blinkin.index -= 0.02;
-        bool = false;
-      }
+      // if (Constants.Controllers.driver2.getBButton()) {
+      //   blinkin.index -= 0.02;
+      // }
 
-      bool = true;
+      blinkin.index = Constants.Controllers.driver2.getRawAxis(0);
 
       blinkin.index();
 
