@@ -10,6 +10,9 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -180,6 +183,20 @@ public class Robot extends TimedRobot {
       SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
       SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
+      NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+NetworkTableEntry tx = table.getEntry("tx");
+NetworkTableEntry ty = table.getEntry("ty");
+NetworkTableEntry ta = table.getEntry("ta");
+
+
+double x = tx.getDouble(0.0);
+double y = ty.getDouble(0.0);
+double area = ta.getDouble(0.0);
+
+      SmartDashboard.putNumber("LimelightX", x);
+SmartDashboard.putNumber("LimelightY", y);
+SmartDashboard.putNumber("LimelightArea", area);
+
       // Intake down & Start Intake
       if (Constants.Controllers.driver2.getLeftBumper()) {
         intake.wristDown();
@@ -199,6 +216,14 @@ public class Robot extends TimedRobot {
       }      
    
       intake.getNoteIntaked();
+
+      if (Constants.Controllers.driver2.getPOV() == 0) {
+        climber.extend();
+      }
+
+      if (Constants.Controllers.driver2.getPOV() == 180) {
+        climber.retract();
+      }
      //// Get the controller axis values
  //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
 

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.Constants;
+//import frc.robot.Subsystems.Blinkin;
 
 public class Climber {
     
@@ -20,6 +21,8 @@ public class Climber {
     public static DigitalInput climberSwitch2;
 
     private static Climber m_Instance = null;
+
+    private static final Blinkin blinkin = Blinkin.getInstance();
 
     public static final PIDController motionPID = new PIDController(Constants.Climber.kP, Constants.Climber.kI,
             Constants.Climber.kD);
@@ -47,13 +50,14 @@ public class Climber {
     }
 
     // Climbers go up
-    public static void extend() {
+    public  void extend() {
         masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 60));
     }
 
     // Climbers go down
-    public static void retract() {
+    public  void retract() {
         masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 0));
+        blinkin.rainbowParty();
     }
 
     // Returns Instance Of Climber
