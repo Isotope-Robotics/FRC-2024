@@ -75,7 +75,7 @@ public class Intake extends SubsystemBase {
     // Stops intake motors
     public void intakeStop() {
         intakeMotor.set(0);
-        blinkin.redShot();
+        blinkin.breathRed();
     }
 
     // Stops wrist motors

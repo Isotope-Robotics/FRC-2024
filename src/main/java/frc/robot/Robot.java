@@ -186,7 +186,7 @@ public class Robot extends TimedRobot {
         intake.intakeStart(.5);
       } else if (Constants.Controllers.driver2.getRightBumper()) {
         intake.intakeStart(-.5);
-        blinkin.fireMedium();
+   
       } else {
         intake.intakeStop();
       }
@@ -198,6 +198,7 @@ public class Robot extends TimedRobot {
         blinkin.fireMedium();
       }      
    
+      intake.getNoteIntaked();
      //// Get the controller axis values
  //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
 
