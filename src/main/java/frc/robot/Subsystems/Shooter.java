@@ -34,11 +34,11 @@ public class Shooter {
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
-    public void shoot(double leftSpeed, double rightSpeed) {
-        shooterMotor1.set(leftSpeed);
-        shooterMotor2.set(rightSpeed);
-        SmartDashboard.putNumber("Shooter 1 Speed", leftSpeed);
-        SmartDashboard.putNumber("Shooter 2 Speed", rightSpeed);
+    public void shoot(double speed) {
+        //shooterMotor1.set(speed);
+        shooterMotor2.set(speed);
+        SmartDashboard.putNumber("Shooter 1 Speed", speed);
+        SmartDashboard.putNumber("Shooter 2 Speed", speed);
     }
 
     // Stop both shooter motors

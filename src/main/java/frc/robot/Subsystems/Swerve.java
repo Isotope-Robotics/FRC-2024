@@ -81,15 +81,20 @@ public class Swerve extends SubsystemBase {
                                 translation.getY(),
                                 rotation));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+        
+        swerveOdometry.update(getGyroYaw(), getModulePositions());
+
+        field.setRobotPose(getPose());
 
         for (SwerveModule mod : mSwerveMods) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-       
+
         }
     }
+
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.Swerve.maxSpeed);
 
@@ -161,23 +166,27 @@ public class Swerve extends SubsystemBase {
         }
     }
 
-  /*   @Override
-    public void periodic() {
-        //swerveOdometry.update(getGyroYaw(), getModulePositions());
-        
-       // field.setRobotPose(getPose());
+    /*
+     * @Override
+     * public void periodic() {
+     * //swerveOdometry.update(getGyroYaw(), getModulePositions());
+     * 
+     * // field.setRobotPose(getPose());
+     * 
+     * for (SwerveModule mod : mSwerveMods) {
+     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder",
+     * mod.getCANCoder().getDegrees());
+     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle",
+     * mod.getPosition().angle.getDegrees());
+     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity",
+     * mod.getState().speedMetersPerSecond);
+     * }
+     * }
+     */
 
-        for (SwerveModule mod : mSwerveMods) {
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-        }
-    }
- */
-
-    //Returns Instance Of Swerve
-    public static Swerve getInstance(){
-        if (m_Instance == null){
+    // Returns Instance Of Swerve
+    public static Swerve getInstance() {
+        if (m_Instance == null) {
             m_Instance = new Swerve();
         }
         return m_Instance;

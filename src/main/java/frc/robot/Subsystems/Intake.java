@@ -10,14 +10,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-// import frc.robot.Subsystems.Blinkin;
 
 public class Intake extends SubsystemBase {
 
     public static CANSparkMax wristMotor1;
     // public static CANSparkMax wristMotor2;
     public static CANSparkMax intakeMotor;
-    public static RelativeEncoder wristEncoder1;
+    public  RelativeEncoder wristEncoder1;
     // public static RelativeEncoder wristEncoder2;
     public static DigitalInput noteIntaked;
     public static DigitalInput wristLimit;
@@ -37,7 +36,7 @@ public class Intake extends SubsystemBase {
 
         // Idle Mode Declarations
         wristMotor1.setIdleMode(Constants.Intake.Brake);
-        intakeMotor.setIdleMode(Constants.Intake.Coast);
+        intakeMotor.setIdleMode(Constants.Intake.Brake);
 
         // Limit Switch (Photo Eye) Declarations
         noteIntaked = new DigitalInput(5);
@@ -47,6 +46,8 @@ public class Intake extends SubsystemBase {
         wristEncoder1 = wristMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
                 Constants.Encoders.NEO_ENCODER_COUNTS);
         // Constants.Encoders.NEO_ENCODER_COUNTS);
+
+        intakeMotor.burnFlash();
 
     }
 
@@ -90,16 +91,16 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        if (getWristLimit()) {
+        if (!getWristLimit()) {
             wristStop();
         } else {
-            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 0));
+            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.5));
         }
     }
 
     // Wrist down movement control
     public void wristDown() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 60));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 37.5));
     }
 
     // Intake speed set

@@ -26,7 +26,7 @@ public class Constants {
         public static final Joystick driver1 = new Joystick(0);
         public static final XboxController driver2 = new XboxController(1);
 
-        public static final double stickDeadband = 0.1;
+        public static final double stickDeadband = 0.25;
     }
 
     public static final class Blinkin {
@@ -65,7 +65,7 @@ public class Constants {
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
-        public static final double kD = 0.0;
+        public static final double kD = 0.00;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
@@ -79,7 +79,7 @@ public class Constants {
     // Swerve Module Constants Class
     public static final class Swerve {
         // Pigeon CAN ID
-        public static final int pigeonId = 1;
+        public static final int pigeonId = 13;
 
         // Module Drive Ratios
         public static final FalconSwerveConstants chosenModule = FalconSwerveConstants.SDS.MK4i

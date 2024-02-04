@@ -20,9 +20,9 @@ public class ShooterCommands {
     // needs the yellow {} and ; for each line because multiple lines
     public static Command shoot() {
             return Commands.runOnce(() ->{
-             m_Shooter.shoot(.25, .25);
+             m_Shooter.shoot(.25);
              Commands.waitSeconds(.5);
-             m_Shooter.shoot(0, 0);
+             m_Shooter.shoot(0);
             });
         }
 

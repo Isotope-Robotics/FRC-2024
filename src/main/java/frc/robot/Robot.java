@@ -38,11 +38,10 @@ public class Robot extends TimedRobot {
   private Command m_AutonomousCommand;
   private RobotContainer auto_RobotContainer;
 
-    //controller
-   // private XboxController controller;
-   // private CANSparkMax leftShooterMotor;
-    //private CANSparkMax rightShooterMotor;
-  
+  // controller
+  // private XboxController controller;
+  // private CANSparkMax leftShooterMotor;
+  // private CANSparkMax rightShooterMotor;
 
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
@@ -58,14 +57,14 @@ public class Robot extends TimedRobot {
 
   private final Climber climber = Climber.getInstance();
 
-  
-
   public void controls() {
-  //  controller = new XboxController(0); // Change the port number as per your setup
-   // leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the motor ID as per your setup
-    //rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the motor ID as per your setup
-}
-
+    // controller = new XboxController(0); // Change the port number as per your
+    // setup
+    // leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the
+    // motor ID as per your setup
+    // rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the
+    // motor ID as per your setup
+  }
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -75,15 +74,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     swerve = Swerve.getInstance();
-    //Robot Container for Auto Commands
-    //auto_RobotContainer = new RobotContainer();
+    // Robot Container for Auto Commands
+    // auto_RobotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
-    //swerve.zeroHeading();
+    swerve.zeroHeading();
 
     // Zero Shooter and Intake Encoders
-   // shooter.zeroEncoders();
-   // intake.zeroEncoders();
+    // shooter.zeroEncoders();
+    intake.zeroEncoders();
   }
 
   /**
@@ -98,8 +97,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    //Command Scheduler ONLY for Auto
-    //CommandScheduler.getInstance().run();
+    // Command Scheduler ONLY for Auto
+    // CommandScheduler.getInstance().run();
   }
 
   /**
@@ -138,109 +137,122 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-    //Destory Auto Commands When Switching To TeleOP
+    // Destory Auto Commands When Switching To TeleOP
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
     }
 
-     
-    
+    intake.zeroEncoders();
   }
+
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    System.out.println(intake.wristEncoder1.getPosition());
+
     // By Default Swerve Is Field Relative
-   
+
+    SwerveDrive(true);
+
+    // if (Constants.Controllers.driver2.getAButton()) {
+    // blinkin.scannerRed();
+    // }
+    // else if (Constants.Controllers.driver2.getXButton()) {
+    // blinkin.confetti();
+    // }
+    // else if (Constants.Controllers.driver2.getYButton()) {
+    // blinkin.rainbowRGB();
+    // }
+    // else if (Constants.Controllers.driver2.getBButton()) {
+    // blinkin.fireMedium();
+    // }
+    // else {
+    // blinkin.breathRed();
+    // }
+
+    // if (Constants.Controllers.driver2.getAButton()) {
+    // blinkin.index += 0.02;
+    // }
+
+    // if (Constants.Controllers.driver2.getBButton()) {
+    // blinkin.index -= 0.02;
+    // }
+
+    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+    SmartDashboard.putBoolean("magnet", climber.getmagnet());
+
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
+
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+
+    // Intake down & Start Intake
+    if (Constants.Controllers.driver2.getLeftBumper()) {
+     // intake.wristDown();
+      intake.intakeStart(-1.0);
+    } else if (Constants.Controllers.driver2.getRightBumper()) {
+      intake.intakeStart(1.0);
+
+    } else {
+      intake.intakeStop();
+    }
+
+    //Back to robot centric while button seven is pushed
+    if (Constants.Controllers.driver1.getRawButton(7)){
+      swerve.zeroHeading();
+      System.out.println("RESET GYRO!!!!!!!");
+    }
+
+    if (Constants.Controllers.driver1.getRawButton((8))){
       SwerveDrive(false);
+      System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
+    }
 
-      // if (Constants.Controllers.driver2.getAButton()) {
-      //   blinkin.scannerRed();
-      // }
-      // else if (Constants.Controllers.driver2.getXButton()) {
-      //   blinkin.confetti();
-      // }
-      // else if (Constants.Controllers.driver2.getYButton()) {
-      //   blinkin.rainbowRGB();
-      // }
-      // else if (Constants.Controllers.driver2.getBButton()) {
-      //   blinkin.fireMedium();
-      // }
-      // else {
-      //   blinkin.breathRed();
-      // }
-
-      // if (Constants.Controllers.driver2.getAButton()) {
-      //   blinkin.index += 0.02;
-      // }
-
-      // if (Constants.Controllers.driver2.getBButton()) {
-      //   blinkin.index -= 0.02;
-      // }
-
-     
-
-      SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-      SmartDashboard.putBoolean("magnet", climber.getmagnet());
-
-      NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-NetworkTableEntry tx = table.getEntry("tx");
-NetworkTableEntry ty = table.getEntry("ty");
-NetworkTableEntry ta = table.getEntry("ta");
+    if (Constants.Controllers.driver2.getYButton()) {
+      shooter.shoot(1.0);
+    } else if (Constants.Controllers.driver2.getXButton()) {
+      shooter.shoot(-1.0);
+    } else {
+      shooter.stop();
+    }
 
 
-double x = tx.getDouble(0.0);
-double y = ty.getDouble(0.0);
-double area = ta.getDouble(0.0);
+    if (Constants.Controllers.driver2.getBButton()){
+      intake.wristDown();
+    } else {
+      intake.wristUp();
+    }
 
-      SmartDashboard.putNumber("LimelightX", x);
-SmartDashboard.putNumber("LimelightY", y);
-SmartDashboard.putNumber("LimelightArea", area);
+    intake.getNoteIntaked();
 
-      // Intake down & Start Intake
-      if (Constants.Controllers.driver2.getLeftBumper()) {
-        intake.wristDown();
-        intake.intakeStart(.5);
-      } else if (Constants.Controllers.driver2.getRightBumper()) {
-        intake.intakeStart(-.5);
-   
-      } else {
-        intake.intakeStop();
-      }
+    if (Constants.Controllers.driver2.getPOV() == 0) {
+      climber.extend();
+    }
 
-      shooter.shoot(Constants.Controllers.driver2.getRightTriggerAxis(), Constants.Controllers.driver2.getRightTriggerAxis());
+    if (Constants.Controllers.driver2.getPOV() == 180) {
+      climber.retract();
+    }
+    //// Get the controller axis values
+    // double shooterSpeed = controller.getRawAxis(3); // Change the axis number as
+    // per your setup
 
-      if (Constants.Controllers.driver2.getAButton()) {
-        intake.wristUp();
-        blinkin.fireMedium();
-      }      
-   
-      intake.getNoteIntaked();
+    // Map the controller output to motor speeds
+    // double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
+    // double rightMotorSpeed = shooterSpeed;
 
-      if (Constants.Controllers.driver2.getPOV() == 0) {
-        climber.extend();
-      }
+    // Set the motor speeds :D
+    // leftShooterMotor.set(leftMotorSpeed);
+    // rightShooterMotor.set(rightMotorSpeed);
 
-      if (Constants.Controllers.driver2.getPOV() == 180) {
-        climber.retract();
-      }
-     //// Get the controller axis values
- //double shooterSpeed = controller.getRawAxis(3); // Change the axis number as per your setup
-
- // Map the controller output to motor speeds
-// double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
-// double rightMotorSpeed = shooterSpeed;
-
- // Set the motor speeds :D
- //leftShooterMotor.set(leftMotorSpeed);
- //rightShooterMotor.set(rightMotorSpeed);
-
-    // Zero Heading if Left Bumper is Pushed
-   // if (Constants.Controllers.driver1.getLeftBumperPressed()) {
-    //  swerve.zeroHeading();
-   // }
-    
-  
   }
 
   /** This function is called once when the robot is disabled. */
