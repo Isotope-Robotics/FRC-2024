@@ -47,7 +47,7 @@ public class Intake extends SubsystemBase {
                 Constants.Encoders.NEO_ENCODER_COUNTS);
         // Constants.Encoders.NEO_ENCODER_COUNTS);
 
-        intakeMotor.burnFlash();
+        //intakeMotor.burnFlash();
 
     }
 
