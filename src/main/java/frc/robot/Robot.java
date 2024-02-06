@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     swerve = Swerve.getInstance();
     // Robot Container for Auto Commands
-    // auto_RobotContainer = new RobotContainer();
+    auto_RobotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();

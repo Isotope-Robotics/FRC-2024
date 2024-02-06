@@ -30,6 +30,7 @@ public class RobotContainer {
     // Adds SmartDashboard Buttons for Auto Selection
     private void configureAutos() {
         SmartDashboard.putData("Example Auto", new PathPlannerAuto("Example Auto"));
+        SmartDashboard.putData("Test Path", new PathPlannerAuto("Test Path"));
     }
 
     // Runs that selected command
