@@ -16,20 +16,20 @@ public class RobotContainer {
 
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
-        NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
-        NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
+        //NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
+        //NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
 
         // Sets up auto buttons on SmartDashboard
         configureAutos();
 
         // Builds Autos from Selected Auto
         autoChooser = AutoBuilder.buildAutoChooser();
-        SmartDashboard.putData("Auto Mode", autoChooser);
+        SmartDashboard.putData("Auto Modes", autoChooser);
     }
 
     // Adds SmartDashboard Buttons for Auto Selection
     private void configureAutos() {
-        SmartDashboard.putData("Example Auto", new PathPlannerAuto("Example Auto"));
+        //SmartDashboard.putData("Example Auto", new PathPlannerAuto("Example Auto"));
         SmartDashboard.putData("Test Path", new PathPlannerAuto("Test Path"));
     }
 
