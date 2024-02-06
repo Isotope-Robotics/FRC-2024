@@ -198,21 +198,21 @@ public class Robot extends TimedRobot {
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
      // intake.wristDown();
-      intake.intakeStart(-1.0);
+      intake.intakeStart(-.5);
     } else if (Constants.Controllers.driver2.getRightBumper()) {
-      intake.intakeStart(1.0);
+      intake.intakeStart(.5);
 
     } else {
       intake.intakeStop();
     }
 
     //Back to robot centric while button seven is pushed
-    if (Constants.Controllers.driver1.getRawButton(7)){
+    if (Constants.Controllers.driver1.getRawButton(2)){
       swerve.zeroHeading();
       System.out.println("RESET GYRO!!!!!!!");
     }
 
-    if (Constants.Controllers.driver1.getRawButton((8))){
+    if (Constants.Controllers.driver1.getRawButton((1))){
       SwerveDrive(false);
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
     }
@@ -293,7 +293,7 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
-    final double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(2),
+    final double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
         Constants.Controllers.stickDeadband);
 
     // Drive Function
