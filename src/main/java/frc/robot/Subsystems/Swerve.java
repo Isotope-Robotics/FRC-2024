@@ -3,7 +3,10 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.PathPlannerLogging;
+import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -48,7 +51,13 @@ public class Swerve extends SubsystemBase {
                 this::setPose,
                 this::getSpeeds,
                 this::driveRobotRelative,
-                Constants.Swerve.pathFollowerConfig,
+                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                    new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                    Constants.Swerve.maxSpeed, // Max module speed, in m/s
+                    Constants.Swerve.trackWidth, // Drive base radius in meters. Distance from robot center to furthest module.
+                    new ReplanningConfig() // Default path replanning config. See the API for the options here
+            ),
                 () -> {
                     // Boolean supplier that controls when the path will be mirrored for the red
                     // alliance

@@ -36,7 +36,7 @@ import frc.robot.Subsystems.Climber;
  */
 public class Robot extends TimedRobot {
   private Command m_AutonomousCommand;
-  private RobotContainer auto_RobotContainer;
+  private RobotContainer robotContainer;
 
   // controller
   // private XboxController controller;
@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     swerve = Swerve.getInstance();
     // Robot Container for Auto Commands
-    auto_RobotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // Command Scheduler ONLY for Auto
-    // CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
   }
 
   /**
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_AutonomousCommand = auto_RobotContainer.getAutonomousCommand();
+    m_AutonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_AutonomousCommand != null) {
@@ -130,9 +130,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {
-
-  }
+  public void autonomousPeriodic() {}
 
   /** This function is called once when teleop is enabled. */
   @Override
@@ -301,8 +299,5 @@ public class Robot extends TimedRobot {
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
-  // Adding Auto Commands to Auto Selector
-  public void generateAutos() {
-    SmartDashboard.putData("Example Auto", new PathPlannerAuto("ExampleAuto"));
-  }
+
 }
