@@ -13,6 +13,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
+    swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
 
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
@@ -120,6 +122,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+
     m_AutonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
