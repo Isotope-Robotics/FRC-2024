@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
-    
+    swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
 
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
@@ -146,6 +146,7 @@ public class Robot extends TimedRobot {
     intake.zeroEncoders();
   }
 
+
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
@@ -202,7 +203,7 @@ public class Robot extends TimedRobot {
 
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
-      // intake.wristDown();
+     // intake.wristDown();
       intake.intakeStart(-.5);
     } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(.5);
@@ -211,20 +212,15 @@ public class Robot extends TimedRobot {
       intake.intakeStop();
     }
 
-    // Back to robot centric while button seven is pushed
-    if (Constants.Controllers.driver1.getRawButton(2)) {
+    //Back to robot centric while button seven is pushed
+    if (Constants.Controllers.driver1.getRawButton(2)){
       swerve.zeroHeading();
       System.out.println("RESET GYRO!!!!!!!");
     }
 
-    if (Constants.Controllers.driver1.getRawButton((1))) {
+    if (Constants.Controllers.driver1.getRawButton((1))){
       SwerveDrive(false);
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
-    }
-
-    if (Constants.Controllers.driver1.getRawButton((5))) {
-      SwerveDrive(true);
-      System.out.println("HROBOT CENTRIC disabled womp womp");
     }
 
     if (Constants.Controllers.driver2.getYButton()) {
@@ -235,7 +231,8 @@ public class Robot extends TimedRobot {
       shooter.stop();
     }
 
-    if (Constants.Controllers.driver2.getBButton()) {
+
+    if (Constants.Controllers.driver2.getBButton()){
       intake.wristDown();
     } else {
       intake.wristUp();
@@ -310,7 +307,6 @@ public class Robot extends TimedRobot {
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
-<<<<<<< Updated upstream
   //Should Rotate Swerve Around Target
   private void SwerveAutoAim(boolean isFieldRel){
     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
@@ -331,6 +327,4 @@ public class Robot extends TimedRobot {
   }
 
 
-=======
->>>>>>> Stashed changes
 }
