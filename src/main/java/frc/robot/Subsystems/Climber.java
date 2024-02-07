@@ -2,7 +2,6 @@ package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
- import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -10,7 +9,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.Constants;
-//import frc.robot.Subsystems.Blinkin;
 
 public class Climber {
     

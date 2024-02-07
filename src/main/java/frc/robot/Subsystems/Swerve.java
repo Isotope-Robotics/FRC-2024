@@ -3,10 +3,7 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.PathPlannerLogging;
-import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -171,23 +168,6 @@ public class Swerve extends SubsystemBase {
         }
     }
 
-
-
-    @Override
-    public void periodic() {
-        swerveOdometry.update(getGyroYaw(), getModulePositions());
-
-        field.setRobotPose(getPose());
-
-        for (SwerveModule mod : mSwerveMods) {
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder",
-                    mod.getCANCoder().getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle",
-                    mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity",
-                    mod.getState().speedMetersPerSecond);
-        }
-    }
 
     // Returns Instance Of Swerve
     public static Swerve getInstance() {
