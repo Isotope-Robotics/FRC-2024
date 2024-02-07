@@ -53,13 +53,7 @@ public class Swerve extends SubsystemBase {
                 this::setPose,
                 this::getSpeeds,
                 this::driveRobotRelative,
-                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                    new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
-                    Constants.Swerve.maxSpeed, // Max module speed, in m/s
-                    Constants.Swerve.trackWidth, // Drive base radius in meters. Distance from robot center to furthest module.
-                    new ReplanningConfig() // Default path replanning config. See the API for the options here
-            ),
+                Constants.Swerve.pathFollowerConfig,
                 () -> {
                     // Boolean supplier that controls when the path will be mirrored for the red
                     // alliance
@@ -92,7 +86,7 @@ public class Swerve extends SubsystemBase {
                                 translation.getY(),
                                 rotation));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
-        
+
         swerveOdometry.update(getGyroYaw(), getModulePositions());
 
         field.setRobotPose(getPose());
@@ -177,23 +171,23 @@ public class Swerve extends SubsystemBase {
         }
     }
 
-    /*
-     * @Override
-     * public void periodic() {
-     * //swerveOdometry.update(getGyroYaw(), getModulePositions());
-     * 
-     * // field.setRobotPose(getPose());
-     * 
-     * for (SwerveModule mod : mSwerveMods) {
-     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder",
-     * mod.getCANCoder().getDegrees());
-     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle",
-     * mod.getPosition().angle.getDegrees());
-     * SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity",
-     * mod.getState().speedMetersPerSecond);
-     * }
-     * }
-     */
+
+
+    @Override
+    public void periodic() {
+        swerveOdometry.update(getGyroYaw(), getModulePositions());
+
+        field.setRobotPose(getPose());
+
+        for (SwerveModule mod : mSwerveMods) {
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder",
+                    mod.getCANCoder().getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle",
+                    mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity",
+                    mod.getState().speedMetersPerSecond);
+        }
+    }
 
     // Returns Instance Of Swerve
     public static Swerve getInstance() {

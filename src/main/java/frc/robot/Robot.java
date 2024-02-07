@@ -134,8 +134,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    swerve.swerveOdometry.update(swerve.gyro.getRotation2d(), swerve.getModulePositions());
-    swerve.field.setRobotPose(swerve.getPose());
+    
   }
 
   /** This function is called once when teleop is enabled. */

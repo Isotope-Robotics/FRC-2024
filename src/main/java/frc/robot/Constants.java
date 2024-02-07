@@ -76,8 +76,12 @@ public class Constants {
         public static final int FALCON_ENCODER_COUNTS = 2048;
     }
 
+    
+
     // Swerve Module Constants Class
     public static final class Swerve {
+
+        
         // Pigeon CAN ID
         public static final int pigeonId = 13;
 
@@ -86,11 +90,14 @@ public class Constants {
                 .Falcon500(FalconSwerveConstants.SDS.MK4i.driveRatios.L1);
 
         public static final FalconSwerveConstants module0 = FalconSwerveConstants.SDS.MK4i.Falcon500Inverted(FalconSwerveConstants.SDS.MK4i.driveRatios.L1);
+    
 
         // Drivetrain Constants
         public static final double trackWidth = Units.inchesToMeters(29.0);
         public static final double wheelBase = Units.inchesToMeters(29.0);
         public static final double wheelCircumference = chosenModule.wheelCircumference;
+        
+        public static final Translation2d flModuleOffset = new Translation2d(wheelBase / 2.0,  trackWidth / 2.0);
 
         // Swerve Kinematics
         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(

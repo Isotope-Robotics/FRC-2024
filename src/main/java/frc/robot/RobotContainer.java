@@ -2,7 +2,9 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerTrajectory;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +32,7 @@ public class RobotContainer {
     private void configureAutos() {
         //SmartDashboard.putData("Example Auto", new PathPlannerAuto("Example Auto"));
         SmartDashboard.putData("Test Path", new PathPlannerAuto("Test Path"));
+
     }
 
     // Runs that selected command
