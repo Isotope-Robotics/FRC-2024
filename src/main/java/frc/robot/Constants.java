@@ -75,6 +75,12 @@ public class Constants {
         public static final int FALCON_ENCODER_COUNTS = 2048;
     }
 
+    public static final class PhotonCannon {
+        public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(10); //Change Me
+        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(10); //Change Me
+        public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(20); //Change Me
+    }
+
     
 
     // Swerve Module Constants Class

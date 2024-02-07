@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
-import frc.robot.Subsystems.Blinkin;
+import frc.robot.Subsystems.Vision;
 import frc.robot.Subsystems.Climber;
 
 /**
@@ -52,6 +52,8 @@ public class Robot extends TimedRobot {
 
   private final Climber climber = Climber.getInstance();
 
+  private final Vision photonCannon = new Vision();
+
   public void controls() {
     // controller = new XboxController(0); // Change the port number as per your
     // setup
@@ -79,6 +81,8 @@ public class Robot extends TimedRobot {
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
     intake.zeroEncoders();
+
+    //photonCannon.createNewStream();
   }
 
   /**
@@ -151,6 +155,11 @@ public class Robot extends TimedRobot {
     // By Default Swerve Is Field Relative
 
     SwerveDrive(true);
+
+    //Auto Aim to Target
+    if (Constants.Controllers.driver1.getRawButton(10)){
+      SwerveAutoAim(false);
+    }
 
     // if (Constants.Controllers.driver2.getAButton()) {
     // blinkin.scannerRed();
@@ -294,6 +303,25 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
 
     // Drive Function
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+  }
+
+  //Should Rotate Swerve Around Target
+  private void SwerveAutoAim(boolean isFieldRel){
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+
+    final double rot;
+
+    if (photonCannon.hasTargets()){
+       rot = -photonCannon.getYawOfTargets();
+    } else {
+      rot = 0;
+    }
+
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
