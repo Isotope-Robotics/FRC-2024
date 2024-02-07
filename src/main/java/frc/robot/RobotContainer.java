@@ -6,7 +6,11 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+<<<<<<< Updated upstream
 import frc.robot.AutoCommands.DrivetrainCommands;
+=======
+import frc.robot.AutoCommands.*;
+>>>>>>> Stashed changes
 
 //THIS IS A ROBOT CONTAINER ONLY FOR AUTO PERIOD COMMANDS!!!!!!!
 
@@ -15,8 +19,8 @@ public class RobotContainer {
 
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
-        //NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
-        //NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
+        NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
+        NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
 
         // Sets up auto buttons on SmartDashboard
         configureAutos();
