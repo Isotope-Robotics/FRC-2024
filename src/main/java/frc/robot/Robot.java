@@ -7,6 +7,7 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -199,7 +200,12 @@ public class Robot extends TimedRobot {
     } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(.5);
 
-    } else {
+    } else if (Constants.Controllers.driver2.getLeftTriggerAxis() > 0.5) {
+      intake.intakeStart(-1);
+
+    }
+    
+    else {
       intake.intakeStop();
     }
 
@@ -214,10 +220,7 @@ public class Robot extends TimedRobot {
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
     }
 
-    if (Constants.Controllers.driver1.getRawButton((6))){
-      swerve.setRot0();
-      System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
-    }
+    
 
     if (Constants.Controllers.driver2.getYButton()) {
       shooter.shoot(1.0);
@@ -245,6 +248,8 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getPOV() == 180) {
       climber.retract();
     }
+
+    System.out.println(swerve.getHeading());
     //// Get the controller axis values
     // double shooterSpeed = controller.getRawAxis(3); // Change the axis number as
     // per your setup
@@ -297,8 +302,18 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
-    final double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
+     double rot;
+
+        if (Constants.Controllers.driver1.getRawButton(6)) {
+          // while (swerve.getHeading() <= -1 || swerve.getHeading() >= 1) {
+
+          // }
+          rot = 0.1;
+          System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
+        } else {
+rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
         Constants.Controllers.stickDeadband);
+        }
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),

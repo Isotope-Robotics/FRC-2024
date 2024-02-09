@@ -147,9 +147,7 @@ public class Swerve extends SubsystemBase {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
-    public void setRot0() {
-        Rotation2d.fromDegrees(0);
-    }
+    
     
 
     public ChassisSpeeds getSpeeds() {

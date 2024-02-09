@@ -39,8 +39,8 @@ public class Intake extends SubsystemBase {
         intakeMotor.setIdleMode(Constants.Intake.Brake);
 
         // Limit Switch (Photo Eye) Declarations
-        noteIntaked = new DigitalInput(5);
-        wristLimit = new DigitalInput(0);
+        noteIntaked = new DigitalInput(1);
+        wristLimit = new DigitalInput(7);
 
         // Encoders Declarations
         wristEncoder1 = wristMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
