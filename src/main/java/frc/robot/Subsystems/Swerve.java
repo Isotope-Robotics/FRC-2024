@@ -3,7 +3,6 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -48,7 +47,7 @@ public class Swerve extends SubsystemBase {
         // Configure AutoBuilder for PathPlanning
         AutoBuilder.configureHolonomic(
                 this::getPose,
-                this::setPose,
+                this::resetPose,
                 this::getSpeeds,
                 this::driveRobotRelative,
                 Constants.Swerve.pathFollowerConfig,
@@ -126,7 +125,7 @@ public class Swerve extends SubsystemBase {
         return swerveOdometry.getPoseMeters();
     }
 
-    public void setPose(Pose2d pose) {
+    public void resetPose(Pose2d pose) {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
