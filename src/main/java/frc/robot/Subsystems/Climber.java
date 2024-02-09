@@ -14,7 +14,7 @@ public class Climber {
     
     public static CANSparkMax masterMotor;
     public static CANSparkMax followerMotor;
-    public static RelativeEncoder wristEncoder;
+    public static RelativeEncoder masterEncoder;
     public static DigitalInput climberSwitch1;
     public static DigitalInput climberSwitch2;
 
@@ -49,12 +49,12 @@ public class Climber {
 
     // Climbers go up
     public  void extend() {
-        masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 60));
+        masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
     }
 
     // Climbers go down
     public  void retract() {
-        masterMotor.set(motionPID.calculate(wristEncoder.getPosition(), 0));
+        masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
         blinkin.rainbowParty();
     }
 
