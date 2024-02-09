@@ -214,6 +214,11 @@ public class Robot extends TimedRobot {
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
     }
 
+    if (Constants.Controllers.driver1.getRawButton((6))){
+      swerve.setRot0();
+      System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
+    }
+
     if (Constants.Controllers.driver2.getYButton()) {
       shooter.shoot(1.0);
     } else if (Constants.Controllers.driver2.getXButton()) {
@@ -225,6 +230,8 @@ public class Robot extends TimedRobot {
 
     if (Constants.Controllers.driver2.getBButton()){
       intake.wristDown();
+    } else if (Constants.Controllers.driver2.getPOV() == 90) {
+      intake.wristHalf();
     } else {
       intake.wristUp();
     }

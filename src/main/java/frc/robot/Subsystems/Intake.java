@@ -53,7 +53,7 @@ public class Intake extends SubsystemBase {
 
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
-        if (noteIntaked.get()) {
+        if (!noteIntaked.get()) {
             blinkin.rainbowForest();
             return true;
         } else {
@@ -95,6 +95,14 @@ public class Intake extends SubsystemBase {
             wristStop();
         } else {
             wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.5));
+        }
+    }
+
+    public void wristHalf() {
+        if (!getWristLimit()) {
+            wristStop();
+        } else {
+            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
         }
     }
 

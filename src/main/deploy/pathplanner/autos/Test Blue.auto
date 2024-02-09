@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8633725538127772,
-      "y": 7.0
+      "x": 0.9045219092944454,
+      "y": 7.1908498704215456
     },
     "rotation": 0
   },
@@ -18,7 +18,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Test Path"
+                  "pathName": "Blue Left 1. Shoot Note"
                 }
               },
               {
@@ -28,6 +28,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
           }
         }
       ]
