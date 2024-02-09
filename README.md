@@ -5,7 +5,7 @@ Team 9709's 2024 FRC Robot Code! The code was written in JAVA using WPILib's FRC
 Libraries:
 REV Robotics
 
-CTRE Phoenix
+CTRE Phoenix 6
 
 
 FRC PathPlanner
