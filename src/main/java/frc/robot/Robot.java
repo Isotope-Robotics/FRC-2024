@@ -149,7 +149,7 @@ public class Robot extends TimedRobot {
 
     //Auto Aim to Target
     if (Constants.Controllers.driver1.getRawButton(10)){
-      SwerveAutoAim(false);
+      SwerveAutoAim(true);
     }
 
     // if (Constants.Controllers.driver2.getAButton()) {
