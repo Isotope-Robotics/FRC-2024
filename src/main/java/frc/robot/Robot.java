@@ -6,6 +6,7 @@ package frc.robot;
 
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -17,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
-import frc.robot.Subsystems.Vision;
+import frc.robot.Subsystems.Vision.Vision;
+import frc.robot.Subsystems.Vision.Limelight;
 import frc.robot.Subsystems.Climber;
 
 /**
@@ -40,7 +42,7 @@ public class Robot extends TimedRobot {
 
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
-  public Swerve swerve;
+  public Swerve swerve = Swerve.getInstance();
 
   // Shooter Varibles
   private final Shooter shooter = Shooter.getInstance();
@@ -52,16 +54,8 @@ public class Robot extends TimedRobot {
 
   private final Climber climber = Climber.getInstance();
 
-  private final Vision photonCannon = new Vision();
+  private final Vision photonCannon = Vision.getInstance();
 
-  public void controls() {
-    // controller = new XboxController(0); // Change the port number as per your
-    // setup
-    // leftShooterMotor = new CANSparkMax(1, MotorType.kBrushless); // Change the
-    // motor ID as per your setup
-    // rightShooterMotor = new CANSparkMax(2, MotorType.kBrushless); // Change the
-    // motor ID as per your setup
-  }
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -70,19 +64,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    swerve = Swerve.getInstance();
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
     swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
-
+    
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
     intake.zeroEncoders();
-
-    //photonCannon.createNewStream();
   }
 
   /**
