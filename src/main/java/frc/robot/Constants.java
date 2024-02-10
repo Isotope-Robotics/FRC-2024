@@ -25,7 +25,7 @@ public class Constants {
         public static final Joystick driver1 = new Joystick(0);
         public static final XboxController driver2 = new XboxController(1);
 
-        public static final double stickDeadband = 0.35;
+        public static final double stickDeadband = 0.25;
     }
 
     public static final class Blinkin {
