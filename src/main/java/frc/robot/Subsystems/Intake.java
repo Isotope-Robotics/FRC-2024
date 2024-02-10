@@ -7,10 +7,14 @@ import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
+    
+    public static Intake m_Intake = Intake.getInstance();
 
     public static CANSparkMax wristMotor1;
     // public static CANSparkMax wristMotor2;
@@ -49,6 +53,20 @@ public class Intake extends SubsystemBase {
         // intakeMotor.burnFlash();
 
     }
+    //one button intake function
+    public static Command IntakeNote() {
+m_Intake.wristDown();
+        return Commands.runOnce(() -> {
+            m_Intake.intakeStart(1.0);
+        }, m_Intake)
+                .andThen(
+                        Commands.waitUntil(() -> m_Intake.getNoteIntaked()).withTimeout(0.5))
+                .andThen(
+                        Commands.runOnce(() -> {
+                            m_Intake.intakeStop();
+                            m_Intake.wristUp();
+    }));
+}
 
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {

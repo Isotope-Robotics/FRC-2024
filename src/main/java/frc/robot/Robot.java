@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AutoCommands.IntakeCommands;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -126,6 +127,7 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
+    boolean variable = false;
     // Destory Auto Commands When Switching To TeleOP
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
@@ -194,6 +196,11 @@ public class Robot extends TimedRobot {
       intake.intakeStart(0.5);
     } else {
       intake.intakeStop();
+    }
+
+
+    if (Constants.Controllers.driver2.getPOV() == 270) {
+      IntakeCommands.IntakeNote();
     }
 
     // Back to robot centric while button seven is pushed
