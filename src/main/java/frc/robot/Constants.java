@@ -32,7 +32,6 @@ public class Constants {
         public static final int blinkinPort = 9;
     }
 
-
     public static final class Shooter {
         public static final int shooterMotor1ID = 2;
         public static final int shooterMotor2ID = 3;
@@ -59,7 +58,7 @@ public class Constants {
 
     public static final class Intake {
         public static final int wristMotor1ID = 7;
-       // public static final int wristMotor2ID = 5;
+        // public static final int wristMotor2ID = 5;
         public static final int intakeMotorID = 6;
 
         public static final double kP = 0.015;
@@ -76,17 +75,14 @@ public class Constants {
     }
 
     public static final class PhotonCannon {
-        public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(10); //Change Me
-        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(10); //Change Me
-        public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(20); //Change Me
+        public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(10); // Change Me
+        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(10); // Change Me
+        public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(20); // Change Me
     }
-
-    
 
     // Swerve Module Constants Class
     public static final class Swerve {
 
-        
         // Pigeon CAN ID
         public static final int pigeonId = 13;
 
@@ -94,15 +90,15 @@ public class Constants {
         public static final FalconSwerveConstants chosenModule = FalconSwerveConstants.SDS.MK4i
                 .Falcon500(FalconSwerveConstants.SDS.MK4i.driveRatios.L1);
 
-        public static final FalconSwerveConstants module0 = FalconSwerveConstants.SDS.MK4i.Falcon500Inverted(FalconSwerveConstants.SDS.MK4i.driveRatios.L1);
-    
+        public static final FalconSwerveConstants module0 = FalconSwerveConstants.SDS.MK4i
+                .Falcon500Inverted(FalconSwerveConstants.SDS.MK4i.driveRatios.L1);
 
         // Drivetrain Constants
         public static final double trackWidth = Units.inchesToMeters(29.0);
         public static final double wheelBase = Units.inchesToMeters(29.0);
         public static final double wheelCircumference = chosenModule.wheelCircumference;
-        
-        public static final Translation2d flModuleOffset = new Translation2d(wheelBase / 2.0,  trackWidth / 2.0);
+
+        public static final Translation2d flModuleOffset = new Translation2d(wheelBase / 2.0, trackWidth / 2.0);
 
         // Swerve Kinematics
         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
@@ -142,9 +138,9 @@ public class Constants {
         public static final double closedLoopRamp = 0.0;
 
         // Angle Motor PID Values
-        public static final double angleKP =  chosenModule.angleKP;
-        public static final double angleKI =  chosenModule.angleKI;
-        public static final double angleKD =  chosenModule.angleKD;
+        public static final double angleKP = chosenModule.angleKP;
+        public static final double angleKI = chosenModule.angleKI;
+        public static final double angleKD = chosenModule.angleKD;
 
         // Drive Motor PID Values
         public static final double driveKP = 0.08;
@@ -172,7 +168,7 @@ public class Constants {
             public static final int driveMotorID = 11;
             public static final int angleMotorID = 10;
             public static final int canCoderID = 25;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(34.75);//34.75 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(34.75);// 34.75 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
@@ -182,7 +178,7 @@ public class Constants {
             public static final int driveMotorID = 17;
             public static final int angleMotorID = 18;
             public static final int canCoderID = 19;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(9);//9 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(9);// 9 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
@@ -192,7 +188,7 @@ public class Constants {
             public static final int driveMotorID = 9;
             public static final int angleMotorID = 20;
             public static final int canCoderID = 21;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-45);//-45 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-45);// -45 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
@@ -202,12 +198,12 @@ public class Constants {
             public static final int driveMotorID = 22;
             public static final int angleMotorID = 14;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0);//0 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0);// 0 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
 
-        //For Pathplanner Config - DO NOT USE ANYWHERE EXCEPT FOR THE CONFIG IN AUTO!!
+        // For Pathplanner Config - DO NOT USE ANYWHERE EXCEPT FOR THE CONFIG IN AUTO!!
         public static final Translation2d front_offset = new Translation2d(wheelBase / 2.0, trackWidth / 2.0);
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(

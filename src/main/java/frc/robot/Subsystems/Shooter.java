@@ -28,13 +28,15 @@ public class Shooter {
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
 
-        //Set Direction of the Motors
+        // Set Direction of the Motors
         shooterMotor1.setInverted(false);
         shooterMotor2.setInverted(false);
 
         // Encoders Declarations
-        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
+                Constants.Encoders.NEO_ENCODER_COUNTS);
+        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
+                Constants.Encoders.NEO_ENCODER_COUNTS);
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)

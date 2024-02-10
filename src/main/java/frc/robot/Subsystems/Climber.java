@@ -11,7 +11,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import frc.robot.Constants;
 
 public class Climber {
-    
+
     public static CANSparkMax masterMotor;
     public static CANSparkMax followerMotor;
     public static RelativeEncoder masterEncoder;
@@ -48,19 +48,19 @@ public class Climber {
     }
 
     // Climbers go up
-    public  void extend() {
+    public void extend() {
         masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
     }
 
     // Climbers go down
-    public  void retract() {
+    public void retract() {
         masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
         blinkin.rainbowParty();
     }
 
     // Returns Instance Of Climber
-    public static Climber getInstance(){
-        if (m_Instance == null){
+    public static Climber getInstance() {
+        if (m_Instance == null) {
             m_Instance = new Climber(Constants.Climber.masterMotorID, Constants.Climber.followerMotorID);
         }
 

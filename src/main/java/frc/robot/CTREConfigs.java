@@ -3,7 +3,6 @@ package frc.robot;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
-
 public class CTREConfigs {
     public TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
     public TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
@@ -41,7 +40,6 @@ public class CTREConfigs {
         swerveDriveFXConfig.MotorOutput.Inverted = Constants.Swerve.driveMotorInvert;
         swerveDriveFXConfig.MotorOutput.NeutralMode = Constants.Swerve.driveNeutralMode;
 
-
         /* Gear Ratio Config */
         swerveDriveFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
 
@@ -63,11 +61,9 @@ public class CTREConfigs {
         swerveDriveFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
         swerveDriveFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
 
-
-         /* Motor Inverts and Neutral Mode */
+        /* Motor Inverts and Neutral Mode */
         swerveDriveFXConfig1.MotorOutput.Inverted = Constants.Swerve.module0.driveMotorInvert;
         swerveDriveFXConfig1.MotorOutput.NeutralMode = Constants.Swerve.driveNeutralMode;
-
 
         /* Gear Ratio Config */
         swerveDriveFXConfig1.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
@@ -91,5 +87,4 @@ public class CTREConfigs {
         swerveDriveFXConfig1.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
     }
 
-   
 }

@@ -4,7 +4,6 @@
 // e
 package frc.robot;
 
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -51,12 +50,11 @@ public class Robot extends TimedRobot {
   // Intake Varibles
   private final Intake intake = Intake.getInstance();
 
-  //private final Blinkin blinkin = Blinkin.getInstance();
+  // private final Blinkin blinkin = Blinkin.getInstance();
 
   private final Climber climber = Climber.getInstance();
 
   private final Vision photonCannon = Vision.getInstance();
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -71,7 +69,7 @@ public class Robot extends TimedRobot {
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
     swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
-    
+
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
     intake.zeroEncoders();
@@ -124,7 +122,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    
+
   }
 
   /** This function is called once when teleop is enabled. */
@@ -138,7 +136,6 @@ public class Robot extends TimedRobot {
     intake.zeroEncoders();
   }
 
-
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
@@ -148,8 +145,8 @@ public class Robot extends TimedRobot {
 
     SwerveDrive(true);
 
-    //Auto Aim to Target
-    if (Constants.Controllers.driver1.getRawButton(10)){
+    // Auto Aim to Target
+    if (Constants.Controllers.driver1.getRawButton(10)) {
       SwerveAutoAim(true);
     }
 
@@ -195,7 +192,7 @@ public class Robot extends TimedRobot {
 
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
-     // intake.wristDown();
+      // intake.wristDown();
       intake.intakeStart(-.5);
     } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(.5);
@@ -204,23 +201,21 @@ public class Robot extends TimedRobot {
       intake.intakeStart(-1);
 
     }
-    
+
     else {
       intake.intakeStop();
     }
 
-    //Back to robot centric while button seven is pushed
-    if (Constants.Controllers.driver1.getRawButton(2)){
+    // Back to robot centric while button seven is pushed
+    if (Constants.Controllers.driver1.getRawButton(2)) {
       swerve.zeroHeading();
       System.out.println("RESET GYRO!!!!!!!");
     }
 
-    if (Constants.Controllers.driver1.getRawButton((1))){
+    if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
     }
-
-    
 
     if (Constants.Controllers.driver2.getYButton()) {
       shooter.shoot(1.0);
@@ -230,8 +225,7 @@ public class Robot extends TimedRobot {
       shooter.stop();
     }
 
-
-    if (Constants.Controllers.driver2.getBButton()){
+    if (Constants.Controllers.driver2.getBButton()) {
       intake.wristDown();
     } else if (Constants.Controllers.driver2.getPOV() == 90) {
       intake.wristHalf();
@@ -302,26 +296,26 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
-     double rot;
+    double rot;
 
-        if (Constants.Controllers.driver1.getRawButton(6)) {
-          // while (swerve.getHeading() <= -1 || swerve.getHeading() >= 1) {
+    if (Constants.Controllers.driver1.getRawButton(6)) {
+      // while (swerve.getHeading() <= -1 || swerve.getHeading() >= 1) {
 
-          // }
-          rot = 0.1;
-          System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
-        } else {
-rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
-        Constants.Controllers.stickDeadband);
-        }
+      // }
+      rot = 0.1;
+      System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
+    } else {
+      rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
+          Constants.Controllers.stickDeadband);
+    }
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
-  //Should Rotate Swerve Around Target
-  private void SwerveAutoAim(boolean isFieldRel){
+  // Should Rotate Swerve Around Target
+  private void SwerveAutoAim(boolean isFieldRel) {
     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
@@ -329,8 +323,8 @@ rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
 
     final double rot;
 
-    if (photonCannon.hasTargets()){
-       rot = -photonCannon.getYawOfTargets();
+    if (photonCannon.hasTargets()) {
+      rot = -photonCannon.getYawOfTargets();
     } else {
       rot = 0;
     }
@@ -338,6 +332,5 @@ rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
-
 
 }

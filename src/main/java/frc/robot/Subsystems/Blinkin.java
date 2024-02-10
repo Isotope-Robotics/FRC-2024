@@ -3,7 +3,6 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
 
-
 public class Blinkin {
 
     public static Spark blinkin;
@@ -14,11 +13,11 @@ public class Blinkin {
 
     public Blinkin() {
         blinkin = new Spark(Constants.Blinkin.blinkinPort);
-        
+
     }
 
-    // Blinkin color/pattern values - https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
-
+    // Blinkin color/pattern values -
+    // https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
 
     public void index() {
         blinkin.set(index);
@@ -30,348 +29,348 @@ public class Blinkin {
         }
     }
 
-    public  void rainbowRGB() {
+    public void rainbowRGB() {
         blinkin.set(-.99);
     }
 
-    public  void rainbowParty() {
+    public void rainbowParty() {
         blinkin.set(-.97);
     }
 
-    public  void rainbowOcean() {
+    public void rainbowOcean() {
         blinkin.set(-.95);
     }
 
-    public  void rainbowLava() {
+    public void rainbowLava() {
         blinkin.set(-.93);
     }
 
-    public  void rainbowForest() {
+    public void rainbowForest() {
         blinkin.set(-.91);
     }
 
-    public  void rainbowGlitter() {
+    public void rainbowGlitter() {
         blinkin.set(-.89);
     }
 
-    public  void confetti() {
+    public void confetti() {
         blinkin.set(-.87);
     }
 
-    public  void redShot() {
+    public void redShot() {
         blinkin.set(-.85);
     }
 
-    public  void blueShot() {
+    public void blueShot() {
         blinkin.set(-.83);
     }
 
-    public  void whiteShot() {
+    public void whiteShot() {
         blinkin.set(-.81);
     }
 
-    public  void sinelonRGB() {
+    public void sinelonRGB() {
         blinkin.set(-.79);
     }
 
-    public  void sinelonParty() {
+    public void sinelonParty() {
         blinkin.set(-.77);
     }
 
-    public  void sinelonOcean() {
+    public void sinelonOcean() {
         blinkin.set(-.75);
     }
 
-    public  void sinelonLava() {
+    public void sinelonLava() {
         blinkin.set(-.73);
     }
 
-    public  void sinelonForest() {
+    public void sinelonForest() {
         blinkin.set(-.71);
     }
 
-    public  void BPMRGB() {
+    public void BPMRGB() {
         blinkin.set(-.69);
     }
 
-    public  void BPMParty() {
+    public void BPMParty() {
         blinkin.set(-.67);
     }
 
-    public  void BPMOcean() {
+    public void BPMOcean() {
         blinkin.set(-.65);
     }
 
-    public  void BPMLava() {
+    public void BPMLava() {
         blinkin.set(-.63);
     }
 
-    public  void BPMForest() {
+    public void BPMForest() {
         blinkin.set(-.61);
     }
 
-    public  void fireMedium() {
+    public void fireMedium() {
         blinkin.set(-.59);
     }
 
-    public  void fireLarge() {
+    public void fireLarge() {
         blinkin.set(-.57);
     }
 
-    public  void twinklesRGB() {
+    public void twinklesRGB() {
         blinkin.set(-.55);
     }
 
-    public  void twinklesParty() {
+    public void twinklesParty() {
         blinkin.set(-.53);
     }
 
-    public  void twinklesOcean() {
+    public void twinklesOcean() {
         blinkin.set(-.51);
     }
 
-    public  void twinklesLava() {
+    public void twinklesLava() {
         blinkin.set(-.49);
     }
 
-    public  void twinklesForest() {
+    public void twinklesForest() {
         blinkin.set(-.47);
     }
 
-    public  void wavesRGB() {
+    public void wavesRGB() {
         blinkin.set(-.45);
     }
 
-    public  void wavesParty() {
+    public void wavesParty() {
         blinkin.set(-.43);
     }
 
-    public  void wavesOcean() {
+    public void wavesOcean() {
         blinkin.set(-.41);
     }
 
-    public  void wavesLava() {
+    public void wavesLava() {
         blinkin.set(-.39);
     }
 
-    public  void wavesForest() {
+    public void wavesForest() {
         blinkin.set(-.37);
     }
 
-    public  void scannerRed() {
+    public void scannerRed() {
         blinkin.set(-.35);
     }
 
-    public  void scannerGray() {
+    public void scannerGray() {
         blinkin.set(-.33);
     }
 
-    public  void chaseRed() {
+    public void chaseRed() {
         blinkin.set(-.31);
     }
 
-    public  void chaseBlue() {
+    public void chaseBlue() {
         blinkin.set(-.29);
     }
 
-    public  void chaseGray() {
+    public void chaseGray() {
         blinkin.set(-.27);
     }
 
-    public  void heartbeatRed() {
+    public void heartbeatRed() {
         blinkin.set(-.25);
     }
 
-    public  void heartbeatBlue() {
+    public void heartbeatBlue() {
         blinkin.set(-.23);
     }
 
-    public  void heartbeatGray() {
+    public void heartbeatGray() {
         blinkin.set(-.21);
     }
 
-    public  void breathRed() {
+    public void breathRed() {
         blinkin.set(-.19);
     }
 
-    public  void breathBlue() {
+    public void breathBlue() {
         blinkin.set(-.17);
     }
 
-    public  void breathGray() {
+    public void breathGray() {
         blinkin.set(-.15);
     }
 
-    // public  void rainbowRGB() {
-    //     blinkin.set(-.13);
+    // public void rainbowRGB() {
+    // blinkin.set(-.13);
     // }
 
-    // public  void rainbowParty() {
-    //     blinkin.set(-.11);
+    // public void rainbowParty() {
+    // blinkin.set(-.11);
     // }
 
-    // public  void rainbowOcean() {
-    //     blinkin.set(-.09);
+    // public void rainbowOcean() {
+    // blinkin.set(-.09);
     // }
 
-    // public  void rainbowLava() {
-    //     blinkin.set(-.07);
+    // public void rainbowLava() {
+    // blinkin.set(-.07);
     // }
 
-    // public  void rainbowForest() {
-    //     blinkin.set(-.05);
+    // public void rainbowForest() {
+    // blinkin.set(-.05);
     // }
 
-    // public  void rainbowGlitter() {
-    //     blinkin.set(-.03);
+    // public void rainbowGlitter() {
+    // blinkin.set(-.03);
     // }
 
-    // public  void confetti() {
-    //     blinkin.set(-.01);
+    // public void confetti() {
+    // blinkin.set(-.01);
     // }
 
-    // public  void redShot() {
-    //     blinkin.set(.01);
+    // public void redShot() {
+    // blinkin.set(.01);
     // }
 
-    // public  void blueShot() {
-    //     blinkin.set(.03);
+    // public void blueShot() {
+    // blinkin.set(.03);
     // }
 
-    // public  void whiteShot() {
-    //     blinkin.set(.05);
+    // public void whiteShot() {
+    // blinkin.set(.05);
     // }
 
-    // public  void sinelonRGB() {
-    //     blinkin.set(.07);
+    // public void sinelonRGB() {
+    // blinkin.set(.07);
     // }
 
-    // public  void sinelonParty() {
-    //     blinkin.set(.09);
+    // public void sinelonParty() {
+    // blinkin.set(.09);
     // }
 
-    // public  void sinelonOcean() {
-    //     blinkin.set(.11);
+    // public void sinelonOcean() {
+    // blinkin.set(.11);
     // }
 
-    // public  void sinelonLava() {
-    //     blinkin.set(-.73);
+    // public void sinelonLava() {
+    // blinkin.set(-.73);
     // }
 
-    // public  void sinelonForest() {
-    //     blinkin.set(-.71);
+    // public void sinelonForest() {
+    // blinkin.set(-.71);
     // }
 
-    // public  void BPMRGB() {
-    //     blinkin.set(-.69);
+    // public void BPMRGB() {
+    // blinkin.set(-.69);
     // }
 
-    // public  void BPMParty() {
-    //     blinkin.set(-.67);
+    // public void BPMParty() {
+    // blinkin.set(-.67);
     // }
 
-    // public  void BPMOcean() {
-    //     blinkin.set(-.65);
+    // public void BPMOcean() {
+    // blinkin.set(-.65);
     // }
 
-    // public  void BPMLava() {
-    //     blinkin.set(-.63);
+    // public void BPMLava() {
+    // blinkin.set(-.63);
     // }
 
-    // public  void BPMForest() {
-    //     blinkin.set(-.61);
+    // public void BPMForest() {
+    // blinkin.set(-.61);
     // }
 
-    // public  void fireMedium() {
-    //     blinkin.set(-.59);
+    // public void fireMedium() {
+    // blinkin.set(-.59);
     // }
 
-    // public  void fireLarge() {
-    //     blinkin.set(-.57);
+    // public void fireLarge() {
+    // blinkin.set(-.57);
     // }
 
-    // public  void twinklesRGB() {
-    //     blinkin.set(-.55);
+    // public void twinklesRGB() {
+    // blinkin.set(-.55);
     // }
 
-    // public  void twinklesParty() {
-    //     blinkin.set(-.53);
+    // public void twinklesParty() {
+    // blinkin.set(-.53);
     // }
 
-    // public  void twinklesOcean() {
-    //     blinkin.set(-.51);
+    // public void twinklesOcean() {
+    // blinkin.set(-.51);
     // }
 
-    // public  void twinklesLava() {
-    //     blinkin.set(-.49);
+    // public void twinklesLava() {
+    // blinkin.set(-.49);
     // }
 
-    // public  void twinklesForest() {
-    //     blinkin.set(-.47);
+    // public void twinklesForest() {
+    // blinkin.set(-.47);
     // }
 
-    // public  void wavesRGB() {
-    //     blinkin.set(-.45);
+    // public void wavesRGB() {
+    // blinkin.set(-.45);
     // }
 
-    // public  void wavesParty() {
-    //     blinkin.set(-.43);
+    // public void wavesParty() {
+    // blinkin.set(-.43);
     // }
 
-    // public  void wavesOcean() {
-    //     blinkin.set(-.41);
+    // public void wavesOcean() {
+    // blinkin.set(-.41);
     // }
 
-    // public  void wavesLava() {
-    //     blinkin.set(-.39);
+    // public void wavesLava() {
+    // blinkin.set(-.39);
     // }
 
-    // public  void wavesForest() {
-    //     blinkin.set(-.37);
+    // public void wavesForest() {
+    // blinkin.set(-.37);
     // }
 
-    // public  void scannerRed() {
-    //     blinkin.set(-.35);
+    // public void scannerRed() {
+    // blinkin.set(-.35);
     // }
 
-    // public  void scannerGray() {
-    //     blinkin.set(-.33);
+    // public void scannerGray() {
+    // blinkin.set(-.33);
     // }
 
-    // public  void chaseRed() {
-    //     blinkin.set(-.31);
+    // public void chaseRed() {
+    // blinkin.set(-.31);
     // }
 
-    // public  void chaseBlue() {
-    //     blinkin.set(-.29);
+    // public void chaseBlue() {
+    // blinkin.set(-.29);
     // }
 
-    // public  void chaseGray() {
-    //     blinkin.set(-.27);
+    // public void chaseGray() {
+    // blinkin.set(-.27);
     // }
 
-    // public  void heartbeatRed() {
-    //     blinkin.set(-.25);
+    // public void heartbeatRed() {
+    // blinkin.set(-.25);
     // }
 
-    // public  void heartbeatBlue() {
-    //     blinkin.set(-.23);
+    // public void heartbeatBlue() {
+    // blinkin.set(-.23);
     // }
 
-    // public  void heartbeatGray() {
-    //     blinkin.set(-.21);
+    // public void heartbeatGray() {
+    // blinkin.set(-.21);
     // }
 
-    // public  void breathRed() {
-    //     blinkin.set(-.19);
+    // public void breathRed() {
+    // blinkin.set(-.19);
     // }
 
-    // public  void breathBlue() {
-    //     blinkin.set(-.17);
+    // public void breathBlue() {
+    // blinkin.set(-.17);
     // }
 
-    // public  void breathGray() {
-    //     blinkin.set(-.15);
+    // public void breathGray() {
+    // blinkin.set(-.15);
     // }
 
     public static Blinkin getInstance() {

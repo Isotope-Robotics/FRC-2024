@@ -10,13 +10,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-
 public class Intake extends SubsystemBase {
 
     public static CANSparkMax wristMotor1;
     // public static CANSparkMax wristMotor2;
     public static CANSparkMax intakeMotor;
-    public  RelativeEncoder wristEncoder1;
+    public RelativeEncoder wristEncoder1;
     // public static RelativeEncoder wristEncoder2;
     public static DigitalInput noteIntaked;
     public static DigitalInput wristLimit;
@@ -47,7 +46,7 @@ public class Intake extends SubsystemBase {
                 Constants.Encoders.NEO_ENCODER_COUNTS);
         // Constants.Encoders.NEO_ENCODER_COUNTS);
 
-        //intakeMotor.burnFlash();
+        // intakeMotor.burnFlash();
 
     }
 

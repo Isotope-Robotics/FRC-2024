@@ -72,7 +72,7 @@ public class Vision {
         }
     }
 
-    //Returns Current Instance of PhotonCannon
+    // Returns Current Instance of PhotonCannon
     public static Vision getInstance() {
         if (m_Instance == null) {
             m_Instance = new Vision();
