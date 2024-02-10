@@ -4,16 +4,8 @@
 // e
 package frc.robot;
 
-<<<<<<< Updated upstream
-import edu.wpi.first.math.MathUtil;
-=======
 
-import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.math.MathUtil;
-import java.math.*;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
->>>>>>> Stashed changes
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -22,11 +14,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Vision;
-import frc.robot.Subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -151,15 +143,8 @@ public class Robot extends TimedRobot {
 
     
 
-<<<<<<< Updated upstream
-    // Auto Aim to Target
-    if (Constants.Controllers.driver1.getRawButton(10)) {
-      SwerveAutoAim(true);
-    }
-=======
     //Auto Aim to Target
     
->>>>>>> Stashed changes
 
     // if (Constants.Controllers.driver2.getAButton()) {
     // blinkin.scannerRed();
@@ -203,25 +188,11 @@ public class Robot extends TimedRobot {
 
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
-<<<<<<< Updated upstream
-      // intake.wristDown();
-      intake.intakeStart(-.5);
-    } else if (Constants.Controllers.driver2.getRightBumper()) {
-      intake.intakeStart(.5);
-
-    } else if (Constants.Controllers.driver2.getLeftTriggerAxis() > 0.5) {
-      intake.intakeStart(-1);
-
-    }
-
-    else {
-=======
      // intake.wristDown();
       intake.intakeStart(-0.5);
     } else if (Constants.Controllers.driver2.getRightBumper() && intake.getNoteIntaked()) {
       intake.intakeStart(0.5);
     } else {
->>>>>>> Stashed changes
       intake.intakeStop();
     }
 
@@ -241,17 +212,12 @@ public class Robot extends TimedRobot {
 
     }
 
-<<<<<<< Updated upstream
-    if (Constants.Controllers.driver2.getYButton()) {
-      shooter.shoot(1.0);
-=======
 
 
     
 
     if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
       shooter.shoot(.5);
->>>>>>> Stashed changes
     } else if (Constants.Controllers.driver2.getXButton()) {
       shooter.shoot(-1.0);
     } else {
@@ -342,20 +308,6 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
     final  double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(4) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-<<<<<<< Updated upstream
-    double rot;
-
-    if (Constants.Controllers.driver1.getRawButton(6)) {
-      // while (swerve.getHeading() <= -1 || swerve.getHeading() >= 1) {
-
-      // }
-      rot = 0.1;
-      System.out.println("ROTATION SET TO ZEROOOOOOOOOO");
-    } else {
-      rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
-          Constants.Controllers.stickDeadband);
-    }
-=======
 
         if (Constants.Controllers.driver1.getPOV() == 0) {
           xSpeed = .75;
@@ -380,7 +332,6 @@ public class Robot extends TimedRobot {
         }
  
         
->>>>>>> Stashed changes
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
@@ -394,21 +345,12 @@ public class Robot extends TimedRobot {
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
 
-<<<<<<< Updated upstream
-    final double rot;
-
-    if (photonCannon.hasTargets()) {
-      rot = -photonCannon.getYawOfTargets();
-    } else {
-      rot = 0;
-=======
      double rot = 0;
     // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 || photonCannon.getYawOfTargets() <= -20)) {
     
     if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7){
        rot = -photonCannon.getYawOfTargets() * 0.01;
        swerve.zeroHeading();
->>>>>>> Stashed changes
     }
 //  }
 

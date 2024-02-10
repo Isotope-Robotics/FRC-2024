@@ -1,14 +1,12 @@
 package frc.robot.Subsystems;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkRelativeEncoder;
-
 import frc.robot.Constants;
 
 public class Shooter {
@@ -35,16 +33,9 @@ public class Shooter {
         shooterMotor2.setInverted(false);
 
         // Encoders Declarations
-<<<<<<< Updated upstream
-        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
-                Constants.Encoders.NEO_ENCODER_COUNTS);
-        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
-                Constants.Encoders.NEO_ENCODER_COUNTS);
-=======
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
     noteDetected = new DigitalInput(7);
->>>>>>> Stashed changes
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
