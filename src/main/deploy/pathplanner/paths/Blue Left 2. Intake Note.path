@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue Left 2 End"
+      "linkedName": "Blue Left 2 end"
     }
   ],
   "rotationTargets": [],
@@ -67,7 +67,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -179.86247667786546,
     "rotateFast": false
   },
   "reversed": false,
