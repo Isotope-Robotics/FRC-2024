@@ -3,6 +3,7 @@ package frc.robot.Subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -16,6 +17,7 @@ public class Shooter {
     private CANSparkMax shooterMotor2;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
+    public static DigitalInput noteDetected;
 
     private static Shooter m_Instance = null;
 
@@ -33,18 +35,32 @@ public class Shooter {
         shooterMotor2.setInverted(false);
 
         // Encoders Declarations
+<<<<<<< Updated upstream
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
                 Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
                 Constants.Encoders.NEO_ENCODER_COUNTS);
+=======
+        shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+        shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+    noteDetected = new DigitalInput(7);
+>>>>>>> Stashed changes
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
-        shooterMotor1.set(speed);
+      //  shooterMotor1.set(speed);
         shooterMotor2.set(speed);
         SmartDashboard.putNumber("Shooter 1 Speed", speed);
         SmartDashboard.putNumber("Shooter 2 Speed", speed);
+    }
+
+    public boolean getNoteDetected() {
+        if (noteDetected.get()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Stop both shooter motors

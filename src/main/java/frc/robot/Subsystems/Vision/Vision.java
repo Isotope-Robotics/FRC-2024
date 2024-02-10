@@ -1,15 +1,23 @@
 package frc.robot.Subsystems.Vision;
 
+import java.util.List;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.common.hardware.VisionLEDMode;
 import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
+import org.photonvision.targeting.TargetCorner;
 
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class Vision {
     public static PhotonCamera photonCannon;
+
+    
 
     private static Vision m_Instance = null;
 
@@ -26,10 +34,12 @@ public class Vision {
 
     }
 
+
+
     // Creates New Vision Stream
     public void createNewStream() {
         try {
-            photonCannon = new PhotonCamera("photonvision");
+            photonCannon = new PhotonCamera("Logitech,_Inc._Webcam_C270");
             isReady = true;
         } catch (Exception e) {
             System.out.println("Can't Create Photon Vision Camera Stream");
@@ -49,8 +59,17 @@ public class Vision {
 
     // Returns the Yaw of Targets
     public double getYawOfTargets() {
-        double yaw = getTargets().getBestTarget().getYaw();
+        var result = photonCannon.getLatestResult();
+        boolean hasTargets = result.hasTargets();
+
+        if (hasTargets == true){
+        PhotonTrackedTarget target = result.getBestTarget();
+        double yaw = target.getYaw();
+        System.out.println(yaw);
+        SmartDashboard.putNumber("Yaw of Notes:", yaw);
         return yaw;
+    }
+    return 0;
     }
 
     // Returns if Targets are Present
@@ -62,6 +81,10 @@ public class Vision {
     public PhotonPipelineResult getTargets() {
         return photonCannon.getLatestResult();
     }
+
+
+
+   
 
     // Turn off LEDs on Limelight Hardware
     public void ledOn(boolean off) {

@@ -4,7 +4,16 @@
 // e
 package frc.robot;
 
+<<<<<<< Updated upstream
 import edu.wpi.first.math.MathUtil;
+=======
+
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
+import edu.wpi.first.math.MathUtil;
+import java.math.*;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+>>>>>>> Stashed changes
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -61,7 +70,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Robot Container for Auto Commands
-    robotContainer = new RobotContainer();
+    //robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
@@ -108,7 +117,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    m_AutonomousCommand = robotContainer.getAutonomousCommand();
+  //  m_AutonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_AutonomousCommand != null) {
@@ -136,16 +145,21 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    System.out.println(intake.wristEncoder1.getPosition());
+   // System.out.println(intake.wristEncoder1.getPosition());
 
     // By Default Swerve Is Field Relative
 
-    SwerveDrive(true);
+    
 
+<<<<<<< Updated upstream
     // Auto Aim to Target
     if (Constants.Controllers.driver1.getRawButton(10)) {
       SwerveAutoAim(true);
     }
+=======
+    //Auto Aim to Target
+    
+>>>>>>> Stashed changes
 
     // if (Constants.Controllers.driver2.getAButton()) {
     // blinkin.scannerRed();
@@ -189,6 +203,7 @@ public class Robot extends TimedRobot {
 
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
+<<<<<<< Updated upstream
       // intake.wristDown();
       intake.intakeStart(-.5);
     } else if (Constants.Controllers.driver2.getRightBumper()) {
@@ -200,6 +215,13 @@ public class Robot extends TimedRobot {
     }
 
     else {
+=======
+     // intake.wristDown();
+      intake.intakeStart(-0.5);
+    } else if (Constants.Controllers.driver2.getRightBumper() && intake.getNoteIntaked()) {
+      intake.intakeStart(0.5);
+    } else {
+>>>>>>> Stashed changes
       intake.intakeStop();
     }
 
@@ -212,10 +234,24 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
+    } else if (Constants.Controllers.driver1.getRawButton(4)){
+      SwerveAutoAim(true);
+    } else {
+    SwerveDrive(true);
+
     }
 
+<<<<<<< Updated upstream
     if (Constants.Controllers.driver2.getYButton()) {
       shooter.shoot(1.0);
+=======
+
+
+    
+
+    if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
+      shooter.shoot(.5);
+>>>>>>> Stashed changes
     } else if (Constants.Controllers.driver2.getXButton()) {
       shooter.shoot(-1.0);
     } else {
@@ -224,13 +260,16 @@ public class Robot extends TimedRobot {
 
     if (Constants.Controllers.driver2.getBButton()) {
       intake.wristDown();
-    } else if (Constants.Controllers.driver2.getPOV() == 90) {
+    } else if (Constants.Controllers.driver2.getBackButton()) {
       intake.wristHalf();
     } else {
       intake.wristUp();
     }
 
-    intake.getNoteIntaked();
+    if (intake.getWristLimit()) {
+      intake.zeroEncoders();
+    }
+    
 
     if (Constants.Controllers.driver2.getPOV() == 0) {
       climber.extend();
@@ -240,7 +279,10 @@ public class Robot extends TimedRobot {
       climber.retract();
     }
 
-    System.out.println(swerve.getHeading());
+    System.out.println(intake.wristEncoder1.getPosition());
+    System.out.println(photonCannon.getYawOfTargets());
+
+    // System.out.println(swerve.getHeading());
     //// Get the controller axis values
     // double shooterSpeed = controller.getRawAxis(3); // Change the axis number as
     // per your setup
@@ -263,6 +305,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically when disabled. */
   @Override
   public void disabledPeriodic() {
+    
   }
 
   /** This function is called once when test mode is enabled. */
@@ -274,6 +317,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
+    //SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
+    //SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
+    photonCannon.getYawOfTargets();
+    //SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
   }
 
   /** This function is called once when the robot is first started up. */
@@ -289,10 +336,13 @@ public class Robot extends TimedRobot {
   // To Drive With Controllers
   private void SwerveDrive(boolean isFieldRel) {
     // Controller Deadbands (Translation, Strafe, Rotation)
-    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+     double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
+    final  double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(4) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        Constants.Controllers.stickDeadband);
+<<<<<<< Updated upstream
     double rot;
 
     if (Constants.Controllers.driver1.getRawButton(6)) {
@@ -305,10 +355,36 @@ public class Robot extends TimedRobot {
       rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3),
           Constants.Controllers.stickDeadband);
     }
+=======
+
+        if (Constants.Controllers.driver1.getPOV() == 0) {
+          xSpeed = .75;
+        } else if (Constants.Controllers.driver1.getPOV() == 90) {
+          ySpeed = .75;
+        } else if (Constants.Controllers.driver1.getPOV() == 180) {
+          xSpeed = -.75;
+        } else if (Constants.Controllers.driver1.getPOV() == 270) {
+          ySpeed = -.75;
+        } else if (Constants.Controllers.driver1.getPOV() == 45) {
+          xSpeed = .5;
+          ySpeed = .5;
+        } else if (Constants.Controllers.driver1.getPOV() == 135) {
+          xSpeed = -.5;
+          ySpeed = .5;
+        } else if (Constants.Controllers.driver1.getPOV() == 225) {
+          xSpeed = -.5;
+          ySpeed = -.5;
+        } else if (Constants.Controllers.driver1.getPOV() == 315) {
+          xSpeed = .5;
+          ySpeed = -.5;
+        }
+ 
+        
+>>>>>>> Stashed changes
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
   // Should Rotate Swerve Around Target
@@ -318,13 +394,23 @@ public class Robot extends TimedRobot {
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
 
+<<<<<<< Updated upstream
     final double rot;
 
     if (photonCannon.hasTargets()) {
       rot = -photonCannon.getYawOfTargets();
     } else {
       rot = 0;
+=======
+     double rot = 0;
+    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 || photonCannon.getYawOfTargets() <= -20)) {
+    
+    if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7){
+       rot = -photonCannon.getYawOfTargets() * 0.01;
+       swerve.zeroHeading();
+>>>>>>> Stashed changes
     }
+//  }
 
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);

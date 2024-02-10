@@ -39,7 +39,7 @@ public class Intake extends SubsystemBase {
 
         // Limit Switch (Photo Eye) Declarations
         noteIntaked = new DigitalInput(1);
-        wristLimit = new DigitalInput(7);
+        wristLimit = new DigitalInput(5);
 
         // Encoders Declarations
         wristEncoder1 = wristMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor,
@@ -90,15 +90,15 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        if (!getWristLimit()) {
+        if (getWristLimit()) {
             wristStop();
         } else {
-            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.5));
+            wristMotor1.set(-.2);
         }
     }
 
     public void wristHalf() {
-        if (!getWristLimit()) {
+        if (getWristLimit()) {
             wristStop();
         } else {
             wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
@@ -107,7 +107,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist down movement control
     public void wristDown() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 37.5));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 35.5));
     }
 
     // Intake speed set
