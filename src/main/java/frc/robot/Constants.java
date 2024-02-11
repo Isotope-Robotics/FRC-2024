@@ -61,9 +61,9 @@ public class Constants {
         // public static final int wristMotor2ID = 5;
         public static final int intakeMotorID = 6;
 
-        public static final double kP = 0.015;
+        public static final double kP = 0.027; //0.015
         public static final double kI = 0.0;
-        public static final double kD = 0.00;
+        public static final double kD = 0.0000402;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
