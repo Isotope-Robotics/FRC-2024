@@ -40,14 +40,16 @@ public class Swerve extends SubsystemBase {
                 new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+        //swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroAngle(), getModulePositions());
 
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), getPose());
+        //swerveOdometry.resetPosition(getGyroYaw, getModulePositions(), getPose());
+        swerveOdometry.resetPosition(getGyroAngle(), getModulePositions(), getPose());
 
         // Configure AutoBuilder for PathPlanning
         AutoBuilder.configureHolonomic(
                 this::getPose,
-                this::resetPose,
+                this::resetPose2,
                 this::getSpeeds,
                 this::driveRobotRelative,
                 Constants.Swerve.pathFollowerConfig,
@@ -84,7 +86,8 @@ public class Swerve extends SubsystemBase {
                                 rotation));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
-        swerveOdometry.update(getGyroYaw(), getModulePositions());
+        //swerveOdometry.update(getGyroYaw(), getModulePositions());
+        swerveOdometry.update(getGyroAngle(), getModulePositions());
 
         field.setRobotPose(getPose());
 
@@ -129,6 +132,10 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
+    public void resetPose2(Pose2d pose){
+        swerveOdometry.resetPosition(getGyroAngle(), getModulePositions(), pose);
+    }
+
     public Rotation2d getHeading() {
         return getPose().getRotation();
     }
@@ -145,6 +152,18 @@ public class Swerve extends SubsystemBase {
 
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
+    }
+
+    //Retuns Gyro Angle from 180 to -180, Prevents 360 degree wrapping
+    public Rotation2d getGyroAngle(){
+        double angle = gyro.getYaw().getValue() + 180;
+        if(angle >  180){
+            angle -= 360;
+        } else if (angle < -180){
+            angle += 360;
+        }
+
+        return Rotation2d.fromDegrees(angle);
     }
 
     public double getRealYaw(){
