@@ -1,12 +1,14 @@
 package frc.robot.Subsystems;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.SparkRelativeEncoder;
+
 import frc.robot.Constants;
 
 public class Shooter {
@@ -40,7 +42,7 @@ public class Shooter {
 
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
-      //  shooterMotor1.set(speed);
+        shooterMotor1.set(-speed);
         shooterMotor2.set(speed);
         SmartDashboard.putNumber("Shooter 1 Speed", speed);
         SmartDashboard.putNumber("Shooter 2 Speed", speed);

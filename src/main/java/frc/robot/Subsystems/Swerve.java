@@ -147,6 +147,11 @@ public class Swerve extends SubsystemBase {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
+    public double getRealYaw(){
+        return gyro.getYaw().getValue();
+    }
+
+
     public ChassisSpeeds getSpeeds() {
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }

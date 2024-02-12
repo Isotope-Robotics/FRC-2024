@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8119358594606917,
-      "y": 3.8474647375359914
+      "x": 0.5650397265706815,
+      "y": 3.682867315609318
     },
     "rotation": 0
   },
@@ -30,15 +30,21 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Blue Middle 2. Intake Note"
+            "name": "DropIntake"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Middle 2. Intake Note"
           }
         },
         {

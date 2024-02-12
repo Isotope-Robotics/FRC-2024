@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.5547523877002646,
+        "y": 2.222065196010092
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.5547523877002654,
+        "y": 2.222065196010092
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.10388429799416,
+        "y": 0.7715504152812825
+      },
+      "prevControl": {
+        "x": 3.10388429799416,
+        "y": 0.7715504152812825
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 572.96,
+    "maxAngularAcceleration": 752.96
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "EZ Points",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
