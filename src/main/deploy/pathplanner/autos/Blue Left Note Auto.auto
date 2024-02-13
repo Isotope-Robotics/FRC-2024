@@ -24,18 +24,6 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "Blue Left 2. Intake Note"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.25
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "DropIntake"
@@ -45,6 +33,18 @@
           "type": "named",
           "data": {
             "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Left 2. Intake Note"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
           }
         },
         {

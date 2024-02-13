@@ -1,0 +1,133 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.5650397265706815,
+      "y": 7.21142454816238
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Left 1. Shoot Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Left 2. Intake Note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Left 3. Shoot Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 4. Intake Note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 5. Shoot Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 6. Intake Note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 7. Shoot Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 8. Intake Note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Super Left 9. Shoot Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

@@ -5,7 +5,11 @@
 package frc.robot;
 
 
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.math.MathUtil;
+import java.math.*;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -19,6 +23,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Vision;
+import frc.robot.Subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -141,35 +146,6 @@ public class Robot extends TimedRobot {
 
     // By Default Swerve Is Field Relative
 
-    
-
-    //Auto Aim to Target
-    
-
-    // if (Constants.Controllers.driver2.getAButton()) {
-    // blinkin.scannerRed();
-    // }
-    // else if (Constants.Controllers.driver2.getXButton()) {
-    // blinkin.confetti();
-    // }
-    // else if (Constants.Controllers.driver2.getYButton()) {
-    // blinkin.rainbowRGB();
-    // }
-    // else if (Constants.Controllers.driver2.getBButton()) {
-    // blinkin.fireMedium();
-    // }
-    // else {
-    // blinkin.breathRed();
-    // }
-
-    // if (Constants.Controllers.driver2.getAButton()) {
-    // blinkin.index += 0.02;
-    // }
-
-    // if (Constants.Controllers.driver2.getBButton()) {
-    // blinkin.index -= 0.02;
-    // }
-
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
@@ -193,6 +169,7 @@ public class Robot extends TimedRobot {
     } else if (Constants.Controllers.driver2.getRightBumper() && intake.getNoteIntaked()) {
       intake.intakeStart(0.5);
     } else {
+
       intake.intakeStop();
     }
 
@@ -232,18 +209,18 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
       shooter.shoot(.5);
     } else if (Constants.Controllers.driver2.getXButton()) {
-      shooter.shoot(-1.0);
+      shooter.shoot(-1.0 * Constants.Controllers.driver2.getRightTriggerAxis());
     } else {
       shooter.stop();
     }
 
-    if (Constants.Controllers.driver2.getBButton()) {
-      intake.wristDown();
-    } else if (Constants.Controllers.driver2.getBackButton()) {
-      intake.wristHalf();
-    } else {
-      intake.wristUp();
-    }
+    // if (Constants.Controllers.driver2.getBButton()) {
+    //   intake.wristDown();
+    // } else if (Constants.Controllers.driver2.getBackButton()) {
+    //   intake.wristHalf();
+    // } else {
+    //   intake.wristUp();
+    // }
 
     if (intake.getWristLimit()) {
       intake.zeroEncoders();
@@ -256,6 +233,10 @@ public class Robot extends TimedRobot {
 
     if (Constants.Controllers.driver2.getPOV() == 180) {
       climber.retract();
+    }
+
+    if (Constants.Controllers.driver1.getRawButton(5)) {
+      SwerveGyro0(true);
     }
 
     System.out.println(intake.wristEncoder1.getPosition());
@@ -315,19 +296,23 @@ public class Robot extends TimedRobot {
   // To Drive With Controllers
   private void SwerveDrive(boolean isFieldRel) {
     // Controller Deadbands (Translation, Strafe, Rotation)
-     double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+
+     double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1)
+      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0)
+      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-    final  double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(4) * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+      double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+     * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
 
         if (Constants.Controllers.driver1.getPOV() == 0) {
-          xSpeed = .75;
+          xSpeed = -.75;
         } else if (Constants.Controllers.driver1.getPOV() == 90) {
           ySpeed = .75;
         } else if (Constants.Controllers.driver1.getPOV() == 180) {
-          xSpeed = -.75;
+          xSpeed = .75;
         } else if (Constants.Controllers.driver1.getPOV() == 270) {
           ySpeed = -.75;
         } else if (Constants.Controllers.driver1.getPOV() == 45) {
@@ -364,6 +349,31 @@ public class Robot extends TimedRobot {
     if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7){
        rot = -photonCannon.getYawOfTargets() * 0.01;
        swerve.zeroHeading();
+    } else {
+      rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+     * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        Constants.Controllers.stickDeadband);
+    }
+//  }
+
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+  }
+
+
+
+ private void SwerveGyro0(boolean isFieldRel) {
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+
+     double rot = 0;
+    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 || photonCannon.getYawOfTargets() <= -20)) {
+    
+    if (swerve.getRealYaw() >= 1 || swerve.getRealYaw() <= -1){
+       rot = -swerve.getRealYaw() * 0.01;
+       
     }
 //  }
 

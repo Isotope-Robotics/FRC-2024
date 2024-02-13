@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.125,
-      "y": 2.3
+      "x": 0.5547523877002646,
+      "y": 2.355800601325514
     },
     "rotation": 0
   },
@@ -18,9 +18,27 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeNote"
           }
         },
         {
@@ -32,7 +50,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.25
           }
         },
         {
@@ -42,9 +60,15 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.25
           }
         }
       ]
