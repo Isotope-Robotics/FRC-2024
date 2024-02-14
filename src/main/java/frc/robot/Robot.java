@@ -5,11 +5,7 @@
 package frc.robot;
 
 
-import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.math.MathUtil;
-import java.math.*;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -23,7 +19,6 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Vision;
-import frc.robot.Subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -58,6 +53,10 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
 
   private final Vision photonCannon = Vision.getInstance();
+
+  private double start_time = 0;
+
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -173,17 +172,26 @@ public class Robot extends TimedRobot {
       intake.intakeStop();
     }
 
+//one button intake
+    if (Constants.Controllers.driver2.getPOV() == 270) {
+      intake.wristDown();
+      intake.intakeStart(1.0);
+} if (intake.getWristLimit() == true) {
+  intake.intakeStart(-1.0);
+}
 
-//     if (Constants.Controllers.driver2.getPOV() == 270) {
-//       intake.wristDown();
-// } else if (intake.getNoteIntaked()) {
-//     intake.intakeStart(0.5);
-// } else {
-//     // Add the condition to check if the wrist is in a flipped position
-//     if (intake.wristDown()) {
-//         intake.wristUp();
-//     }
-// }
+
+//one button shoot
+    if(Constants.Controllers.driver2.getStartButton()){
+      start_time = System.currentTimeMillis();
+    } else if(System.currentTimeMillis() - start_time > 0.2){
+      shooter.shoot(1.0);
+    } else if(System.currentTimeMillis() - start_time < 0.2 && System.currentTimeMillis() - start_time > 0.4){
+      if(intake.getNoteIntaked() || shooter.getNoteDetected()){
+        shooter.shoot(1.0);
+        intake.intakeStart(-1.0);
+      }
+    }
 
 
     // Back to robot centric while button seven is pushed
@@ -207,20 +215,20 @@ public class Robot extends TimedRobot {
     
 
     if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
-      shooter.shoot(.5);
+      shooter.shoot(1.0);
     } else if (Constants.Controllers.driver2.getXButton()) {
       shooter.shoot(-1.0 * Constants.Controllers.driver2.getRightTriggerAxis());
     } else {
       shooter.stop();
     }
 
-    // if (Constants.Controllers.driver2.getBButton()) {
-    //   intake.wristDown();
-    // } else if (Constants.Controllers.driver2.getBackButton()) {
-    //   intake.wristHalf();
-    // } else {
-    //   intake.wristUp();
-    // }
+    if (Constants.Controllers.driver2.getBButton()) {
+      intake.wristDown();
+    } else if (Constants.Controllers.driver2.getBackButton()) {
+      intake.wristHalf();
+    } else {
+      intake.wristUp();
+    }
 
     if (intake.getWristLimit()) {
       intake.zeroEncoders();
