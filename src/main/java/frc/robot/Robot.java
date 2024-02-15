@@ -362,27 +362,32 @@ public class Robot extends TimedRobot {
      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
     }
-//  }
+// }
 
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
 
-    private void limelightAim(boolean isFieldRel) {
-      final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-        Constants.Controllers.stickDeadband);
-    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-        Constants.Controllers.stickDeadband);
-    // Replace "limelight" with name of your Limelight table
-    var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+  //   private void limelightAim(boolean isFieldRel) {
+  //     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+  //       Constants.Controllers.stickDeadband);
+  //   final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+  //       Constants.Controllers.stickDeadband);
+  //   // Replace "limelight" with name of your Limelight table
+  //   var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-    // Get Limelight data
-    double rot = limelightTable.getEntry("ty").getDouble(0.0);
+  //   // Get Limelight data
+  //   double rot = limelightTable.getEntry("ty").getDouble(0.0);
 
-    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-    rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
-    }
+  //   swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+  //   rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+    
+  //     if (limelightAim(isFieldRel);. >= 7 || limelightTable.getYawOfTargets() <= -7){
+  //       rot = -limelightAim.getYawOfTargets()* 0.01;
+
+  //     }
+  // }
 
 
 
