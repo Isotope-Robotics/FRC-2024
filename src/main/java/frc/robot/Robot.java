@@ -356,7 +356,7 @@ public class Robot extends TimedRobot {
     
     if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7){
        rot = -photonCannon.getYawOfTargets() * 0.01;
-       swerve.zeroHeading();
+       //swerve.zeroHeading();
     } else {
       rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
@@ -367,6 +367,22 @@ public class Robot extends TimedRobot {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
+
+
+    private void limelightAim(boolean isFieldRel) {
+      final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+    // Replace "limelight" with name of your Limelight table
+    var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+
+    // Get Limelight data
+    double rot = limelightTable.getEntry("ty").getDouble(0.0);
+
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+    rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+    }
 
 
 
