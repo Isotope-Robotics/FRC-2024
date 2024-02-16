@@ -143,8 +143,8 @@ public class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         // Drive Motor PID Values
-        public static final double driveKP = 0.08;//2.0;
-        public static final double driveKI = 0.01;//40.0;
+        public static final double driveKP = 0.12;//0.08;//2.0;
+        public static final double driveKI = 0.0;//0.01;//40.0;
         public static final double driveKD = 0.00;//0.02;
         public static final double driveKF = 0.0;
 
