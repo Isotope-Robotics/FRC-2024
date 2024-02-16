@@ -214,7 +214,7 @@ public class Constants {
                 new ReplanningConfig());
     }
 
-    /*
+    
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 4.5;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -229,6 +229,6 @@ public class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
-    */
+    
 
 }

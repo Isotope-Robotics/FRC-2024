@@ -140,10 +140,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    // System.out.println(intake.wristEncoder1.getPosition());
-
-    // By Default Swerve Is Field Relative
-
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
@@ -207,13 +203,12 @@ public class Robot extends TimedRobot {
     // Back to robot centric while button seven is pushed
     if (Constants.Controllers.driver1.getRawButton(2)) {
       swerve.zeroHeading();
-
       System.out.println("RESET GYRO!!!!!!!");
     }
 
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
-      System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
+      System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
     } else if (Constants.Controllers.driver1.getRawButton(4)) {
       SwerveAutoAim(true);
     } else {

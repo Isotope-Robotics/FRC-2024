@@ -44,12 +44,10 @@ public class Swerve extends SubsystemBase {
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), getPose());
-
         // Configure AutoBuilder for PathPlanning
         AutoBuilder.configureHolonomic(
                 this::getPose,
-                this::resetPose,
+                this::setPose,
                 this::getSpeeds,
                 this::driveRobotRelative,
                 Constants.Swerve.pathFollowerConfig,
@@ -130,7 +128,7 @@ public class Swerve extends SubsystemBase {
         return swerveOdometry.getPoseMeters();
     }
 
-    public void resetPose(Pose2d pose) {
+    public void setPose(Pose2d pose){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
@@ -148,10 +146,12 @@ public class Swerve extends SubsystemBase {
                 new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
+    //Returns Gyro as a Rotation2d 
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
+    //For Telementry Info, Returns as a Double Value
     public double getRealYaw() {
         return gyro.getYaw().getValue();
     }
@@ -183,5 +183,16 @@ public class Swerve extends SubsystemBase {
             m_Instance = new Swerve();
         }
         return m_Instance;
+    }
+
+    @Override
+    public void periodic(){
+        swerveOdometry.update(getGyroYaw(), getModulePositions());
+
+        for(SwerveModule mod : mSwerveMods){
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        }
     }
 }
