@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
-  private double start_time = 0;
+  //private double start_time = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
