@@ -7,14 +7,17 @@
     "Blue Middle Linked  ",
     "Blue Right Linked ",
     "EZ Points",
+    "New Folder",
     "Red Left Linked ",
     "Red Middle Linked ",
     "Red Right Linked"
   ],
-  "autoFolders": [],
-  "defaultMaxVel": 4.5,
-  "defaultMaxAccel": 4.5,
-  "defaultMaxAngVel": 572.96,
-  "defaultMaxAngAccel": 752.96,
+  "autoFolders": [
+    "CONFIG_AUTO"
+  ],
+  "defaultMaxVel": 3.9,
+  "defaultMaxAccel": 16.0,
+  "defaultMaxAngVel": 400.0,
+  "defaultMaxAngAccel": 1500.0,
   "maxModuleSpeed": 4.5
 }

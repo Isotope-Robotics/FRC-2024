@@ -13,6 +13,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,16 +42,14 @@ public class Swerve extends SubsystemBase {
                 new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
-        //swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroAngle(), getModulePositions());
+        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
-        //swerveOdometry.resetPosition(getGyroYaw, getModulePositions(), getPose());
-        swerveOdometry.resetPosition(getGyroAngle(), getModulePositions(), getPose());
+        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), getPose());
 
         // Configure AutoBuilder for PathPlanning
         AutoBuilder.configureHolonomic(
                 this::getPose,
-                this::resetPose2,
+                this::resetPose,
                 this::getSpeeds,
                 this::driveRobotRelative,
                 Constants.Swerve.pathFollowerConfig,
@@ -84,10 +84,13 @@ public class Swerve extends SubsystemBase {
                                 translation.getX(),
                                 translation.getY(),
                                 rotation));
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
-        //swerveOdometry.update(getGyroYaw(), getModulePositions());
-        swerveOdometry.update(getGyroAngle(), getModulePositions());
+       
+            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+
+        
+
+        swerveOdometry.update(getGyroYaw(), getModulePositions());
 
         field.setRobotPose(getPose());
 
@@ -96,7 +99,6 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-
         }
     }
 
@@ -132,10 +134,6 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
-    public void resetPose2(Pose2d pose){
-        swerveOdometry.resetPosition(getGyroAngle(), getModulePositions(), pose);
-    }
-
     public Rotation2d getHeading() {
         return getPose().getRotation();
     }
@@ -154,22 +152,9 @@ public class Swerve extends SubsystemBase {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
-    //Retuns Gyro Angle from 180 to -180, Prevents 360 degree wrapping
-    public Rotation2d getGyroAngle(){
-        double angle = gyro.getYaw().getValue() + 180;
-        if(angle >  180){
-            angle -= 360;
-        } else if (angle < -180){
-            angle += 360;
-        }
-
-        return Rotation2d.fromDegrees(angle);
-    }
-
-    public double getRealYaw(){
+    public double getRealYaw() {
         return gyro.getYaw().getValue();
     }
-
 
     public ChassisSpeeds getSpeeds() {
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());

@@ -30,7 +30,7 @@ public class RobotContainer {
 
     // Adds SmartDashboard Buttons for Auto Selection
     private void configureAutos() {
-        SmartDashboard.putData("Test Path", new PathPlannerAuto("Test Blue"));
+        SmartDashboard.putData("Test Path", new PathPlannerAuto("One Meter"));
         //SmartDashboard.putData("Blue Path", new DrivetrainCommands().followPathCommand("Test Path"));
 
         //SSH CLEAR OLD FILES FROM RIO ***ETHEN ONLY!!!!***

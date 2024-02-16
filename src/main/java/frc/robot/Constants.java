@@ -25,7 +25,7 @@ public class Constants {
         public static final Joystick driver1 = new Joystick(0);
         public static final XboxController driver2 = new XboxController(1);
 
-        public static final double stickDeadband = 0.25;
+        public static final double stickDeadband = 0.3;
     }
 
     public static final class Blinkin {
@@ -61,9 +61,9 @@ public class Constants {
         // public static final int wristMotor2ID = 5;
         public static final int intakeMotorID = 6;
 
-        public static final double kP = 0.027; //0.015
+        public static final double kP = 0.1; //0.015
         public static final double kI = 0.0;
-        public static final double kD = 0.0000402;
+        public static final double kD = 0.0;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
@@ -143,9 +143,9 @@ public class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         // Drive Motor PID Values
-        public static final double driveKP = 0.08;
-        public static final double driveKI = 0.01;
-        public static final double driveKD = 0.0;
+        public static final double driveKP = 0.08;//2.0;
+        public static final double driveKI = 0.01;//40.0;
+        public static final double driveKD = 0.00;//0.02;
         public static final double driveKF = 0.0;
 
         public static final double driveKS = 0.32;
@@ -154,7 +154,7 @@ public class Constants {
 
         // Swerve Profiling Values
         // Meters per Second
-        public static final double maxSpeed = 4.5;
+        public static final double maxSpeed = 3.5;
         // Radians per Second
         public static final double maxAngularVelocity = 10.0;
 
@@ -168,7 +168,7 @@ public class Constants {
             public static final int driveMotorID = 11;
             public static final int angleMotorID = 10;
             public static final int canCoderID = 25;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(34.75);// 34.75 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(35.075);// 34.75 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
@@ -188,7 +188,7 @@ public class Constants {
             public static final int driveMotorID = 9;
             public static final int angleMotorID = 20;
             public static final int canCoderID = 21;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-45);// -45 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-49.5);// -45 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
@@ -198,24 +198,25 @@ public class Constants {
             public static final int driveMotorID = 22;
             public static final int angleMotorID = 14;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0);// 0 original offset
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(1);// 0 original offset
             public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
                     canCoderID, angleOffset);
         }
 
         // For Pathplanner Config - DO NOT USE ANYWHERE EXCEPT FOR THE CONFIG IN AUTO!!
         public static final Translation2d front_offset = new Translation2d(wheelBase / 2.0, trackWidth / 2.0);
-
+        
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
                 new PIDConstants(5.0, 0, 0), // Translation constants
                 new PIDConstants(5.0, 0, 0), // Rotation constants
-                maxSpeed,
+                4.5,//maxSpeed,
                 front_offset.getNorm(), // Drive base radius (distance from center to furthest module)
                 new ReplanningConfig());
     }
 
+    /*
     public static final class AutoConstants {
-        public static final double kMaxSpeedMetersPerSecond = 3;
+        public static final double kMaxSpeedMetersPerSecond = 4.5;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
@@ -224,9 +225,10 @@ public class Constants {
         public static final double kPYController = 1;
         public static final double kPThetaController = 1;
 
-        /* Constraint for the motion profilied robot angle controller */
+        // Constraint for the motion profilied robot angle controller
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+    */
 
 }

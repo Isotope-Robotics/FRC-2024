@@ -4,7 +4,6 @@
 // e
 package frc.robot;
 
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
@@ -40,7 +39,6 @@ public class Robot extends TimedRobot {
 
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
-  public Swerve swerve = Swerve.getInstance();
 
   // Shooter Varibles
   private final Shooter shooter = Shooter.getInstance();
@@ -54,9 +52,9 @@ public class Robot extends TimedRobot {
 
   private final Vision photonCannon = Vision.getInstance();
 
+  public Swerve swerve;
+
   private double start_time = 0;
-
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -65,8 +63,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    swerve = Swerve.getInstance();
     // Robot Container for Auto Commands
-    //robotContainer = new RobotContainer();
+    robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
     swerve.zeroHeading();
@@ -113,7 +112,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-  //  m_AutonomousCommand = robotContainer.getAutonomousCommand();
+    m_AutonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_AutonomousCommand != null) {
@@ -124,7 +123,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-
+    SmartDashboard.putNumber("Gyro:", swerve.getRealYaw());
   }
 
   /** This function is called once when teleop is enabled. */
@@ -141,7 +140,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-   // System.out.println(intake.wristEncoder1.getPosition());
+    // System.out.println(intake.wristEncoder1.getPosition());
 
     // By Default Swerve Is Field Relative
 
@@ -163,7 +162,7 @@ public class Robot extends TimedRobot {
 
     // Intake down & Start Intake
     if (Constants.Controllers.driver2.getLeftBumper()) {
-     // intake.wristDown();
+      // intake.wristDown();
       intake.intakeStart(-0.5);
     } else if (Constants.Controllers.driver2.getRightBumper() && intake.getNoteIntaked()) {
       intake.intakeStart(0.5);
@@ -172,47 +171,55 @@ public class Robot extends TimedRobot {
       intake.intakeStop();
     }
 
-//one button intake
+    /* 
+    // one button intake
     if (Constants.Controllers.driver2.getPOV() == 270) {
       intake.wristDown();
       intake.intakeStart(1.0);
-} if (intake.getWristLimit() == true) {
-  intake.intakeStart(-1.0);
-}
+    } else if (intake.getWristLimit() == true) {
+      intake.intakeStart(-1.0);
+    } else {
+      intake.wristStop();
+      intake.intakeStop();
+    }
+    */
 
-
-//one button shoot
-    if(Constants.Controllers.driver2.getStartButton()){
+    /*  one button shoot
+    if (Constants.Controllers.driver2.getStartButton()) {
       start_time = System.currentTimeMillis();
-    } else if(System.currentTimeMillis() - start_time > 0.2){
+    } else if (System.currentTimeMillis() - start_time > 0.2) {
       shooter.shoot(1.0);
-    } else if(System.currentTimeMillis() - start_time < 0.2 && System.currentTimeMillis() - start_time > 0.4){
-      if(intake.getNoteIntaked() || shooter.getNoteDetected()){
+    } else if (System.currentTimeMillis() - start_time < 0.2 && System.currentTimeMillis() - start_time > 0.4) {
+      if (intake.getNoteIntaked() || shooter.getNoteDetected()) {
         shooter.shoot(1.0);
         intake.intakeStart(-1.0);
+      } else {
+        intake.intakeStop();
+        intake.wristStop();
       }
-    }
 
+    } else {
+      intake.intakeStop();
+      intake.wristStop();
+    }
+    */
 
     // Back to robot centric while button seven is pushed
     if (Constants.Controllers.driver1.getRawButton(2)) {
       swerve.zeroHeading();
+
       System.out.println("RESET GYRO!!!!!!!");
     }
 
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
       System.out.println("HROBOT CENTRIC ENABLLEEEDDDDD!!");
-    } else if (Constants.Controllers.driver1.getRawButton(4)){
+    } else if (Constants.Controllers.driver1.getRawButton(4)) {
       SwerveAutoAim(true);
     } else {
-    SwerveDrive(true);
+      SwerveDrive(true);
 
     }
-
-
-
-    
 
     if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
       shooter.shoot(1.0);
@@ -230,10 +237,9 @@ public class Robot extends TimedRobot {
       intake.wristUp();
     }
 
-    if (intake.getWristLimit()) {
+    if (!intake.getWristLimit()) {
       intake.zeroEncoders();
     }
-    
 
     if (Constants.Controllers.driver2.getPOV() == 0) {
       climber.extend();
@@ -273,7 +279,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically when disabled. */
   @Override
   public void disabledPeriodic() {
-    
+
   }
 
   /** This function is called once when test mode is enabled. */
@@ -285,10 +291,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    //SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
-    //SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
+    // SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
+    // SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
     photonCannon.getYawOfTargets();
-    //SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
+    // SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
   }
 
   /** This function is called once when the robot is first started up. */
@@ -305,43 +311,41 @@ public class Robot extends TimedRobot {
   private void SwerveDrive(boolean isFieldRel) {
     // Controller Deadbands (Translation, Strafe, Rotation)
 
-     double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1)
-      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+    double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1)
+        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0)
-      * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+    double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0)
+        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-      double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
-     * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+    double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
 
-        if (Constants.Controllers.driver1.getPOV() == 0) {
-          xSpeed = -.75;
-        } else if (Constants.Controllers.driver1.getPOV() == 90) {
-          ySpeed = .75;
-        } else if (Constants.Controllers.driver1.getPOV() == 180) {
-          xSpeed = .75;
-        } else if (Constants.Controllers.driver1.getPOV() == 270) {
-          ySpeed = -.75;
-        } else if (Constants.Controllers.driver1.getPOV() == 45) {
-          xSpeed = .5;
-          ySpeed = .5;
-        } else if (Constants.Controllers.driver1.getPOV() == 135) {
-          xSpeed = -.5;
-          ySpeed = .5;
-        } else if (Constants.Controllers.driver1.getPOV() == 225) {
-          xSpeed = -.5;
-          ySpeed = -.5;
-        } else if (Constants.Controllers.driver1.getPOV() == 315) {
-          xSpeed = .5;
-          ySpeed = -.5;
-        }
- 
-        
+    if (Constants.Controllers.driver1.getPOV() == 0) {
+      xSpeed = -.75;
+    } else if (Constants.Controllers.driver1.getPOV() == 90) {
+      ySpeed = .75;
+    } else if (Constants.Controllers.driver1.getPOV() == 180) {
+      xSpeed = .75;
+    } else if (Constants.Controllers.driver1.getPOV() == 270) {
+      ySpeed = -.75;
+    } else if (Constants.Controllers.driver1.getPOV() == 45) {
+      xSpeed = .5;
+      ySpeed = .5;
+    } else if (Constants.Controllers.driver1.getPOV() == 135) {
+      xSpeed = -.5;
+      ySpeed = .5;
+    } else if (Constants.Controllers.driver1.getPOV() == 225) {
+      xSpeed = -.5;
+      ySpeed = -.5;
+    } else if (Constants.Controllers.driver1.getPOV() == 315) {
+      xSpeed = .5;
+      ySpeed = -.5;
+    }
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
   // Should Rotate Swerve Around Target
@@ -351,60 +355,63 @@ public class Robot extends TimedRobot {
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
 
-     double rot = 0;
-    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 || photonCannon.getYawOfTargets() <= -20)) {
-    
-    if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7){
-       rot = -photonCannon.getYawOfTargets() * 0.01;
-       //swerve.zeroHeading();
+    double rot = 0;
+    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 ||
+    // photonCannon.getYawOfTargets() <= -20)) {
+
+    if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7) {
+      rot = -photonCannon.getYawOfTargets() * 0.01;
+      // swerve.zeroHeading();
     } else {
       rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
-     * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
-        Constants.Controllers.stickDeadband);
+          * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+          Constants.Controllers.stickDeadband);
     }
-// }
+    // }
 
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
+  // private void limelightAim(boolean isFieldRel) {
+  // final double xSpeed =
+  // MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+  // Constants.Controllers.stickDeadband);
+  // final double ySpeed =
+  // MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+  // Constants.Controllers.stickDeadband);
+  // // Replace "limelight" with name of your Limelight table
+  // var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-  //   private void limelightAim(boolean isFieldRel) {
-  //     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-  //       Constants.Controllers.stickDeadband);
-  //   final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-  //       Constants.Controllers.stickDeadband);
-  //   // Replace "limelight" with name of your Limelight table
-  //   var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+  // // Get Limelight data
+  // double rot = limelightTable.getEntry("ty").getDouble(0.0);
 
-  //   // Get Limelight data
-  //   double rot = limelightTable.getEntry("ty").getDouble(0.0);
+  // swerve.drive(new Translation2d(xSpeed,
+  // ySpeed).times(Constants.Swerve.maxSpeed),
+  // rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-  //   swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-  //   rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
-    
-  //     if (limelightAim(isFieldRel);. >= 7 || limelightTable.getYawOfTargets() <= -7){
-  //       rot = -limelightAim.getYawOfTargets()* 0.01;
+  // if (limelightAim(isFieldRel);. >= 7 || limelightTable.getYawOfTargets() <=
+  // -7){
+  // rot = -limelightAim.getYawOfTargets()* 0.01;
 
-  //     }
+  // }
   // }
 
-
-
- private void SwerveGyro0(boolean isFieldRel) {
+  private void SwerveGyro0(boolean isFieldRel) {
     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
 
-     double rot = 0;
-    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 || photonCannon.getYawOfTargets() <= -20)) {
-    
-    if (swerve.getRealYaw() >= 1 || swerve.getRealYaw() <= -1){
-       rot = -swerve.getRealYaw() * 0.01;
-       
+    double rot = 0;
+    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 ||
+    // photonCannon.getYawOfTargets() <= -20)) {
+
+    if (swerve.getRealYaw() >= 1 || swerve.getRealYaw() <= -1) {
+      rot = -swerve.getRealYaw() * 0.01;
+
     }
-//  }
+    // }
 
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);

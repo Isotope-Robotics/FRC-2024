@@ -2,6 +2,7 @@ package frc.robot.AutoCommands;
 
 import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
@@ -15,9 +16,13 @@ import frc.robot.Subsystems.Swerve;
 public class DrivetrainCommands {
     public Swerve swerve = Swerve.getInstance();
 
-    public Command followPathCommand(String pathName) {
+    public Command followPathCommand(String pathName, boolean isFirstPath) {
         PathPlannerPath path = PathPlannerPath.fromPathFile(pathName);
 
+        if (isFirstPath){
+            swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
+        }
+        
         return new FollowPathHolonomic(
                 path,
                 swerve::getPose, // Robot pose supplier
@@ -25,8 +30,8 @@ public class DrivetrainCommands {
                 swerve::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your
                                                  // Constants class
-                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        new PIDConstants(50.0, 0.0, 0.0), // Translation PID constants //TODO:bingus
+                        new PIDConstants(50.0, 0.0, 0.0), // Rotation PID constants
                         Constants.Swerve.maxSpeed, // Max module speed, in m/s
                         Units.inchesToMeters(17), // Drive base radius in meters. Distance from robot center to furthest
                                                   // module.

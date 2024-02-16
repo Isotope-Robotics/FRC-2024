@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class CTREConfigs {
     public TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
@@ -18,7 +19,7 @@ public class CTREConfigs {
         /** Swerve Angle Motor Configurations */
         /* Motor Inverts and Neutral Mode */
         swerveAngleFXConfig.MotorOutput.Inverted = Constants.Swerve.angleMotorInvert;
-        swerveAngleFXConfig.MotorOutput.NeutralMode = Constants.Swerve.angleNeutralMode;
+        swerveAngleFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Gear Ratio and Wrapping Config */
         swerveAngleFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.angleGearRatio;
@@ -38,7 +39,7 @@ public class CTREConfigs {
         /** Swerve Drive Motor Configuration */
         /* Motor Inverts and Neutral Mode */
         swerveDriveFXConfig.MotorOutput.Inverted = Constants.Swerve.driveMotorInvert;
-        swerveDriveFXConfig.MotorOutput.NeutralMode = Constants.Swerve.driveNeutralMode;
+        swerveDriveFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Gear Ratio Config */
         swerveDriveFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
@@ -63,7 +64,7 @@ public class CTREConfigs {
 
         /* Motor Inverts and Neutral Mode */
         swerveDriveFXConfig1.MotorOutput.Inverted = Constants.Swerve.module0.driveMotorInvert;
-        swerveDriveFXConfig1.MotorOutput.NeutralMode = Constants.Swerve.driveNeutralMode;
+        swerveDriveFXConfig1.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Gear Ratio Config */
         swerveDriveFXConfig1.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
