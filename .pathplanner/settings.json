@@ -7,7 +7,6 @@
     "Blue Middle Linked  ",
     "Blue Right Linked ",
     "EZ Points",
-    "New Folder",
     "Red Left Linked ",
     "Red Middle Linked ",
     "Red Right Linked"
@@ -19,5 +18,5 @@
   "defaultMaxAccel": 16.0,
   "defaultMaxAngVel": 400.0,
   "defaultMaxAngAccel": 1500.0,
-  "maxModuleSpeed": 4.5
+  "maxModuleSpeed": 3.9
 }

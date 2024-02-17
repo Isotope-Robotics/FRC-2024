@@ -90,20 +90,14 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        if (getWristLimit()) {
-            wristStop();
-        } else {
+        
             //wristMotor1.set(-.2);
-            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.0));
-        }
+            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 6.0));
+    
     }
 
     public void wristHalf() {
-        if (getWristLimit()) {
-            wristStop();
-        } else {
-            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
-        }
+       wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
     }
 
     // Wrist down movement control

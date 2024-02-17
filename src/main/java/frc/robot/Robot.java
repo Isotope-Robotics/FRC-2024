@@ -4,12 +4,16 @@
 // e
 package frc.robot;
 
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -68,12 +72,16 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
-    swerve.zeroHeading();
-    swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
+    //swerve.zeroHeading();
+    //swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
 
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
     intake.zeroEncoders();
+
+    //intake.wristMotor1.clearFaults();
+    //intake.intakeMotor.clearFaults();
+
   }
 
   /**
@@ -118,13 +126,13 @@ public class Robot extends TimedRobot {
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.schedule();
     }
-  }
+
+    }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("Gyro:", swerve.getRealYaw());
-  }
+ }
 
   /** This function is called once when teleop is enabled. */
   @Override
@@ -160,7 +168,7 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getLeftBumper()) {
       // intake.wristDown();
       intake.intakeStart(-0.5);
-    } else if (Constants.Controllers.driver2.getRightBumper() && intake.getNoteIntaked()) {
+    } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(0.5);
     } else {
 
@@ -224,14 +232,15 @@ public class Robot extends TimedRobot {
       shooter.stop();
     }
 
-    if (Constants.Controllers.driver2.getBButton()) {
+   /*  if (Constants.Controllers.driver2.getBButton()) {
       intake.wristDown();
     } else if (Constants.Controllers.driver2.getBackButton()) {
       intake.wristHalf();
     } else {
       intake.wristUp();
     }
-
+    
+*/
     if (!intake.getWristLimit()) {
       intake.zeroEncoders();
     }
@@ -288,8 +297,9 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     // SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
     // SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
-    photonCannon.getYawOfTargets();
+    //photonCannon.getYawOfTargets();
     // SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
+    //intake.wristMotor1.set(1.0);
   }
 
   /** This function is called once when the robot is first started up. */

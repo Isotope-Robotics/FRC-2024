@@ -61,9 +61,9 @@ public class Constants {
         // public static final int wristMotor2ID = 5;
         public static final int intakeMotorID = 6;
 
-        public static final double kP = 0.1; //0.015
+        public static final double kP = 100.0; //0.015
         public static final double kI = 0.0;
-        public static final double kD = 0.0;
+        public static final double kD = 0.00;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
@@ -154,7 +154,7 @@ public class Constants {
 
         // Swerve Profiling Values
         // Meters per Second
-        public static final double maxSpeed = 3.5;
+        public static final double maxSpeed = 4.3;
         // Radians per Second
         public static final double maxAngularVelocity = 10.0;
 

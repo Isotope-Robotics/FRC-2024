@@ -39,7 +39,7 @@ public class CTREConfigs {
         /** Swerve Drive Motor Configuration */
         /* Motor Inverts and Neutral Mode */
         swerveDriveFXConfig.MotorOutput.Inverted = Constants.Swerve.driveMotorInvert;
-        swerveDriveFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        swerveDriveFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         /* Gear Ratio Config */
         swerveDriveFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
@@ -64,7 +64,7 @@ public class CTREConfigs {
 
         /* Motor Inverts and Neutral Mode */
         swerveDriveFXConfig1.MotorOutput.Inverted = Constants.Swerve.module0.driveMotorInvert;
-        swerveDriveFXConfig1.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        swerveDriveFXConfig1.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         /* Gear Ratio Config */
         swerveDriveFXConfig1.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
