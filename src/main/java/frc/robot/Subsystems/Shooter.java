@@ -49,7 +49,7 @@ public class Shooter {
     }
 
     public boolean getNoteDetected() {
-        if (!noteDetected.get()) {
+        if (noteDetected.get()) {
             return true;
         } else {
             return false;
