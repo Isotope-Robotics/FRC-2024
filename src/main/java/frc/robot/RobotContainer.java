@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -11,14 +12,11 @@ import frc.robot.AutoCommands.Autos.Blue.BlueCommands;
 //THIS IS A ROBOT CONTAINER ONLY FOR AUTO PERIOD COMMANDS!!!!!!!
 
 public class RobotContainer {
-    SendableChooser<Command> autoChooser = new SendableChooser<>();
+    SendableChooser<Command> autoChooser;
 
     private final BlueCommands blue = new BlueCommands();
 
-    private final Command Default_Auto = blue.DrivePastLine();
-    private final Command Drive_Past_Line = blue.DrivePastLine();
-    private final Command SpeakerShootCrossLine = blue.SpeakerShootCrossLine();
-    private final Command SpeakerGrab2NoteCrossLine = blue.SpeakerGrab2NoteCrossLine();
+    private final Command DRIVE_LINE_AUTO = blue.Speaker2NoteAuto();
 
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
@@ -29,16 +27,15 @@ public class RobotContainer {
         // Sets up auto buttons on SmartDashboard
         configureAutos();
 
-        SmartDashboard.putData("Auto Modes", autoChooser);
+        //SmartDashboard.putData("Auto Modes", autoChooser);
+        autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+        SmartDashboard.putData("Auto Mode", autoChooser);
 
           }
 
     // Adds SmartDashboard Buttons for Auto Selection
     private void configureAutos() {
-        autoChooser.setDefaultOption("Default", Drive_Past_Line);
-        //autoChooser.addOption("Drive Past Line", Drive_Past_Line);
-        //autoChooser.addOption("Shoot 1 Note Speaker", SpeakerShootCrossLine);
-        //autoChooser.addOption("Shooter 2 Notes Speaker", SpeakerGrab2NoteCrossLine);
+        
     }
 
     // Runs that selected command

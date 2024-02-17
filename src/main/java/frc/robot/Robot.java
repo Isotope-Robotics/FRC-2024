@@ -7,6 +7,8 @@ package frc.robot;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -72,9 +74,11 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
 
     // Zero Gyro Heading for Swerve
-    //swerve.zeroHeading();
-    //swerve.swerveOdometry.resetPosition(swerve.getGyroYaw(), swerve.getModulePositions(), swerve.getPose());
-
+    
+    //swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), 
+     //   new Pose2d(new Translation2d(1.34, 5.55 ), new Rotation2d(0.0)));
+     
+    //swerve.zeroHeading();   
     // Zero Shooter and Intake Encoders
     // shooter.zeroEncoders();
     intake.zeroEncoders();

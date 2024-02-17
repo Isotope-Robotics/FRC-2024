@@ -11,9 +11,7 @@
     "Red Middle Linked ",
     "Red Right Linked"
   ],
-  "autoFolders": [
-    "CONFIG_AUTO"
-  ],
+  "autoFolders": [],
   "defaultMaxVel": 3.9,
   "defaultMaxAccel": 16.0,
   "defaultMaxAngVel": 400.0,

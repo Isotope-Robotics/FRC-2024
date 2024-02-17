@@ -1,10 +1,15 @@
 package frc.robot.AutoCommands.Autos.Blue;
 import com.pathplanner.lib.commands.FollowPathHolonomic;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 import frc.robot.AutoCommands.ShooterCommands;
 import frc.robot.Subsystems.Swerve;
@@ -16,7 +21,7 @@ public class BlueCommands extends Command {
          PathPlannerPath path = PathPlannerPath.fromPathFile("Drive To Line");
 
         //If this is the first path it should reset to inital pose
-        swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
+        //swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
         
 
         return new FollowPathHolonomic(
@@ -41,11 +46,22 @@ public class BlueCommands extends Command {
         );
     }
 
+    public Command Speaker2NoteAuto(){
+        String autoName = "Speaker 2 Note Auto";
+        Pose2d pose =  PathPlannerAuto.getStaringPoseFromAutoFile(autoName);
+
+        swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), 
+        pose);
+        
+        return new PathPlannerAuto(autoName);
+    }
+
     public Command DriveToSpeakerNote1(){
          PathPlannerPath path = PathPlannerPath.fromPathFile("Drive To Note 1 From Speaker");
 
         //If this is the first path it should reset to inital pose
-        swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
+        swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), 
+        path.getPreviewStartingHolonomicPose());
         
 
         return new FollowPathHolonomic(
@@ -74,7 +90,7 @@ public class BlueCommands extends Command {
          PathPlannerPath path = PathPlannerPath.fromPathFile("Drive From Note 1 To Speaker");
 
         //If this is the first path it should reset to inital pose
-        swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
+        //swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), path.getPreviewStartingHolonomicPose());
         
 
         return new FollowPathHolonomic(

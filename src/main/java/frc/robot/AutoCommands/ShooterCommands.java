@@ -17,7 +17,7 @@ public class ShooterCommands {
     // needs the yellow {} and ; for each line because multiple lines
     public static Command shoot() {
         return Commands.runOnce(() -> {
-            m_Shooter.shoot(1.0);
+            m_Shooter.shoot(-1.0);
         })
                 .andThen(Commands.waitSeconds(0.5))
                 .andThen(Commands.runOnce(() -> {
