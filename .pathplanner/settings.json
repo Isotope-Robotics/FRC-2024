@@ -2,16 +2,12 @@
   "robotWidth": 0.73,
   "robotLength": 0.73,
   "holonomicMode": true,
-  "pathFolders": [
-    "Blue Left Linked",
-    "Blue Middle Linked  ",
-    "Blue Right Linked ",
-    "EZ Points",
-    "Red Left Linked ",
-    "Red Middle Linked ",
-    "Red Right Linked"
+  "pathFolders": [],
+  "autoFolders": [
+    "Station 2",
+    "Speaker",
+    "Station 1"
   ],
-  "autoFolders": [],
   "defaultMaxVel": 3.9,
   "defaultMaxAccel": 16.0,
   "defaultMaxAngVel": 400.0,

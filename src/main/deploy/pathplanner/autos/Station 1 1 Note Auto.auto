@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3576779647621067,
-      "y": 5.61
+      "x": 0.5547523877002646,
+      "y": 7.149700514939878
     },
     "rotation": 180.0
   },
@@ -14,12 +14,24 @@
         {
           "type": "path",
           "data": {
+            "pathName": "Station 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "Speaker Past Line Mid"
           }
         }
       ]
     }
   },
-  "folder": "Speaker",
+  "folder": null,
   "choreoAuto": false
 }

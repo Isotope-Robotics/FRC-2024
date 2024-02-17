@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.34,
-      "y": 5.547612425391122
+      "x": 0.5547523877002646,
+      "y": 4.145797564778087
     },
     "rotation": 180.0
   },
@@ -11,6 +11,12 @@
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Station 2"
+          }
+        },
         {
           "type": "named",
           "data": {
@@ -88,10 +94,16 @@
           "data": {
             "name": "Shoot"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drive Over Note 3"
+          }
         }
       ]
     }
   },
-  "folder": "Speaker",
+  "folder": "Station 2",
   "choreoAuto": false
 }
