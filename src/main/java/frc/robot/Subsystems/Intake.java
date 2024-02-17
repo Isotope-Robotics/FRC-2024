@@ -38,7 +38,7 @@ public class Intake extends SubsystemBase {
         intakeMotor.setIdleMode(Constants.Intake.Brake);
 
         // Limit Switch (Photo Eye) Declarations
-        noteIntaked = new DigitalInput(1);
+        noteIntaked = new DigitalInput(0);
         wristLimit = new DigitalInput(5);
 
         // Encoders Declarations
@@ -52,7 +52,7 @@ public class Intake extends SubsystemBase {
 
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
-        if (!noteIntaked.get()) {
+        if (noteIntaked.get()) {
             blinkin.rainbowForest();
             return true;
         } else {
@@ -79,7 +79,6 @@ public class Intake extends SubsystemBase {
     public void wristStop() {
         wristMotor1.set(0);
         blinkin.chaseRed();
-        // wristMotor2.set(0);
     }
 
     public void zeroEncoders() {
@@ -90,14 +89,11 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        
-            //wristMotor1.set(-.2);
-            wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 6.0));
-    
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 6.0));
     }
 
     public void wristHalf() {
-       wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 18));
     }
 
     // Wrist down movement control

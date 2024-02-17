@@ -73,19 +73,7 @@ public class Robot extends TimedRobot {
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
 
-    // Zero Gyro Heading for Swerve
-    
-    //swerve.swerveOdometry.resetPosition(swerve.getHeading(), swerve.getModulePositions(), 
-     //   new Pose2d(new Translation2d(1.34, 5.55 ), new Rotation2d(0.0)));
-     
-    //swerve.zeroHeading();   
-    // Zero Shooter and Intake Encoders
-    // shooter.zeroEncoders();
     intake.zeroEncoders();
-
-    //intake.wristMotor1.clearFaults();
-    //intake.intakeMotor.clearFaults();
-
   }
 
   /**
@@ -102,6 +90,9 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // Command Scheduler ONLY for Auto
     CommandScheduler.getInstance().run();
+
+    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+    SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
   }
 
   /**

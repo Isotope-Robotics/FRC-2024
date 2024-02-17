@@ -37,7 +37,7 @@ public class Shooter {
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-    noteDetected = new DigitalInput(7);
+        noteDetected = new DigitalInput(1);
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
@@ -49,7 +49,7 @@ public class Shooter {
     }
 
     public boolean getNoteDetected() {
-        if (noteDetected.get()) {
+        if (!noteDetected.get()) {
             return true;
         } else {
             return false;
