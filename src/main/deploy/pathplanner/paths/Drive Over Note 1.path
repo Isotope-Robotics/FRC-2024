@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 14.177830021377273,
-        "y": 5.609502686690648
+        "x": 1.3381784483283943,
+        "y": 5.547612425391122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.421902030273245,
-        "y": 5.61770284941937
+        "x": 2.338178448328394,
+        "y": 5.547612425391122
       },
       "isLocked": false,
-      "linkedName": "Red Middle 2 End"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 15.199782093140575,
-        "y": 5.609502686690648
+        "x": 2.8899783112849433,
+        "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 14.63051069274339,
-        "y": 5.615368258568548
+        "x": 1.8899783112849433,
+        "y": 5.547612425391122
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,10 +32,10 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 4.5,
-    "maxAngularVelocity": 572.958,
-    "maxAngularAcceleration": 572.958
+    "maxVelocity": 3.9,
+    "maxAcceleration": 16.0,
+    "maxAngularVelocity": 400.0,
+    "maxAngularAcceleration": 1500.0
   },
   "goalEndState": {
     "velocity": 0,
@@ -43,7 +43,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Red Middle Linked ",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }

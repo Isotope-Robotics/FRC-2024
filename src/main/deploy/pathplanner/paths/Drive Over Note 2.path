@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5547523877002646,
-        "y": 2.222065196010092
+        "x": 1.3381784483283943,
+        "y": 5.547612425391122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5547523877002654,
-        "y": 2.222065196010092
+        "x": 2.338178448328394,
+        "y": 5.547612425391122
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.10388429799416,
-        "y": 0.7715504152812825
+        "x": 2.601932822913265,
+        "y": 4.1046482092964185
       },
       "prevControl": {
-        "x": 3.10388429799416,
-        "y": 0.7715504152812825
+        "x": 1.6019328229132652,
+        "y": 4.1046482092964185
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "EZ Points",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
