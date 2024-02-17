@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 0.5547523877002646,
-      "y": 7.149700514939878
+      "y": 2.364588505580368
     },
     "rotation": 180.0
   },
@@ -80,6 +80,6 @@
       ]
     }
   },
-  "folder": null,
+  "folder": "Station 1",
   "choreoAuto": false
 }

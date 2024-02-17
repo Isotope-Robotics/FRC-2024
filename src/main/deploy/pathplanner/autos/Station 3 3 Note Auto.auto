@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 0.5547523877002646,
-      "y": 2.294491742484643
+      "y": 2.364588505580368
     },
     "rotation": 180.0
   },
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Station 1"
+            "pathName": "Station 3"
           }
         },
         {
@@ -74,36 +74,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Drive To Note 3 From Speaker"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Drive From Note 3 To Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Drive Over Note 3"
+            "pathName": "Speaker Past Line"
           }
         }
       ]
     }
   },
-  "folder": "Station 1",
+  "folder": "Station 3",
   "choreoAuto": false
 }

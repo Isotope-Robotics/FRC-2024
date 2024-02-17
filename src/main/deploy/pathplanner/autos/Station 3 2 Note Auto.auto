@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 0.5547523877002646,
-      "y": 2.7078580470094975
+      "y": 2.4624196289769897
     },
     "rotation": 180.0
   },
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Station 1"
+            "pathName": "Station 3"
           }
         },
         {
@@ -56,6 +56,6 @@
       ]
     }
   },
-  "folder": "Station 1",
+  "folder": "Station 3",
   "choreoAuto": false
 }

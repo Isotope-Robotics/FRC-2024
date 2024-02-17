@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Station 1"
+            "pathName": "Station 3"
           }
         },
         {
@@ -32,6 +32,6 @@
       ]
     }
   },
-  "folder": "Station 1",
+  "folder": "Station 3",
   "choreoAuto": false
 }

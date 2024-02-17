@@ -4,9 +4,10 @@
   "holonomicMode": true,
   "pathFolders": [],
   "autoFolders": [
-    "Station 2",
+    "Station 3",
     "Speaker",
-    "Station 1"
+    "Station 1",
+    "Station 2"
   ],
   "defaultMaxVel": 3.9,
   "defaultMaxAccel": 16.0,
