@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
-  // private double start_time = 0;
+  //private double start_time = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -122,12 +122,12 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.schedule();
     }
 
-  }
+    }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-  }
+ }
 
   /** This function is called once when teleop is enabled. */
   @Override
@@ -170,40 +170,38 @@ public class Robot extends TimedRobot {
       intake.intakeStop();
     }
 
-    /*
-     * // one button intake
-     * if (Constants.Controllers.driver2.getPOV() == 270) {
-     * intake.wristDown();
-     * intake.intakeStart(1.0);
-     * } else if (intake.getWristLimit() == true) {
-     * intake.intakeStart(-1.0);
-     * } else {
-     * intake.wristStop();
-     * intake.intakeStop();
-     * }
-     */
+    /* 
+    // one button intake
+    if (Constants.Controllers.driver2.getPOV() == 270) {
+      intake.wristDown();
+      intake.intakeStart(1.0);
+    } else if (intake.getWristLimit() == true) {
+      intake.intakeStart(-1.0);
+    } else {
+      intake.wristStop();
+      intake.intakeStop();
+    }
+    */
 
-    /*
-     * one button shoot
-     * if (Constants.Controllers.driver2.getStartButton()) {
-     * start_time = System.currentTimeMillis();
-     * } else if (System.currentTimeMillis() - start_time > 0.2) {
-     * shooter.shoot(1.0);
-     * } else if (System.currentTimeMillis() - start_time < 0.2 &&
-     * System.currentTimeMillis() - start_time > 0.4) {
-     * if (intake.getNoteIntaked() || shooter.getNoteDetected()) {
-     * shooter.shoot(1.0);
-     * intake.intakeStart(-1.0);
-     * } else {
-     * intake.intakeStop();
-     * intake.wristStop();
-     * }
-     * 
-     * } else {
-     * intake.intakeStop();
-     * intake.wristStop();
-     * }
-     */
+    /*  one button shoot
+    if (Constants.Controllers.driver2.getStartButton()) {
+      start_time = System.currentTimeMillis();
+    } else if (System.currentTimeMillis() - start_time > 0.2) {
+      shooter.shoot(1.0);
+    } else if (System.currentTimeMillis() - start_time < 0.2 && System.currentTimeMillis() - start_time > 0.4) {
+      if (intake.getNoteIntaked() || shooter.getNoteDetected()) {
+        shooter.shoot(1.0);
+        intake.intakeStart(-1.0);
+      } else {
+        intake.intakeStop();
+        intake.wristStop();
+      }
+
+    } else {
+      intake.intakeStop();
+      intake.wristStop();
+    }
+    */
 
     // Back to robot centric while button seven is pushed
     if (Constants.Controllers.driver1.getRawButton(2)) {
@@ -229,16 +227,15 @@ public class Robot extends TimedRobot {
       shooter.stop();
     }
 
-    /*
-     * if (Constants.Controllers.driver2.getBButton()) {
-     * intake.wristDown();
-     * } else if (Constants.Controllers.driver2.getBackButton()) {
-     * intake.wristHalf();
-     * } else {
-     * intake.wristUp();
-     * }
-     * 
-     */
+   /*  if (Constants.Controllers.driver2.getBButton()) {
+      intake.wristDown();
+    } else if (Constants.Controllers.driver2.getBackButton()) {
+      intake.wristHalf();
+    } else {
+      intake.wristUp();
+    }
+    
+*/
     if (!intake.getWristLimit()) {
       intake.zeroEncoders();
     }
@@ -295,9 +292,9 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     // SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
     // SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
-    // photonCannon.getYawOfTargets();
+    //photonCannon.getYawOfTargets();
     // SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
-    // intake.wristMotor1.set(1.0);
+    //intake.wristMotor1.set(1.0);
   }
 
   /** This function is called once when the robot is first started up. */
@@ -393,11 +390,9 @@ public class Robot extends TimedRobot {
   ySpeed).times(Constants.Swerve.maxSpeed),
   rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-  if (limelightAim(isFieldRel);. >= 7 || limelightTable.getYawOfTargets() <=
-  -7){
-  rot = -limelightAim.getYawOfTargets()* 0.01;
-
-  }
+  // if (limelightTable.getYawOfTargets() >= 7 || limelightTable.getYawOfTargets() <= -7) {
+  // rot = -limelightAim.getYawOfTargets()* 0.01;
+  // }
   }
 
   private void SwerveGyro0(boolean isFieldRel) {
