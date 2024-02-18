@@ -20,7 +20,8 @@ public class RobotContainer {
 
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
-        NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
+        NamedCommands.registerCommand("DropIntake", IntakeCommands.DropAndIntake());
+        NamedCommands.registerCommand("UpIntake", IntakeCommands.UpToShoot());
         NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
         NamedCommands.registerCommand("Shoot", ShooterCommands.shoot());
 

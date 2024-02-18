@@ -182,6 +182,7 @@ public class Swerve extends SubsystemBase {
     public void periodic() {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
 
+        
         field.setRobotPose(getPose());
 
 

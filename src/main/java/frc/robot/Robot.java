@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
-  //private double start_time = 0;
+  // private double start_time = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -122,12 +122,12 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.schedule();
     }
 
-    }
+  }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
- }
+  }
 
   /** This function is called once when teleop is enabled. */
   @Override
@@ -143,131 +143,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    SmartDashboard.putBoolean("magnet", climber.getmagnet());
-
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
-    NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry ta = table.getEntry("ta");
-
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
-
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
-
-    // Intake down & Start Intake
-    if (Constants.Controllers.driver2.getLeftBumper()) {
-      // intake.wristDown();
-      intake.intakeStart(-0.5);
-    } else if (Constants.Controllers.driver2.getRightBumper()) {
-      intake.intakeStart(0.5);
-    } else {
-
-      intake.intakeStop();
-    }
-
-    /* 
-    // one button intake
-    if (Constants.Controllers.driver2.getPOV() == 270) {
-      intake.wristDown();
-      intake.intakeStart(1.0);
-    } else if (intake.getWristLimit() == true) {
-      intake.intakeStart(-1.0);
-    } else {
-      intake.wristStop();
-      intake.intakeStop();
-    }
-    */
-
-    /*  one button shoot
-    if (Constants.Controllers.driver2.getStartButton()) {
-      start_time = System.currentTimeMillis();
-    } else if (System.currentTimeMillis() - start_time > 0.2) {
-      shooter.shoot(1.0);
-    } else if (System.currentTimeMillis() - start_time < 0.2 && System.currentTimeMillis() - start_time > 0.4) {
-      if (intake.getNoteIntaked() || shooter.getNoteDetected()) {
-        shooter.shoot(1.0);
-        intake.intakeStart(-1.0);
-      } else {
-        intake.intakeStop();
-        intake.wristStop();
-      }
-
-    } else {
-      intake.intakeStop();
-      intake.wristStop();
-    }
-    */
-
-    // Back to robot centric while button seven is pushed
-    if (Constants.Controllers.driver1.getRawButton(2)) {
-      swerve.zeroHeading();
-      System.out.println("RESET GYRO!!!!!!!");
-    }
-
-    if (Constants.Controllers.driver1.getRawButton((1))) {
-      SwerveDrive(false);
-      System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
-    } else if (Constants.Controllers.driver1.getRawButton(4)) {
-      SwerveAutoAim(true);
-    } else {
-      SwerveDrive(true);
-
-    }
-
-    if (Constants.Controllers.driver2.getYButton() && shooter.getNoteDetected()) {
-      shooter.shoot(1.0);
-    } else if (Constants.Controllers.driver2.getXButton()) {
-      shooter.shoot(-1.0 * Constants.Controllers.driver2.getRightTriggerAxis());
-    } else {
-      shooter.stop();
-    }
-
-   /*  if (Constants.Controllers.driver2.getBButton()) {
-      intake.wristDown();
-    } else if (Constants.Controllers.driver2.getBackButton()) {
-      intake.wristHalf();
-    } else {
-      intake.wristUp();
-    }
-    
-*/
-    if (!intake.getWristLimit()) {
-      intake.zeroEncoders();
-    }
-
-    if (Constants.Controllers.driver2.getPOV() == 0) {
-      climber.extend();
-    }
-
-    if (Constants.Controllers.driver2.getPOV() == 180) {
-      climber.retract();
-    }
-
-    if (Constants.Controllers.driver1.getRawButton(5)) {
-      SwerveGyro0(true);
-    }
-
-    System.out.println(intake.wristEncoder1.getPosition());
-    System.out.println(photonCannon.getYawOfTargets());
-
-    // System.out.println(swerve.getHeading());
-    //// Get the controller axis values
-    // double shooterSpeed = controller.getRawAxis(3); // Change the axis number as
-    // per your setup
-
-    // Map the controller output to motor speeds
-    // double leftMotorSpeed = -shooterSpeed; // Reverse the value if necessary
-    // double rightMotorSpeed = shooterSpeed;
-
-    // Set the motor speeds :D
-    // leftShooterMotor.set(leftMotorSpeed);
-    // rightShooterMotor.set(rightMotorSpeed);
-
+    Driver1Controls();
+    Driver2Controls();
+    // AutomatedOverrides();
+    RobotTelemetry();
   }
 
   /** This function is called once when the robot is disabled. */
@@ -292,9 +171,9 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     // SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
     // SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
-    //photonCannon.getYawOfTargets();
+    // photonCannon.getYawOfTargets();
     // SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
-    //intake.wristMotor1.set(1.0);
+    // intake.wristMotor1.set(1.0);
   }
 
   /** This function is called once when the robot is first started up. */
@@ -305,6 +184,117 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {
+  }
+
+  private void Driver1Controls() {
+    // Back to robot centric while button seven is pushed
+    if (Constants.Controllers.driver1.getRawButton(2)) {
+      swerve.zeroHeading();
+      System.out.println("RESET GYRO!!!!!!!");
+    }
+
+    if (Constants.Controllers.driver1.getRawButton((1))) {
+      SwerveDrive(false);
+      System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
+    } else if (Constants.Controllers.driver1.getRawButton(4)) {
+      SwerveAutoAim(true);
+    } else {
+      SwerveDrive(true);
+
+    }
+
+    if (Constants.Controllers.driver1.getRawButton(5)) {
+      SwerveGyro0(true);
+    }
+  }
+
+  private void Driver2Controls() {
+    // One Button Intake
+    if (Constants.Controllers.driver2.getLeftBumper()) {
+      intake.intakeStart(0.75);
+    } else {
+      intake.intakeStop();
+    }
+
+    if (Constants.Controllers.driver2.getRightBumper()) {
+      intake.intakeStart(-0.75);
+    } 
+
+    if (Constants.Controllers.driver2.getAButton()) {
+      intake.wristDown();
+    } else if(Constants.Controllers.driver2.getBackButton()) {
+      intake.wristHalf();
+    } else {
+      intake.wristUp();
+    }
+
+    // One Button Shoot
+    if (Constants.Controllers.driver2.getBButton()) {
+      shooter.shoot(-1.0);
+      intake.intakeStart(-1.0);
+    } else {
+      shooter.stop();
+      // intake.intakeStop();
+    }
+
+    // Climber Extend
+    if (Constants.Controllers.driver2.getXButton()) {
+      climber.extend();
+    }
+
+    // Climber Retract
+    if (Constants.Controllers.driver2.getYButton()) {
+      climber.retract();
+    }
+  }
+
+  private void AutomatedOverrides() {
+    // Intake OUT Override
+    if (Constants.Controllers.driver2.getLeftBumper()) {
+      // intake.wristDown();
+      intake.intakeStart(-0.7);
+      // Intake IN Override
+    } else if (Constants.Controllers.driver2.getRightBumper()) {
+      if (intake.getNoteIntaked()) {
+        intake.intakeStart(0.65);
+      } else {
+        intake.intakeStop();
+      }
+    }
+
+    // Shooter Override
+    if (Constants.Controllers.driver2.getPOV() == 0) {
+      shooter.shoot(-1.0);
+    } else {
+      shooter.stop();
+    }
+
+    // Intake Override
+    if (Constants.Controllers.driver2.getPOV() == 270) {
+      intake.wristDown();
+    } else if (Constants.Controllers.driver2.getPOV() == 90) {
+      intake.wristHalf();
+    }
+
+  }
+
+  private void RobotTelemetry() {
+    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+    SmartDashboard.putBoolean("magnet", climber.getmagnet());
+
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
+
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+    System.out.println(intake.wristEncoder1.getPosition());
   }
 
   // To Drive With Controllers
@@ -374,25 +364,24 @@ public class Robot extends TimedRobot {
   }
 
   private void limelightAim(boolean isFieldRel) {
-  final double xSpeed =
-  MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-  Constants.Controllers.stickDeadband);
-  final double ySpeed =
-  MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-  Constants.Controllers.stickDeadband);
-  // Replace "limelight" with name of your Limelight table
-  var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+    // Replace "limelight" with name of your Limelight table
+    var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-  // Get Limelight data
-  double rot = limelightTable.getEntry("ty").getDouble(0.0);
+    // Get Limelight data
+    double rot = limelightTable.getEntry("ty").getDouble(0.0);
 
-  swerve.drive(new Translation2d(xSpeed,
-  ySpeed).times(Constants.Swerve.maxSpeed),
-  rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+    swerve.drive(new Translation2d(xSpeed,
+        ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-  // if (limelightTable.getYawOfTargets() >= 7 || limelightTable.getYawOfTargets() <= -7) {
-  // rot = -limelightAim.getYawOfTargets()* 0.01;
-  // }
+    // if (limelightTable.getYawOfTargets() >= 7 || limelightTable.getYawOfTargets()
+    // <= -7) {
+    // rot = -limelightAim.getYawOfTargets()* 0.01;
+    // }
   }
 
   private void SwerveGyro0(boolean isFieldRel) {

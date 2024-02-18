@@ -52,11 +52,11 @@ public class Intake extends SubsystemBase {
 
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
-        if (noteIntaked.get()) {
+        if (!noteIntaked.get()) {
             blinkin.rainbowForest();
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -89,7 +89,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 6.0));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.0));
     }
 
     public void wristHalf() {
@@ -98,7 +98,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist down movement control
     public void wristDown() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 36.2));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 39.0));
     }
 
     // Intake speed set
