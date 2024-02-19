@@ -24,15 +24,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "DropIntake"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.05
           }
         },
         {
@@ -48,15 +42,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Speaker Past Line"
+            "waitTime": 0.05
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.0
+            "pathName": "Speaker Past Line"
           }
         }
       ]
