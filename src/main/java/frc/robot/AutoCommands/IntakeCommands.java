@@ -25,6 +25,8 @@ public class IntakeCommands {
         }, m_Intake);
     }
 
+
+
     public static Command DropAndIntake(){
         return Commands.runOnce(()-> {
             m_Intake.wristDown();
@@ -47,11 +49,34 @@ public class IntakeCommands {
             m_Intake.intakeStart(-0.75);
         }, m_Intake)
                 .andThen(
-                        Commands.waitUntil(() -> m_Intake.getNoteIntaked()).withTimeout(0.3))
+                        Commands.waitSeconds(0.05))
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Intake.intakeStop();
                         }));
 
+    }
+
+    public static Command stopIntake(){
+        return Commands.runOnce(()-> {
+            m_Intake.intakeStop();
+        });
+    }
+
+    public static Command StopWrist(){
+        return Commands.runOnce(()-> {
+            m_Intake.wristStop();
+        });
+    }
+
+    public static Command IntakeLessNote(){
+        return Commands.runOnce(()-> {
+            m_Intake.intakeStart(-0.3);
+        }, m_Intake).andThen(Commands.waitSeconds(0.02))
+        .andThen(
+            Commands.waitSeconds(0.2)
+        ).andThen(Commands.runOnce(()-> {
+            m_Intake.intakeStop();
+        }));
     }
 }
