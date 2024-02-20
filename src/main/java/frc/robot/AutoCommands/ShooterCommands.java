@@ -21,7 +21,7 @@ public class ShooterCommands {
         })
                 .andThen(Commands.waitSeconds(0.5))
                 .andThen(Commands.runOnce(() -> {
-                    m_Intake.intakeStart(-1.0);
+                    m_Intake.intakeStart(1.0);
                 }).andThen(Commands.waitSeconds(0.5)
                         .andThen(Commands.runOnce(() -> {
                             m_Intake.intakeStop();

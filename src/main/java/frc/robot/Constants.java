@@ -63,7 +63,7 @@ public class Constants {
 
         public static final double kP = 0.1; //0.015
         public static final double kI = 0.0;
-        public static final double kD = 0.0015;
+        public static final double kD = 0.0013;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;

@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 2.28,
-        "y": 5.55
+        "x": 2.430151368616278,
+        "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 2.0799999999999996,
-        "y": 5.55
+        "x": 2.2301513686162777,
+        "y": 5.547612425391122
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Drop and Start Intake",
-      "waypointRelativePos": 0.1,
+      "name": "Drop Intake",
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,24 @@
             {
               "type": "named",
               "data": {
-                "name": "DropAndIntake"
+                "name": "DropIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake Note",
+      "waypointRelativePos": 0.75,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeNote"
               }
             }
           ]

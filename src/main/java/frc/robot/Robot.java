@@ -209,32 +209,40 @@ public class Robot extends TimedRobot {
   }
 
   private void Driver2Controls() {
-    // One Button Intake
+    // Intake Manual Control
     if (Constants.Controllers.driver2.getLeftBumper()) {
+      intake.intakeStart(-0.75);
+    } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(0.75);
     } else {
       intake.intakeStop();
     }
 
-    if (Constants.Controllers.driver2.getRightBumper()) {
-      intake.intakeStart(-0.75);
-    } 
-
+    // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
-      intake.wristDown();
-    } else if(Constants.Controllers.driver2.getBackButton()) {
-      intake.wristHalf();
+      if (intake.getNoteIntaked()) {
+        intake.wristUp();
+        intake.intakeStop();
+      } else {
+        intake.wristDown();
+        intake.intakeStart(-0.75);
+      }
     } else {
       intake.wristUp();
+    }
+
+    // Wrist Manual Control
+    if (Constants.Controllers.driver2.getStartButton()) {
+      intake.wristDown();
+    } else if (Constants.Controllers.driver2.getBackButton()) {
+      intake.wristHalf();
     }
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getBButton()) {
       shooter.shoot(-1.0);
-      intake.intakeStart(-1.0);
     } else {
       shooter.stop();
-      // intake.intakeStop();
     }
 
     // Climber Extend
@@ -246,36 +254,6 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getYButton()) {
       climber.retract();
     }
-  }
-
-  private void AutomatedOverrides() {
-    // Intake OUT Override
-    if (Constants.Controllers.driver2.getLeftBumper()) {
-      // intake.wristDown();
-      intake.intakeStart(-0.7);
-      // Intake IN Override
-    } else if (Constants.Controllers.driver2.getRightBumper()) {
-      if (intake.getNoteIntaked()) {
-        intake.intakeStart(0.65);
-      } else {
-        intake.intakeStop();
-      }
-    }
-
-    // Shooter Override
-    if (Constants.Controllers.driver2.getPOV() == 0) {
-      shooter.shoot(-1.0);
-    } else {
-      shooter.stop();
-    }
-
-    // Intake Override
-    if (Constants.Controllers.driver2.getPOV() == 270) {
-      intake.wristDown();
-    } else if (Constants.Controllers.driver2.getPOV() == 90) {
-      intake.wristHalf();
-    }
-
   }
 
   private void RobotTelemetry() {

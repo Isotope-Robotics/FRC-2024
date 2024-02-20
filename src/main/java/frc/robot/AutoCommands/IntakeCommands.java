@@ -30,7 +30,7 @@ public class IntakeCommands {
             m_Intake.wristDown();
             m_Intake.intakeStart(1.0);
         }, m_Intake).andThen(
-            Commands.waitSeconds(1.5)
+            Commands.waitSeconds(0.50)
             .andThen(()-> {
                 m_Intake.wristUp();
             }).andThen(Commands.waitSeconds(0.05))
@@ -44,14 +44,13 @@ public class IntakeCommands {
     // Intake Note, If Note is Intaked Then Up the Wrist to Travel
     public static Command IntakeNote() {
         return Commands.runOnce(() -> {
-            m_Intake.intakeStart(0.75);
+            m_Intake.intakeStart(-0.75);
         }, m_Intake)
                 .andThen(
-                        Commands.waitUntil(() -> m_Intake.getNoteIntaked()).withTimeout(0.8))
+                        Commands.waitUntil(() -> m_Intake.getNoteIntaked()).withTimeout(0.3))
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Intake.intakeStop();
-                            m_Intake.wristUp();
                         }));
 
     }
