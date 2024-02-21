@@ -22,7 +22,8 @@ public class MoveWristPID extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
     );
-    //getController().enableContinuousInput(-Math.PI, Math.PI);
+    getController().setTolerance(1.0);
+
   }
 
   @Override

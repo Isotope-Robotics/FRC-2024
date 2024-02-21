@@ -18,6 +18,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Drive To Note 1 From Speaker"
@@ -26,13 +32,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 1.5
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "Drive From Note 1 To Speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "UpIntake"
           }
         },
         {

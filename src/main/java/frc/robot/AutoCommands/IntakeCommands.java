@@ -12,13 +12,14 @@ public class IntakeCommands {
     }
 
     // Drop Intake
-    public static Command DropToPickUp() {
-        return Commands.parallel(Commands.run(() -> {
+    public Command DropToPickUp() {
+        return Commands.run(() -> {
             m_Intake.wristDown();
-        }));
+        }, m_Intake);
+
     };
 
-    public static Command UpToShoot() {
+    public Command UpToShoot() {
         return Commands.run(() -> {
             m_Intake.wristUp();
         }, m_Intake);

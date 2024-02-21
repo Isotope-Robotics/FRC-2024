@@ -4,6 +4,8 @@
 // e
 package frc.robot;
 
+import javax.swing.plaf.synth.SynthLookAndFeel;
+
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
@@ -98,6 +100,8 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
+
+    System.out.println(Intake.getInstance().wristEncoder1.getPosition());
   }
 
   /**

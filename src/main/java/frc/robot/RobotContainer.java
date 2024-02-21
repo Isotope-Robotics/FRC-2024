@@ -19,11 +19,14 @@ public class RobotContainer {
 
     private final Command DRIVE_LINE_AUTO = blue.Speaker2NoteAuto();
 
+    private final Command dropToPickUp = new MoveWristPID(37.5, Intake.getInstance());
+    private final Command upIntake = new MoveWristPID(1.0, Intake.getInstance());
+
 
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
-        NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());
-        NamedCommands.registerCommand("UpIntake", IntakeCommands.UpToShoot());
+        NamedCommands.registerCommand("DropIntake", dropToPickUp);
+        NamedCommands.registerCommand("UpIntake", upIntake);
         NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
         NamedCommands.registerCommand("Shoot", ShooterCommands.shoot());
         NamedCommands.registerCommand("IntakeStop", IntakeCommands.stopIntake());

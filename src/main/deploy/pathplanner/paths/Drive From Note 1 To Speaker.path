@@ -32,23 +32,6 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Up Intake",
-      "waypointRelativePos": 0.4,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "UpIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "Stop Intake",
       "waypointRelativePos": 0.85,
       "command": {
@@ -71,7 +54,14 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeLess"
+              }
+            }
+          ]
         }
       }
     }
