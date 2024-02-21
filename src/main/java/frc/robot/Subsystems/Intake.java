@@ -89,7 +89,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.0));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 5.0));
     }
 
     public void wristHalf() {
@@ -99,13 +99,20 @@ public class Intake extends SubsystemBase {
 
     // Wrist down movement control
     public void wristDown() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 37.75));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 37.5));
     }
 
     // Intake speed set
     public void intakeStart(double speed) {
         intakeMotor.set(speed);
         blinkin.rainbowRGB();
+    }
+
+    //Clears Sticky Faults
+    public void clearStickyFaults(){
+        intakeMotor.clearFaults();
+        wristMotor1.clearFaults();
+        System.out.println("Clearing Intake Faults, If Any");
     }
 
     // Returns Instance Of Intake

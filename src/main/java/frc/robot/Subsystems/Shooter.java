@@ -81,6 +81,13 @@ public class Shooter {
 
     }
 
+    //Clear Sticky Faults
+    public void clearStickyFaults(){
+        shooterMotor1.clearFaults();
+        shooterMotor2.clearFaults();
+        System.out.println("Clearing Shooter Faults, If Any");
+    }
+
     // Returns Instance Of Shooter
     public static Shooter getInstance() {
         if (m_Instance == null) {

@@ -18,6 +18,7 @@ public class RobotContainer {
 
     private final Command DRIVE_LINE_AUTO = blue.Speaker2NoteAuto();
 
+
     public RobotContainer() {
         // For Adding Print Statements in PathPlanner
         NamedCommands.registerCommand("DropIntake", IntakeCommands.DropToPickUp());

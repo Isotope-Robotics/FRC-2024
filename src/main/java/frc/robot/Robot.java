@@ -70,10 +70,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     swerve = Swerve.getInstance();
+
+    
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
 
     intake.zeroEncoders();
+
+    intake.clearStickyFaults();
+    shooter.clearStickyFaults();
   }
 
   /**
@@ -137,7 +142,6 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.cancel();
     }
 
-    intake.zeroEncoders();
   }
 
   /** This function is called periodically during operator control. */
