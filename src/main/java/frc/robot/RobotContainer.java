@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.AutoCommands.*;
 import frc.robot.AutoCommands.Autos.Blue.BlueCommands;
+import frc.robot.Subsystems.Intake;
 
 //THIS IS A ROBOT CONTAINER ONLY FOR AUTO PERIOD COMMANDS!!!!!!!
 

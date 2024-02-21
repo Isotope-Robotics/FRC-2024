@@ -1,6 +1,9 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import java.util.function.DoubleConsumer;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkRelativeEncoder;
@@ -89,7 +92,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 5.0));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.0));
     }
 
     public void wristHalf() {
@@ -113,6 +116,10 @@ public class Intake extends SubsystemBase {
         intakeMotor.clearFaults();
         wristMotor1.clearFaults();
         System.out.println("Clearing Intake Faults, If Any");
+    }
+
+    public void setWrist(double speed){
+        wristMotor1.set(speed);      
     }
 
     // Returns Instance Of Intake

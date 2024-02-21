@@ -8,38 +8,34 @@ public class IntakeCommands {
     public static Intake m_Intake = Intake.getInstance();
 
     public IntakeCommands() {
-      
+
     }
 
     // Drop Intake
     public static Command DropToPickUp() {
-        return Commands.run(() -> {
+        return Commands.parallel(Commands.run(() -> {
             m_Intake.wristDown();
-        }, m_Intake);
-    }
+        }));
+    };
 
-    public static Command UpToShoot(){
-        return Commands.run(()-> {
+    public static Command UpToShoot() {
+        return Commands.run(() -> {
             m_Intake.wristUp();
         }, m_Intake);
     }
 
-
-
-    public static Command DropAndIntake(){
-        return Commands.runOnce(()-> {
+    public static Command DropAndIntake() {
+        return Commands.runOnce(() -> {
             m_Intake.wristDown();
             m_Intake.intakeStart(1.0);
         }, m_Intake).andThen(
-            Commands.waitSeconds(0.50)
-            .andThen(()-> {
-                m_Intake.wristUp();
-            }).andThen(Commands.waitSeconds(0.05))
-            .andThen(Commands.runOnce(()->{
-                m_Intake.intakeStop();
-            })
-            )
-        );
+                Commands.waitSeconds(0.50)
+                        .andThen(() -> {
+                            m_Intake.wristUp();
+                        }).andThen(Commands.waitSeconds(0.05))
+                        .andThen(Commands.runOnce(() -> {
+                            m_Intake.intakeStop();
+                        })));
     }
 
     // Intake Note, If Note is Intaked Then Up the Wrist to Travel
@@ -56,26 +52,26 @@ public class IntakeCommands {
 
     }
 
-    public static Command stopIntake(){
-        return Commands.runOnce(()-> {
+    public static Command stopIntake() {
+        return Commands.runOnce(() -> {
             m_Intake.intakeStop();
         });
     }
 
-    public static Command StopWrist(){
-        return Commands.runOnce(()-> {
+    public static Command StopWrist() {
+        return Commands.runOnce(() -> {
             m_Intake.wristStop();
         });
     }
 
-    public static Command IntakeLessNote(){
-        return Commands.runOnce(()-> {
+    public static Command IntakeLessNote() {
+        return Commands.runOnce(() -> {
             m_Intake.intakeStart(-0.25);
         }, m_Intake).andThen(Commands.waitSeconds(0.02))
-        .andThen(
-            Commands.waitSeconds(0.2)
-        ).andThen(Commands.runOnce(()-> {
-            m_Intake.intakeStop();
-        }));
+                .andThen(
+                        Commands.waitSeconds(0.2))
+                .andThen(Commands.runOnce(() -> {
+                    m_Intake.intakeStop();
+                }));
     }
 }
