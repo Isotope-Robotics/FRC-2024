@@ -8,6 +8,8 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -81,6 +83,8 @@ public class Robot extends TimedRobot {
 
     intake.clearStickyFaults();
     shooter.clearStickyFaults();
+
+    //CameraServer.startAutomaticCapture(0);
   }
 
   /**
@@ -145,6 +149,8 @@ public class Robot extends TimedRobot {
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
     }
+
+    swerve.zeroHeading();
 
   }
 

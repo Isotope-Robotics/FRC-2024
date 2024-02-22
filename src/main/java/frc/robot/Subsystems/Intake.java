@@ -49,6 +49,8 @@ public class Intake extends SubsystemBase {
 
         // intakeMotor.burnFlash();
 
+        wristPID.setTolerance(1.0);
+
     }
 
     // Photoelectric Sensor for sensing a note in the intake

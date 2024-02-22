@@ -18,15 +18,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Drive To Note 1 From Speaker"
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "IntakeNote"
+            "waitTime": 1.5
           }
         },
         {
@@ -38,25 +44,55 @@
         {
           "type": "named",
           "data": {
-            "name": "Shoot"
+            "name": "UpIntake"
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Drive To Note 2 From Speaker"
+            "waitTime": 1.5
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "IntakeNote"
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Drive From Note 2 To Speaker"
+            "pathName": "Drive To Note 3 From Speaker"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drive From Note 3 To Speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "UpIntake"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
           }
         },
         {
