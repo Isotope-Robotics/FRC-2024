@@ -4,6 +4,7 @@
 // e
 package frc.robot;
 
+import javax.sound.sampled.LineEvent;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -27,6 +28,8 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
+import frc.robot.Subsystems.Vision.Limelight;
+import frc.robot.Subsystems.Vision.LimelightHelpers;
 import frc.robot.Subsystems.Vision.Vision;
 
 /**
@@ -62,7 +65,14 @@ public class Robot extends TimedRobot {
 
   private final Vision photonCannon = Vision.getInstance();
 
+  private final Limelight limelight = new Limelight();
+
   public Swerve swerve;
+
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
+  double limelightLastError;
+
 
   // private double start_time = 0;
 
@@ -75,7 +85,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     swerve = Swerve.getInstance();
 
-    
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
 
@@ -84,7 +93,7 @@ public class Robot extends TimedRobot {
     intake.clearStickyFaults();
     shooter.clearStickyFaults();
 
-    //CameraServer.startAutomaticCapture(0);
+    // CameraServer.startAutomaticCapture(0);
   }
 
   /**
@@ -105,7 +114,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
-    System.out.println(Intake.getInstance().wristEncoder1.getPosition());
+    // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
+
+    limelight.updateLimelightData();
+
+    
+
   }
 
   /**
@@ -160,7 +174,7 @@ public class Robot extends TimedRobot {
     Driver1Controls();
     Driver2Controls();
     // AutomatedOverrides();
-    RobotTelemetry();
+    // RobotTelemetry();
   }
 
   /** This function is called once when the robot is disabled. */
@@ -212,9 +226,15 @@ public class Robot extends TimedRobot {
       System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
     } else if (Constants.Controllers.driver1.getRawButton(4)) {
       SwerveAutoAim(true);
+    } else if (Constants.Controllers.driver1.getRawButton(3)) {
+      limelightAim(true);
     } else {
       SwerveDrive(true);
+    }
 
+    if (!(Constants.Controllers.driver1.getRawButton(3))){
+      limelightLastError = 0;
+      //System.out.println("limelight button not pressed, setting last tx to 0");
     }
 
     if (Constants.Controllers.driver1.getRawButton(5)) {
@@ -360,20 +380,43 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
         Constants.Controllers.stickDeadband);
-    // Replace "limelight" with name of your Limelight table
-    var limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-    // Get Limelight data
-    double rot = limelightTable.getEntry("ty").getDouble(0.0);
+    double currentGyro = Math.abs((swerve.gyro.getAngle() % 360));
+    System.out.println("angle: " + currentGyro);
 
-    swerve.drive(new Translation2d(xSpeed,
-        ySpeed).times(Constants.Swerve.maxSpeed),
-        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+    double tx = table.getEntry("tx").getFloat(0);
+    double tx_max = 30.0f; //detemined empirically as the limelights field of view
+    double error = 0.0f;
+    
+    if (tx != 0.0f) {
+      error = (tx/tx_max)*(31.65/180);
+    }
+    else {
+      //if (currentGyro > 180) {
+        error = currentGyro / 180;
+      //}
+      //else {
+      //  error = 360 - currentGyro;
+      //}
+    }
+    System.out.println("error: " + error);
+    if (limelightLastError == 0.0f) {
+      limelightLastError = tx;
+    }
+    double error_derivative = error - limelightLastError;
+    double kP = 0.9f; //should be between 0 and 1, but can be greater than 1 to go even faster
+    double kD = 5.0f; //should be between 0 and 1
+    double steering_adjust = 0.0f;
+    double acceptable_error_threshold = 15.0f/360.0f;
 
-    // if (limelightTable.getYawOfTargets() >= 7 || limelightTable.getYawOfTargets()
-    // <= -7) {
-    // rot = -limelightAim.getYawOfTargets()* 0.01;
-    // }
+    if (error > acceptable_error_threshold || error < -acceptable_error_threshold) {
+      steering_adjust = -1.0f * (kP * error + kD * error_derivative);
+    }
+
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+
+    limelightLastError = tx;
   }
 
   private void SwerveGyro0(boolean isFieldRel) {

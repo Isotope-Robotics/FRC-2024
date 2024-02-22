@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5299214508203467,
+        "x": 1.8150213804830928,
         "y": 6.995390431883621
       },
       "isLocked": false,
@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.408601513944883,
-        "y": 5.524300973413978
+        "x": 1.4057878828008366,
+        "y": 5.507946742389212
       },
       "prevControl": {
-        "x": 2.408601513944883,
-        "y": 5.524300973413978
+        "x": 1.9526193673074301,
+        "y": 5.507946742389212
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "TOP iNTAKE",
-      "waypointRelativePos": 0.8,
+      "name": "Stop Intake",
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
@@ -50,7 +50,7 @@
     },
     {
       "name": "Intake Less",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.15,
       "command": {
         "type": "parallel",
         "data": {
