@@ -102,7 +102,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist down movement control
     public void wristDown() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 37.5));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 38.0));
     }
 
     // Intake speed set
