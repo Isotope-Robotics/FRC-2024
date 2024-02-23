@@ -7,11 +7,14 @@ package frc.robot;
 import javax.sound.sampled.LineEvent;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
+import org.photonvision.PhotonCamera;
+
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -30,7 +33,6 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
 import frc.robot.Subsystems.Vision.LimelightHelpers;
-import frc.robot.Subsystems.Vision.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -63,8 +65,6 @@ public class Robot extends TimedRobot {
 
   private final Climber climber = Climber.getInstance();
 
-  private final Vision photonCannon = Vision.getInstance();
-
   private final Limelight limelight = new Limelight();
 
   public Swerve swerve;
@@ -73,6 +73,12 @@ public class Robot extends TimedRobot {
 
   double limelightLastError;
 
+  PhotonCamera photon = new PhotonCamera("Microsoft_LifeCam_HD-3000");
+
+  //Photon Vision PID Setup
+  final double ANGULAR_P = 0.1;
+  final double ANGULAR_D = 0.0;
+  PIDController turnController = new PIDController(ANGULAR_P, 0, ANGULAR_D);
 
   // private double start_time = 0;
 
@@ -84,6 +90,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     swerve = Swerve.getInstance();
+
+    // CameraServer.startAutomaticCapture();
 
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
@@ -117,8 +125,6 @@ public class Robot extends TimedRobot {
     // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
-
-    
 
   }
 
@@ -185,7 +191,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically when disabled. */
   @Override
   public void disabledPeriodic() {
-
   }
 
   /** This function is called once when test mode is enabled. */
@@ -225,20 +230,16 @@ public class Robot extends TimedRobot {
       SwerveDrive(false);
       System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
     } else if (Constants.Controllers.driver1.getRawButton(4)) {
-      SwerveAutoAim(true);
+      NoteAutoAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(3)) {
       limelightAim(true);
     } else {
       SwerveDrive(true);
     }
 
-    if (!(Constants.Controllers.driver1.getRawButton(3))){
+    if (!(Constants.Controllers.driver1.getRawButton(3))) {
       limelightLastError = 0;
-      //System.out.println("limelight button not pressed, setting last tx to 0");
-    }
-
-    if (Constants.Controllers.driver1.getRawButton(5)) {
-      SwerveGyro0(true);
+      // System.out.println("limelight button not pressed, setting last tx to 0");
     }
   }
 
@@ -350,76 +351,78 @@ public class Robot extends TimedRobot {
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
-  // Should Rotate Swerve Around Target
-  private void SwerveAutoAim(boolean isFieldRel) {
-    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-        Constants.Controllers.stickDeadband);
-    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-        Constants.Controllers.stickDeadband);
-
-    double rot = 0;
-    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 ||
-    // photonCannon.getYawOfTargets() <= -20)) {
-
-    if (photonCannon.getYawOfTargets() >= 7 || photonCannon.getYawOfTargets() <= -7) {
-      rot = -photonCannon.getYawOfTargets() * 0.01;
-      // swerve.zeroHeading();
-    } else {
-      rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
-          * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
-          Constants.Controllers.stickDeadband);
-    }
-    // }
-
-    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
-  }
-
   private void limelightAim(boolean isFieldRel) {
-    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-        Constants.Controllers.stickDeadband);
-    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-        Constants.Controllers.stickDeadband);
-
-    double currentGyro = Math.abs((swerve.gyro.getAngle() % 360));
-    System.out.println("angle: " + currentGyro);
-
+    double currentGyro = swerve.gyro.getAngle();
+    double mappedAngle = 0.0f;
+    double angy = ((currentGyro % 360.0f));
+    if (currentGyro >= 0.0f) {
+      if (angy > 180) {
+        mappedAngle = angy - 360.0f;
+      } else {
+        mappedAngle = angy;
+      }
+    } else {
+      if (Math.abs(angy) > 180.0f) {
+        mappedAngle = angy + 360.0f;
+      } else {
+        mappedAngle = angy;
+      }
+    }
     double tx = table.getEntry("tx").getFloat(0);
-    double tx_max = 30.0f; //detemined empirically as the limelights field of view
+    double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
-    
-    if (tx != 0.0f) {
-      error = (tx/tx_max)*(31.65/180);
+    double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
+    double kD = 0.0f; // should be between 0 and 1
+    double steering_adjust = 0.0f;
+    double acceptable_error_threshold = 15.0f / 360.0f; // 15 degrees allowable
+    if (tx != 0.0f) { // use the limelight if it recognizes anything, and use the gyro otherwise
+      error = -1.0f * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1
+                                                     // being 180 degrees away
+    } else {
+      error = mappedAngle / 180.0f; // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees
+                                    // away
     }
-    else {
-      //if (currentGyro > 180) {
-        error = currentGyro / 180;
-      //}
-      //else {
-      //  error = 360 - currentGyro;
-      //}
-    }
-    System.out.println("error: " + error);
     if (limelightLastError == 0.0f) {
       limelightLastError = tx;
     }
     double error_derivative = error - limelightLastError;
-    double kP = 0.9f; //should be between 0 and 1, but can be greater than 1 to go even faster
-    double kD = 5.0f; //should be between 0 and 1
-    double steering_adjust = 0.0f;
-    double acceptable_error_threshold = 15.0f/360.0f;
+    limelightLastError = tx; // setting limelightlasterror for next loop
 
-    if (error > acceptable_error_threshold || error < -acceptable_error_threshold) {
-      steering_adjust = -1.0f * (kP * error + kD * error_derivative);
+    if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
+      steering_adjust = (kP * error + kD * error_derivative);
     }
 
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    limelightLastError = tx;
+    System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", error: " + error);
   }
 
-  private void SwerveGyro0(boolean isFieldRel) {
+  public void NoteAutoAim(boolean isFieldRel){
+    double steering_adjust;
+    var result = photon.getLatestResult();
+
+    if (result.hasTargets()){
+      steering_adjust = -turnController.calculate(result.getBestTarget().getYaw(), 0);
+    } else {
+      steering_adjust = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        Constants.Controllers.stickDeadband);
+    }
+
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+  }
+
+ /*  private void SwerveGyro0(boolean isFieldRel) {
     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
         Constants.Controllers.stickDeadband);
     final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
@@ -438,5 +441,6 @@ public class Robot extends TimedRobot {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
+  */
 
 }
