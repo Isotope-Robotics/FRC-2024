@@ -69,9 +69,12 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  //NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-april");
+  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-note");
 
-  double limelightLastError;
+  double limelightAprilTagLastError;
+  double limelightNoteLastError;
 
   PhotonCamera photon = new PhotonCamera("Microsoft_LifeCam_HD-3000");
 
@@ -229,16 +232,23 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
       System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
-    } else if (Constants.Controllers.driver1.getRawButton(4)) {
-      NoteAutoAim(true);
+    
     } else if (Constants.Controllers.driver1.getRawButton(3)) {
-      limelightAim(true);
+      limelightAprilTagAim(true);
+    } else if (Constants.Controllers.driver1.getRawButton(4)) {
+      limelightNoteAim(true);
+    //} else if (Constants.Controllers.driver1.getRawButton(4)) {
+    //  NoteAutoAim(true);
     } else {
       SwerveDrive(true);
     }
 
     if (!(Constants.Controllers.driver1.getRawButton(3))) {
-      limelightLastError = 0;
+      limelightAprilTagLastError = 0;
+      // System.out.println("limelight button not pressed, setting last tx to 0");
+    }
+    if (!(Constants.Controllers.driver1.getRawButton(4))) {
+      limelightNoteLastError = 0;
       // System.out.println("limelight button not pressed, setting last tx to 0");
     }
   }
@@ -351,7 +361,7 @@ public class Robot extends TimedRobot {
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
-  private void limelightAim(boolean isFieldRel) {
+  private void limelightAprilTagAim(boolean isFieldRel) {
     double currentGyro = swerve.gyro.getAngle();
     double mappedAngle = 0.0f;
     double angy = ((currentGyro % 360.0f));
@@ -368,13 +378,14 @@ public class Robot extends TimedRobot {
         mappedAngle = angy;
       }
     }
-    double tx = table.getEntry("tx").getFloat(0);
+    double tx = limelightAprilTable.getEntry("tx").getFloat(700);
+    System.out.println("tx april: " + tx);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
     double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
-    double acceptable_error_threshold = 15.0f / 360.0f; // 15 degrees allowable
+    double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
     if (tx != 0.0f) { // use the limelight if it recognizes anything, and use the gyro otherwise
       error = -1.0f * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1
                                                      // being 180 degrees away
@@ -382,11 +393,11 @@ public class Robot extends TimedRobot {
       error = mappedAngle / 180.0f; // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees
                                     // away
     }
-    if (limelightLastError == 0.0f) {
-      limelightLastError = tx;
+    if (limelightAprilTagLastError == 0.0f) {
+      limelightAprilTagLastError = tx;
     }
-    double error_derivative = error - limelightLastError;
-    limelightLastError = tx; // setting limelightlasterror for next loop
+    double error_derivative = error - limelightAprilTagLastError;
+    limelightAprilTagLastError = tx; // setting limelightlasterror for next loop
 
     if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
       steering_adjust = (kP * error + kD * error_derivative);
@@ -399,9 +410,39 @@ public class Robot extends TimedRobot {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", error: " + error);
+    System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", april tag error: " + error);
   }
 
+private void limelightNoteAim(boolean isFieldRel) {
+    double tx = limelightNoteTable.getEntry("tx").getFloat(0);
+    double tx_max = 30.0f; // detemined empirically as the limelights field of view
+    double error = 0.0f;
+    double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
+    double kD = 0.0f; // should be between 0 and 1
+    double steering_adjust = 0.0f;
+    double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
+    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
+    if (limelightNoteLastError == 0.0f) {
+      limelightNoteLastError = tx;
+    }
+    double error_derivative = error - limelightNoteLastError;
+    limelightNoteLastError = tx; // setting limelightlasterror for next loop
+
+    if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
+      steering_adjust = (kP * error + kD * error_derivative);
+    }
+
+    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+        Constants.Controllers.stickDeadband);
+    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+        Constants.Controllers.stickDeadband);
+    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+
+    System.out.println("Note error: " + error);
+  }
+
+  //uses photon vision, we are using limelight, keeping in case the code is useful later
   public void NoteAutoAim(boolean isFieldRel){
     double steering_adjust;
     var result = photon.getLatestResult();
