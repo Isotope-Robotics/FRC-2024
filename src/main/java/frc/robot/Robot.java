@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
 
     intake.zeroEncoders();
 
-    intake.clearStickyFaults();
+    //intake.clearStickyFaults();
     shooter.clearStickyFaults();
 
     // CameraServer.startAutomaticCapture(0);
@@ -125,7 +125,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
-    // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
+    System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
 
@@ -293,11 +293,10 @@ public class Robot extends TimedRobot {
     // Climber Extend
     if (Constants.Controllers.driver2.getXButton()) {
       climber.extend();
-    }
-
-    // Climber Retract
-    if (Constants.Controllers.driver2.getYButton()) {
+    }else if (Constants.Controllers.driver2.getYButton()) {
       climber.retract();
+    } else {
+      climber.stop();
     }
   }
 

@@ -14,7 +14,7 @@ public class Climber {
 
     public static CANSparkMax masterMotor;
     public static CANSparkMax followerMotor;
-    public static RelativeEncoder masterEncoder;
+    //public static RelativeEncoder masterEncoder;
     public static DigitalInput climberSwitch1;
     public static DigitalInput climberSwitch2;
 
@@ -30,7 +30,7 @@ public class Climber {
         masterMotor = new CANSparkMax(masterMotorID, MotorType.kBrushless);
         followerMotor = new CANSparkMax(followerMotorID, MotorType.kBrushless);
         // Follow Declaration
-        followerMotor.follow(masterMotor);
+        //followerMotor.follow(masterMotor);
         // Idle Mode Declarations
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
@@ -49,15 +49,20 @@ public class Climber {
 
     // Climbers go up
     public void extend() {
-        masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
+        //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
+        masterMotor.set(1.0);
     }
 
     // Climbers go down
     public void retract() {
-        masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
+        //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
+        masterMotor.set(-1.0);
         blinkin.rainbowParty();
     }
 
+    public void stop(){
+        masterMotor.set(0);
+    }
     // Returns Instance Of Climber
     public static Climber getInstance() {
         if (m_Instance == null) {
