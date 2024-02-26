@@ -42,7 +42,7 @@ public class IntakeCommands {
     // Intake Note, If Note is Intaked Then Up the Wrist to Travel
     public static Command IntakeNote() {
         return Commands.run(() -> {
-            m_Intake.intakeStart(-0.75);
+            m_Intake.intakeStart(-1);
         }, m_Intake)
                 .andThen(
                         Commands.waitSeconds(0.05))

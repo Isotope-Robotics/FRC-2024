@@ -8,40 +8,40 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.169556481104003,
-        "y": 5.297451962425293
+        "x": 1.3707054194735169,
+        "y": 5.397451962425293
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.663059280534515,
-        "y": 6.630585568863446
+        "x": 1.3707054194735169,
+        "y": 7.015965109624455
       },
       "prevControl": {
-        "x": 1.5084797806005987,
-        "y": 6.335945632497911
+        "x": 1.2762976370004102,
+        "y": 6.982992839327877
       },
       "nextControl": {
-        "x": 1.8003289387707908,
-        "y": 6.892231669316259
+        "x": 1.4651132019466233,
+        "y": 7.048937379921033
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4231793192931113,
-        "y": 6.958021893251764
+        "x": 2.560783467431597,
+        "y": 7.015965109624455
       },
       "prevControl": {
-        "x": 1.965399032393694,
-        "y": 6.958021893251764
+        "x": 2.1030031805321796,
+        "y": 7.015965109624455
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "note 3 end"
     }
   ],
   "rotationTargets": [],
@@ -49,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note",
-      "waypointRelativePos": 1.75,
+      "waypointRelativePos": 1.25,
       "command": {
         "type": "parallel",
         "data": {

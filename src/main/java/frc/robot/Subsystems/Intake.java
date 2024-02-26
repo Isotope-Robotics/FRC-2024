@@ -66,6 +66,7 @@ public class Intake extends SubsystemBase {
     // Returns Limit Switch for Wrist Limit
     public boolean getWristLimit() {
         if (wristLimit.get()) {
+            blinkin.twinklesLava();
             return true;
         } else {
             return false;

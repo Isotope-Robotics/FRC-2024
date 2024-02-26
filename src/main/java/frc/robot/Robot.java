@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Subsystems.Blinkin;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -61,7 +62,7 @@ public class Robot extends TimedRobot {
   // Intake Varibles
   private final Intake intake = Intake.getInstance();
 
-  // private final Blinkin blinkin = Blinkin.getInstance();
+  private final Blinkin blinkin = Blinkin.getInstance();
 
   private final Climber climber = Climber.getInstance();
 
@@ -172,6 +173,8 @@ public class Robot extends TimedRobot {
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
     }
+
+    blinkin.rainbowRGB();
 
     swerve.zeroHeading();
 

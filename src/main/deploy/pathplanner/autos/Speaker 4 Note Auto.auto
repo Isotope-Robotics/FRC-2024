@@ -24,6 +24,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Drive To Note 1 From Speaker"
@@ -99,6 +105,12 @@
           "type": "named",
           "data": {
             "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
           }
         },
         {

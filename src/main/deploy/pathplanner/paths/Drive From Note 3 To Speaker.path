@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.529921450820346,
-        "y": 6.995390431883621
+        "x": 2.560783467431597,
+        "y": 7.015965109624455
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8150213804830928,
-        "y": 6.995390431883621
+        "x": 1.8458833970943438,
+        "y": 7.015965109624455
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "note 3 end"
     },
     {
       "anchor": {
-        "x": 1.4057878828008366,
-        "y": 5.507946742389212
+        "x": 1.408601513944883,
+        "y": 5.318554196005636
       },
       "prevControl": {
-        "x": 1.9526193673074301,
-        "y": 5.507946742389212
+        "x": 1.9554329984514767,
+        "y": 5.318554196005636
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Stop Intake",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -50,7 +50,7 @@
     },
     {
       "name": "Intake Less",
-      "waypointRelativePos": 0.15,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
