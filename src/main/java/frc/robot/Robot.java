@@ -275,7 +275,7 @@ public class Robot extends TimedRobot {
     }
 
     //one button intake half then shoot
-    if (Constants.Controllers.driver2.getRightTriggerAxis() > 0.2) {
+    if (Constants.Controllers.driver2.getBButton()){
       intake.wristHalf();
       intake.intakeStart(-1.0);
     } else {
@@ -284,16 +284,11 @@ public class Robot extends TimedRobot {
     }
 
     // One Button Shoot
-    if (Constants.Controllers.driver2.getBButton()) {
-     // shooter.shoot(-1.0);
-     shooter.shoot(-Constants.Controllers.driver2.getRightTriggerAxis());
+    if (Constants.Controllers.driver2.getRightTriggerAxis() > 0.2) {
+     shooter.shoot(-1.0);
     } else {
       shooter.stop();
     }
-
-         shooter.shoot(-Constants.Controllers.driver2.getRightTriggerAxis());
-
-
     // Climber Extend
     if (Constants.Controllers.driver2.getXButton()) {
       climber.extend();
