@@ -4,26 +4,15 @@
 // e
 package frc.robot;
 
-import javax.sound.sampled.LineEvent;
-import javax.swing.plaf.synth.SynthLookAndFeel;
-
 import org.photonvision.PhotonCamera;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -33,7 +22,6 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
-import frc.robot.Subsystems.Vision.LimelightHelpers;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -284,6 +272,15 @@ public class Robot extends TimedRobot {
       intake.wristDown();
     } else if (Constants.Controllers.driver2.getBackButton()) {
       intake.wristHalf();
+    }
+
+    //one button intake half then shoot
+    if (Constants.Controllers.driver2.getRightTriggerAxis() > 0.2) {
+      intake.wristHalf();
+      intake.intakeStart(-1.0);
+    } else {
+      intake.wristUp();
+      intake.intakeStop();
     }
 
     // One Button Shoot
