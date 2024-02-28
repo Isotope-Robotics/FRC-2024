@@ -285,10 +285,14 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getBButton()) {
-      shooter.shoot(-1.0);
+     // shooter.shoot(-1.0);
+     shooter.shoot(-Constants.Controllers.driver2.getRightTriggerAxis());
     } else {
       shooter.stop();
     }
+
+         shooter.shoot(-Constants.Controllers.driver2.getRightTriggerAxis());
+
 
     // Climber Extend
     if (Constants.Controllers.driver2.getXButton()) {
