@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -18,6 +19,8 @@ public class Shooter {
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
     public static DigitalInput noteDetected;
+    public static Relay relay;
+
 
     private static Shooter m_Instance = null;
 
@@ -38,6 +41,15 @@ public class Shooter {
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         noteDetected = new DigitalInput(1);
+        relay = new Relay(8);
+    }
+
+    public void lightsOn() {
+        relay.set(Relay.Value.kForward);
+    }
+
+    public void lightsOff() {
+        relay.set(Relay.Value.kOff);
     }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
