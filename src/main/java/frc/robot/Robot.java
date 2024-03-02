@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AutoCommands.ShooterCommands;
 import frc.robot.Subsystems.Blinkin;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
@@ -90,8 +91,10 @@ public class Robot extends TimedRobot {
 
     intake.zeroEncoders();
 
-    //intake.clearStickyFaults();
+    intake.clearStickyFaults();
     shooter.clearStickyFaults();
+    climber.clearStickyFaults();
+
 
     // CameraServer.startAutomaticCapture(0);
   }
@@ -114,7 +117,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
-    System.out.println(Intake.getInstance().wristEncoder1.getPosition());
+    //System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
 
@@ -146,6 +149,8 @@ public class Robot extends TimedRobot {
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.schedule();
     }
+
+    ShooterCommands.lightsOn();
 
   }
 
@@ -257,11 +262,14 @@ public class Robot extends TimedRobot {
     // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
       if (intake.getNoteIntaked()) {
+        //System.out.println("bad");
         intake.wristUp();
         intake.intakeStop();
+        //blinkin.chaseBlue();
       } else {
         intake.wristDown();
         intake.intakeStart(-0.75);
+       // blinkin.chaseRed();
       }
     } else {
       intake.wristUp();
@@ -284,8 +292,8 @@ public class Robot extends TimedRobot {
     }
 
     // One Button Shoot
-    if (Constants.Controllers.driver2.getRightTriggerAxis() > 0.2) {
-     shooter.shoot(-1.0);
+    if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.20) {
+      shooter.shoot(-1.0);
     } else {
       shooter.stop();
     }
@@ -301,7 +309,7 @@ public class Robot extends TimedRobot {
 
   private void RobotTelemetry() {
     SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    SmartDashboard.putBoolean("magnet", climber.getmagnet());
+    //SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
@@ -377,7 +385,7 @@ public class Robot extends TimedRobot {
       }
     }
     double tx = limelightAprilTable.getEntry("tx").getFloat(700);
-    System.out.println("tx april: " + tx);
+    //System.out.println("tx april: " + tx);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
     double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
@@ -408,7 +416,7 @@ public class Robot extends TimedRobot {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", april tag error: " + error);
+    //System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", april tag error: " + error);
   }
 
 private void limelightNoteAim(boolean isFieldRel) {
@@ -437,7 +445,7 @@ private void limelightNoteAim(boolean isFieldRel) {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    System.out.println("Note error: " + error);
+    //System.out.println("Note error: " + error);
   }
 
   //uses photon vision, we are using limelight, keeping in case the code is useful later

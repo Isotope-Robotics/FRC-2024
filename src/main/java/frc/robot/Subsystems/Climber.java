@@ -35,34 +35,43 @@ public class Climber {
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
 
-        climberSwitch1 = new DigitalInput(8);
-        climberSwitch2 = new DigitalInput(3);
+       // climberSwitch1 = new DigitalInput(8);
+       // climberSwitch2 = new DigitalInput(3);
     }
 
-    public boolean getmagnet() {
-        if (climberSwitch1.get()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public boolean getmagnet() {
+    //     if (climberSwitch1.get()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     // Climbers go up
     public void extend() {
         //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
         masterMotor.set(1.0);
+        followerMotor.set(1.0);
     }
 
     // Climbers go down
     public void retract() {
         //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
         masterMotor.set(-1.0);
+        followerMotor.set(-1.0);
         blinkin.rainbowParty();
     }
 
     public void stop(){
         masterMotor.set(0);
     }
+
+    public void clearStickyFaults(){
+        masterMotor.clearFaults();
+        followerMotor.clearFaults();
+        System.out.println("Clearing Shooter Faults, If Any");
+    }
+
     // Returns Instance Of Climber
     public static Climber getInstance() {
         if (m_Instance == null) {

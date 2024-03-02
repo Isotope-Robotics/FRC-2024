@@ -37,8 +37,9 @@ public class ShooterCommands {
                 .andThen(Commands.waitSeconds(1))
                 .andThen(Commands.runOnce(() -> {
                     m_Shooter.lightsOff();
+  
                 }));
-                        };
+                    };
 
   
     }

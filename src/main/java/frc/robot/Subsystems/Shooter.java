@@ -4,8 +4,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Subsystems.Blinkin;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkRelativeEncoder;
@@ -19,10 +20,13 @@ public class Shooter {
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
     public static DigitalInput noteDetected;
-    public static Relay relay;
+    public static DigitalOutput relay;
 
 
     private static Shooter m_Instance = null;
+
+    private final Blinkin blinkin = Blinkin.getInstance();
+
 
     public Shooter(int shooter1CANID, int shooter2CANID) {
         // Motor Declarations
@@ -41,16 +45,20 @@ public class Shooter {
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         noteDetected = new DigitalInput(1);
-        relay = new Relay(8);
+        relay = new DigitalOutput(8);
     }
 
     public void lightsOn() {
-        relay.set(Relay.Value.kForward);
-    }
+        relay.set(true);
+        System.out.println("lights onn!!");
+       }
 
-    public void lightsOff() {
-        relay.set(Relay.Value.kOff);
-    }
+       public void lightsOff() {
+      
+        relay.set(false);
+                System.out.println("lights offfffffffff!!");
+
+       }
 
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
@@ -62,6 +70,7 @@ public class Shooter {
 
     public boolean getNoteDetected() {
         if (!noteDetected.get()) {
+           // blinkin.rainbowRGB();
             return true;
         } else {
             return false;
