@@ -56,7 +56,7 @@ public class Intake extends SubsystemBase {
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
         if (!noteIntaked.get()) {
-            blinkin.rainbowForest();
+           // blinkin.rainbowForest();
             return false;
         } else {
             return true;
@@ -66,7 +66,7 @@ public class Intake extends SubsystemBase {
     // Returns Limit Switch for Wrist Limit
     public boolean getWristLimit() {
         if (wristLimit.get()) {
-            blinkin.twinklesLava();
+           // blinkin.twinklesLava();
             return true;
         } else {
             return false;
@@ -76,13 +76,13 @@ public class Intake extends SubsystemBase {
     // Stops intake motors
     public void intakeStop() {
         intakeMotor.set(0);
-        blinkin.breathRed();
+        //blinkin.breathRed();
     }
 
     // Stops wrist motors
     public void wristStop() {
         wristMotor1.set(0);
-        blinkin.chaseRed();
+        //blinkin.chaseRed();
     }
 
     public void zeroEncoders() {
@@ -109,7 +109,7 @@ public class Intake extends SubsystemBase {
     // Intake speed set
     public void intakeStart(double speed) {
         intakeMotor.set(speed);
-        blinkin.rainbowRGB();
+        //blinkin.rainbowRGB();
     }
 
     //Clears Sticky Faults

@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.cancel();
     }
 
-    blinkin.rainbowRGB();
+    blinkin.rainbowParty();
 
     swerve.zeroHeading();
 
@@ -178,6 +178,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Driver1Controls();
     Driver2Controls();
+        System.out.println(intake.wristEncoder1.getPosition());
+
     // AutomatedOverrides();
     // RobotTelemetry();
   }
@@ -227,7 +229,7 @@ public class Robot extends TimedRobot {
 
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
-      System.out.println("ROBOT CENTRIC ENABLLEEEDDDDD!!");
+      System.out.println("ROBOT CENTRIC not ENABLLEEEDDDDD!!");
     
     } else if (Constants.Controllers.driver1.getRawButton(3)) {
       limelightAprilTagAim(true);
@@ -269,11 +271,12 @@ public class Robot extends TimedRobot {
       } else {
         intake.wristDown();
         intake.intakeStart(-0.75);
-       // blinkin.chaseRed();
+         blinkin.rainbowRGB();
       }
     } else {
       intake.wristUp();
     }
+    
 
     // Wrist Manual Control
     if (Constants.Controllers.driver2.getStartButton()) {
@@ -286,20 +289,20 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getBButton()){
       intake.wristHalf();
       intake.intakeStart(-1.0);
-    } else {
-      intake.wristUp();
-      intake.intakeStop();
     }
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.20) {
       shooter.shoot(-1.0);
+      blinkin.wavesLava();
     } else {
       shooter.stop();
     }
     // Climber Extend
     if (Constants.Controllers.driver2.getXButton()) {
       climber.extend();
+      blinkin.wavesParty();
+
     }else if (Constants.Controllers.driver2.getYButton()) {
       climber.retract();
     } else {
@@ -340,27 +343,27 @@ public class Robot extends TimedRobot {
         * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
 
-    if (Constants.Controllers.driver1.getPOV() == 0) {
-      xSpeed = -.75;
-    } else if (Constants.Controllers.driver1.getPOV() == 90) {
-      ySpeed = .75;
-    } else if (Constants.Controllers.driver1.getPOV() == 180) {
-      xSpeed = .75;
-    } else if (Constants.Controllers.driver1.getPOV() == 270) {
-      ySpeed = -.75;
-    } else if (Constants.Controllers.driver1.getPOV() == 45) {
-      xSpeed = .5;
-      ySpeed = .5;
-    } else if (Constants.Controllers.driver1.getPOV() == 135) {
-      xSpeed = -.5;
-      ySpeed = .5;
-    } else if (Constants.Controllers.driver1.getPOV() == 225) {
-      xSpeed = -.5;
-      ySpeed = -.5;
-    } else if (Constants.Controllers.driver1.getPOV() == 315) {
-      xSpeed = .5;
-      ySpeed = -.5;
-    }
+    // if (Constants.Controllers.driver1.getPOV() == 0) {
+    //   xSpeed = -.75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 90) {
+    //   ySpeed = .75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 180) {
+    //   xSpeed = .75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 270) {
+    //   ySpeed = -.75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 45) {
+    //   xSpeed = .5;
+    //   ySpeed = .5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 135) {
+    //   xSpeed = -.5;
+    //   ySpeed = .5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 225) {
+    //   xSpeed = -.5;
+    //   ySpeed = -.5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 315) {
+    //   xSpeed = .5;
+    //   ySpeed = -.5;
+    // }
 
     // Drive Function
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),

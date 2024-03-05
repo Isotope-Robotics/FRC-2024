@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8458833970943438,
-        "y": 7.015965109624455
+        "x": 2.550983680166412,
+        "y": 6.205605586566623
       },
       "isLocked": false,
       "linkedName": "note 3 end"
     },
     {
       "anchor": {
-        "x": 1.2865185919945297,
-        "y": 5.495559806285489
+        "x": 1.1411307033140385,
+        "y": 5.627174362118149
       },
       "prevControl": {
-        "x": 1.8333500765011232,
-        "y": 5.495559806285489
+        "x": 1.6879621878206321,
+        "y": 5.627174362118149
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Stop Intake",
-      "waypointRelativePos": 0.45,
+      "waypointRelativePos": 0.95,
       "command": {
         "type": "parallel",
         "data": {

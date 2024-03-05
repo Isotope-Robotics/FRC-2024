@@ -30,7 +30,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("IntakeNote", IntakeCommands.IntakeNote());
         NamedCommands.registerCommand("Shoot", ShooterCommands.shoot());
         NamedCommands.registerCommand("IntakeStop", IntakeCommands.stopIntake());
-        NamedCommands.registerCommand("IntakeLess", IntakeCommands.IntakeLessNote());
+        NamedCommands.registerCommand("IntakeLess", IntakeCommands.IntakeLess());
         NamedCommands.registerCommand("StopWrist", IntakeCommands.StopWrist());
 
         // Sets up auto buttons on SmartDashboard

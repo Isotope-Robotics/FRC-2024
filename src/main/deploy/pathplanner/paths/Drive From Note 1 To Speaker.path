@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 1.237885319372534,
+        "x": 1.17199271992529,
         "y": 5.55
       },
       "prevControl": {
-        "x": 1.137885319372534,
+        "x": 1.0719927199252899,
         "y": 5.55
       },
       "nextControl": null,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Stop Intake",
-      "waypointRelativePos": 0.85,
+      "waypointRelativePos": 0.95,
       "command": {
         "type": "parallel",
         "data": {
@@ -50,7 +50,7 @@
     },
     {
       "name": "Intake Less",
-      "waypointRelativePos": 0.15,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {

@@ -65,14 +65,15 @@ public class IntakeCommands {
         });
     }
 
-    public static Command IntakeLessNote() {
+    public static Command IntakeLess() {
         return Commands.runOnce(() -> {
             m_Intake.intakeStart(-0.25);
-        }, m_Intake).andThen(Commands.waitSeconds(0.02))
+        }, m_Intake)
+        .andThen(
+                        Commands.waitSeconds(0.5))
                 .andThen(
-                        Commands.waitSeconds(0.2))
-                .andThen(Commands.runOnce(() -> {
-                    m_Intake.intakeStop();
-                }));
+                        Commands.runOnce(() -> {
+                            m_Intake.intakeStop();
+                        }));
     }
 }

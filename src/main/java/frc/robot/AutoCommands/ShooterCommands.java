@@ -19,10 +19,10 @@ public class ShooterCommands {
         return Commands.runOnce(() -> {
             m_Shooter.shoot(-1.0);
         })
-                .andThen(Commands.waitSeconds(0.5))
+                .andThen(Commands.waitSeconds(0.35))
                 .andThen(Commands.runOnce(() -> {
                     m_Intake.intakeStart(1.0);
-                }).andThen(Commands.waitSeconds(0.75)
+                }).andThen(Commands.waitSeconds(0.6)
                         .andThen(Commands.runOnce(() -> {
                             m_Intake.intakeStop();
                             m_Shooter.stop();
