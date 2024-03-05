@@ -1,17 +1,16 @@
 package frc.robot.Subsystems;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Subsystems.Blinkin;
-
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkRelativeEncoder;
-
 import frc.robot.Constants;
+import frc.robot.Subsystems.Vision.pivot;
 
 public class Shooter {
 
@@ -21,6 +20,11 @@ public class Shooter {
     public static RelativeEncoder shooter2Encoder;
     public static DigitalInput noteDetected;
     public static DigitalOutput relay;
+    private static pivot instance = null;
+	private static final boolean invertLeft = true;
+	private static final boolean invertRight = false;
+    private static final double MAX_ANGLE_UP = 90.0;
+	private static final double MAX_ANGLE_DOWN = 0.0;
 
 
     private static Shooter m_Instance = null;
@@ -116,4 +120,24 @@ public class Shooter {
         }
         return m_Instance;
     }
+    //setting the angle
+private void setAngle(double angle, boolean invert, Servo servo,
+double minAngle, double maxAngle) {
+
+//The Servo class has hard coded ranges of travel.
+if(minAngle < 0) {
+minAngle = 0.0;
 }
+
+if(maxAngle > 170.0){
+maxAngle = 170.0;
+}
+
+//Get angle in range
+if(angle > maxAngle) {
+angle = maxAngle;
+} else if(angle < minAngle) {
+angle = minAngle;
+}
+    }
+        }
