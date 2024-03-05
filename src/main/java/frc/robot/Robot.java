@@ -150,7 +150,6 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.schedule();
     }
 
-    ShooterCommands.lightsOn();
 
   }
 

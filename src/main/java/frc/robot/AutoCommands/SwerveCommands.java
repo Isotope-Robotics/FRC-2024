@@ -16,11 +16,24 @@ public class SwerveCommands {
             m_Swerve.limelightNoteAim(true);
         }, m_Swerve)
                 .andThen(
-                        Commands.waitSeconds(0.10))
+                        Commands.waitSeconds(1))
                 .andThen(
-                        Commands.runOnce(() -> {
-                      //      m_Swerve.intakeStop();
-                        }));
+                        Commands.run(() -> {
+                            m_Swerve.forward(false);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.25)));
+
+    }
+
+    public static Command AprTagAutoAim() {
+        return Commands.run(() -> {
+            m_Swerve.limelightNoteAim(true);
+        }, m_Swerve)
+                .andThen(
+                        Commands.waitSeconds(1))
+                .andThen(
+                        Commands.run(() -> {
+                            m_Swerve.forward(false);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.25)));
 
     }
     
