@@ -129,8 +129,8 @@ if(minAngle < 0) {
 minAngle = 0.0;
 }
 
-if(maxAngle > 170.0){
-maxAngle = 170.0;
+if(maxAngle > 90.0){
+maxAngle = 90.0;
 }
 
 //Get angle in range
