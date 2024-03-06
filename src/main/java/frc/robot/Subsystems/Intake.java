@@ -1,7 +1,6 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkRelativeEncoder;
@@ -56,9 +55,9 @@ public class Intake extends SubsystemBase {
     // Photoelectric Sensor for sensing a note in the intake
     public boolean getNoteIntaked() {
         if (!noteIntaked.get()) {
-           // blinkin.rainbowForest();
             return false;
         } else {
+            blinkin.fireLarge();
             return true;
         }
     }
