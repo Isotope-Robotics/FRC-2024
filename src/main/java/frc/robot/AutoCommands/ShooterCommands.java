@@ -30,7 +30,7 @@ public class ShooterCommands {
     }
 
 
-    public static Command lightsOn() {
+    public static Command noteAutoAim() {
         return Commands.runOnce(() -> {
            m_Shooter.lightsOn();
         })
