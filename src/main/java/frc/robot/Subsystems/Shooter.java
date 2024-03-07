@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.Subsystems.Vision.pivot;
 
 public class Shooter {
 
@@ -20,7 +19,6 @@ public class Shooter {
     public static RelativeEncoder shooter2Encoder;
     public static DigitalInput noteDetected;
     public static DigitalOutput relay;
-    private static pivot instance = null;
 	private static final boolean invertLeft = true;
 	private static final boolean invertRight = false;
     private static final double MAX_ANGLE_UP = 90.0;
