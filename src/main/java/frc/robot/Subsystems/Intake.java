@@ -57,7 +57,7 @@ public class Intake extends SubsystemBase {
         if (!noteIntaked.get()) {
             return false;
         } else {
-            blinkin.fireLarge();
+            //blinkin.fireLarge();
             return true;
         }
     }
