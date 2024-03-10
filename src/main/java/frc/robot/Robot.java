@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
     // Command Scheduler ONLY for Auto
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
+    //SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+   // SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
     //System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
@@ -262,7 +262,7 @@ public class Robot extends TimedRobot {
 
     // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
-      if (intake.getNoteIntaked()) {
+      if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
         //System.out.println("bad");
         intake.wristUp();
         intake.intakeStop();
@@ -292,7 +292,7 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.20) {
-      shooter.shoot(-1.0);
+      shooter.shoot(1.0);
       blinkin.wavesLava();
     } else {
       shooter.stop();
@@ -310,7 +310,7 @@ public class Robot extends TimedRobot {
   }
 
   private void RobotTelemetry() {
-    SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+   // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
     //SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");

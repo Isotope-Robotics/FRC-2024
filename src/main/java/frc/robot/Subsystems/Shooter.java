@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkRelativeEncoder;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Servo;
@@ -15,38 +16,45 @@ public class Shooter {
 
     private CANSparkMax shooterMotor1;
     private CANSparkMax shooterMotor2;
+    private CANSparkMax pivotMotor;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
+    public static RelativeEncoder pivotEncoder;
     public static DigitalInput noteDetected;
     public static DigitalOutput relay;
-	private static final boolean invertLeft = true;
-	private static final boolean invertRight = false;
-    private static final double MAX_ANGLE_UP = 90.0;
-	private static final double MAX_ANGLE_DOWN = 0.0;
+	
 
 
     private static Shooter m_Instance = null;
 
+    public static final PIDController pivotPID = new PIDController(Constants.Shooter.kP2, Constants.Shooter.kI2,
+            Constants.Shooter.kD2);
+
     private final Blinkin blinkin = Blinkin.getInstance();
 
 
-    public Shooter(int shooter1CANID, int shooter2CANID) {
+    public Shooter(int shooter1CANID, int shooter2CANID, int pivotMotorID) {
         // Motor Declarations
         shooterMotor1 = new CANSparkMax(shooter1CANID, MotorType.kBrushless);
         shooterMotor2 = new CANSparkMax(shooter2CANID, MotorType.kBrushless);
+        pivotMotor = new CANSparkMax(pivotMotorID, MotorType.kBrushless);
+
 
         // Idle Mode Declarations
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
+        pivotMotor.setIdleMode(Constants.Shooter.Brake);
 
         // Set Direction of the Motors
         shooterMotor1.setInverted(false);
         shooterMotor2.setInverted(false);
+        pivotMotor.setInverted(false);
 
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        noteDetected = new DigitalInput(1);
+        pivotEncoder = pivotMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+        //noteDetected = new DigitalInput(1);
         relay = new DigitalOutput(8);
     }
 
@@ -64,20 +72,20 @@ public class Shooter {
 
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
-        shooterMotor1.set(-speed);
+        shooterMotor1.set(speed);
         shooterMotor2.set(speed);
         SmartDashboard.putNumber("Shooter 1 Speed", speed);
         SmartDashboard.putNumber("Shooter 2 Speed", speed);
     }
 
-    public boolean getNoteDetected() {
-        if (!noteDetected.get()) {
-           // blinkin.rainbowRGB();
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public boolean getNoteDetected() {
+    //     if (!noteDetected.get()) {
+    //        // blinkin.rainbowRGB();
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     // Stop both shooter motors
     public void stop() {
@@ -90,6 +98,7 @@ public class Shooter {
         // Zero Out Encoder Positions
         shooter1Encoder.setPosition(0);
         shooter2Encoder.setPosition(0);
+        pivotEncoder.setPosition(0);
         System.err.println("Zeroed Shooter Encoders");
     }
 
@@ -108,34 +117,24 @@ public class Shooter {
     public void clearStickyFaults(){
         shooterMotor1.clearFaults();
         shooterMotor2.clearFaults();
+        pivotMotor.clearFaults();
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
     // Returns Instance Of Shooter
     public static Shooter getInstance() {
         if (m_Instance == null) {
-            m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
+            m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID, Constants.Shooter.pivotMotorID);
         }
         return m_Instance;
     }
     //setting the angle
-private void setAngle(double angle, boolean invert, Servo servo,
-double minAngle, double maxAngle) {
+    public void pivotDown() {
+      // pivotMotor.setPosition(-1);
+    }
 
-//The Servo class has hard coded ranges of travel.
-if(minAngle < 0) {
-minAngle = 0.0;
-}
+    public void pivotUp() {
+      //  pivotMotor.setPosition(0);
 
-if(maxAngle > 90.0){
-maxAngle = 90.0;
-}
-
-//Get angle in range
-if(angle > maxAngle) {
-angle = maxAngle;
-} else if(angle < minAngle) {
-angle = minAngle;
-}
     }
         }

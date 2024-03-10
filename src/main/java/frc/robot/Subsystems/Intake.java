@@ -17,7 +17,8 @@ public class Intake extends SubsystemBase {
     public static CANSparkMax intakeMotor;
     public RelativeEncoder wristEncoder1;
     // public static RelativeEncoder wristEncoder2;
-    public static DigitalInput noteIntaked;
+    public static DigitalInput noteIntakedLeft;
+    public static DigitalInput noteIntakedRight;
     public static DigitalInput wristLimit;
 
     private static Intake m_Instance = null;
@@ -38,7 +39,9 @@ public class Intake extends SubsystemBase {
         intakeMotor.setIdleMode(Constants.Intake.Brake);
 
         // Limit Switch (Photo Eye) Declarations
-        noteIntaked = new DigitalInput(0);
+        noteIntakedLeft = new DigitalInput(0);
+        noteIntakedRight = new DigitalInput(1);
+
         wristLimit = new DigitalInput(5);
 
         // Encoders Declarations
@@ -53,8 +56,17 @@ public class Intake extends SubsystemBase {
     }
 
     // Photoelectric Sensor for sensing a note in the intake
-    public boolean getNoteIntaked() {
-        if (!noteIntaked.get()) {
+    public boolean getNoteIntakedLeft() {
+        if (noteIntakedLeft.get()) {
+            return false;
+        } else {
+            blinkin.fireLarge();
+            return true;
+        }
+    }
+
+    public boolean getNoteIntakedRight() {
+        if (noteIntakedRight.get()) {
             return false;
         } else {
             blinkin.fireLarge();

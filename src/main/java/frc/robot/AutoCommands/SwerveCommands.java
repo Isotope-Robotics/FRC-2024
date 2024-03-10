@@ -26,7 +26,7 @@ public class SwerveCommands {
 
     public static Command AprTagAutoAim() {
         return Commands.run(() -> {
-            m_Swerve.limelightNoteAim(true);
+            m_Swerve.limelightAprilTagAim(true);
         }, m_Swerve)
                 .andThen(
                         Commands.waitSeconds(1))

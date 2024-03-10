@@ -30,16 +30,5 @@ public class ShooterCommands {
     }
 
 
-    public static Command noteAutoAim() {
-        return Commands.runOnce(() -> {
-           m_Shooter.lightsOn();
-        })
-                .andThen(Commands.waitSeconds(1))
-                .andThen(Commands.runOnce(() -> {
-                    m_Shooter.lightsOff();
-  
-                }));
-                    };
-
-  
+    
     }
