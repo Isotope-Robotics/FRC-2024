@@ -90,6 +90,7 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
 
     intake.zeroEncoders();
+    shooter.zeroEncoders();
 
     intake.clearStickyFaults();
     shooter.clearStickyFaults();
@@ -180,7 +181,11 @@ public class Robot extends TimedRobot {
         System.out.println(intake.wristEncoder1.getPosition());
 
     // AutomatedOverrides();
-    // RobotTelemetry();
+     RobotTelemetry();
+
+     Shooter.pivotDown();
+
+     Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
   }
 
   /** This function is called once when the robot is disabled. */
@@ -196,17 +201,13 @@ public class Robot extends TimedRobot {
   /** This function is called once when test mode is enabled. */
   @Override
   public void testInit() {
-    CommandScheduler.getInstance().cancelAll();
+    //CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    // SmartDashboard.putNumber("Range",photonCannon.getRangeToTarget());
-    // SmartDashboard.putNumber("Yaw",photonCannon.getYawOfTargets());
-    // photonCannon.getYawOfTargets();
-    // SmartDashboard.putNumber("value", Vision.getInstance().getYawOfTargets());
-    // intake.wristMotor1.set(1.0);
+   swerve.ke();
   }
 
   /** This function is called once when the robot is first started up. */
@@ -236,6 +237,8 @@ public class Robot extends TimedRobot {
       limelightNoteAim(true);
     //} else if (Constants.Controllers.driver1.getRawButton(4)) {
     //  NoteAutoAim(true);
+    } else if (Constants.Controllers.driver1.getRawButton(5)) {
+      SwerveLock();
     } else {
       SwerveDrive(true);
     }
@@ -287,13 +290,15 @@ public class Robot extends TimedRobot {
     //one button intake half then shoot
     if (Constants.Controllers.driver2.getBButton()){
       intake.wristHalf();
-      intake.intakeStart(-1.0);
+      intake.intakeStart(.1);
     }
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.20) {
       shooter.shoot(1.0);
       blinkin.wavesLava();
+    } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= .2) {
+      shooter.shoot2(1.0);
     } else {
       shooter.stop();
     }
@@ -469,6 +474,10 @@ private void limelightNoteAim(boolean isFieldRel) {
         Constants.Controllers.stickDeadband);
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+  }
+
+  public void SwerveLock() {
+    swerve.lock();
   }
 
  /*  private void SwerveGyro0(boolean isFieldRel) {

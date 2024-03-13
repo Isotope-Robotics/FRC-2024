@@ -204,6 +204,13 @@ public class Swerve extends SubsystemBase {
         }
     }
 
+    public void ke() {
+              for (SwerveModule mod : mSwerveMods) {
+
+                  SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
+              }
+    }
+
     public void limelightNoteAim(boolean isFieldRel) {
     double tx = limelightNoteTable.getEntry("tx").getFloat(0);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
@@ -232,30 +239,13 @@ public class Swerve extends SubsystemBase {
   }
 
   public void forward(boolean isFieldRel) {
-    double tx = limelightNoteTable.getEntry("tx").getFloat(0);
-    double tx_max = 30.0f; // detemined empirically as the limelights field of view
-    double error = 0.0f;
-    double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
-    double kD = 0.0f; // should be between 0 and 1
-    double steering_adjust = 0.0f;
-    double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
-    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
-    if (limelightNoteLastError == 0.0f) {
-      limelightNoteLastError = tx;
-    }
-    double error_derivative = error - limelightNoteLastError;
-    limelightNoteLastError = tx; // setting limelightlasterror for next loop
-
-    if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
-      steering_adjust = (kP * error + kD * error_derivative);
-    }
-
+    
     final double xSpeed = 0.25;
     final double ySpeed = 0;
+    final double rot = 0;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-        steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    //System.out.println("Note error: " + error);
   }
 
   public void limelightAprilTagAim(boolean isFieldRel) {
@@ -306,5 +296,23 @@ public class Swerve extends SubsystemBase {
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
     //System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", april tag error: " + error);
+  }
+
+  Rotation2d swr = new Rotation2d(45);
+  Rotation2d swr2 = new Rotation2d(-45);
+
+  SwerveModuleState sw = new SwerveModuleState(0.0, swr);
+    SwerveModuleState sw2 = new SwerveModuleState(0.0, swr2);
+
+
+  public void lock() {
+    for (SwerveModule mod : mSwerveMods) {
+      if (mod.moduleNumber == 0 || mod.moduleNumber == 3) {
+mod.setDesiredState(sw, false);
+      } else {
+        mod.setDesiredState(sw2, false);
+
+      }
+              }
   }
 }

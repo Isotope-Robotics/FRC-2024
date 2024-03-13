@@ -16,7 +16,7 @@ public class Shooter {
 
     private CANSparkMax shooterMotor1;
     private CANSparkMax shooterMotor2;
-    private CANSparkMax pivotMotor;
+    public static CANSparkMax pivotMotor;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
     public static RelativeEncoder pivotEncoder;
@@ -72,6 +72,13 @@ public class Shooter {
 
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
+        shooterMotor1.set(-1.0f*speed);
+        shooterMotor2.set(speed);
+        SmartDashboard.putNumber("Shooter 1 Speed", speed);
+        SmartDashboard.putNumber("Shooter 2 Speed", speed);
+    }
+
+    public void shoot2(double speed) {
         shooterMotor1.set(speed);
         shooterMotor2.set(speed);
         SmartDashboard.putNumber("Shooter 1 Speed", speed);
@@ -121,6 +128,16 @@ public class Shooter {
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
+    public static void pivotDown() {
+      // pivotMotor.setPosition(-1);
+      SmartDashboard.putNumber("pivot", pivotEncoder.getPosition());
+    }
+
+    public static void pivotUp() {
+      //  pivotMotor.setPosition(0);
+
+    }
+
     // Returns Instance Of Shooter
     public static Shooter getInstance() {
         if (m_Instance == null) {
@@ -129,12 +146,5 @@ public class Shooter {
         return m_Instance;
     }
     //setting the angle
-    public void pivotDown() {
-      // pivotMotor.setPosition(-1);
-    }
-
-    public void pivotUp() {
-      //  pivotMotor.setPosition(0);
-
-    }
+    
         }
