@@ -195,78 +195,85 @@ public class Blinkin {
         blinkin.set(.87);
     }
 
+    public void lightchase() {
+        blinkin.set(.01);
+    }
 
-    // public void rainbowRGB() {
-    // blinkin.set(-.13);
-    // }
+    public void Heartbeatslow() {
+        blinkin.set(.03);
+    }
 
-    // public void rainbowParty() {
-    // blinkin.set(-.11);
-    // }
 
-    // public void rainbowOcean() {
-    // blinkin.set(-.09);
-    // }
 
-    // public void rainbowLava() {
-    // blinkin.set(-.07);
-    // }
 
-    // public void rainbowForest() {
-    // blinkin.set(-.05);
-    // }
+    public void heartbeatmedium() {
+    blinkin.set(.03);
+    }
 
-    // public void rainbowGlitter() {
-    // blinkin.set(-.03);
-    // }
+    public void heartbeatfast() {
+    blinkin.set(.05);
+    }
 
-    // public void confetti() {
-    // blinkin.set(-.01);
-    // }
+    public void breathslow() {
+    blinkin.set(.07);
+    }
 
-    // public void redShot() {
-    // blinkin.set(.01);
-    // }
+    public void breathfast() {
+    blinkin.set(.11);
+    }
 
-    // public void blueShot() {
-    // blinkin.set(.03);
-    // }
+    public void shot() {
+    blinkin.set(.13);
+    }
 
-    // public void whiteShot() {
-    // blinkin.set(.05);
-    // }
 
-    // public void sinelonRGB() {
-    // blinkin.set(.07);
-    // }
+    public void blendtoblack() {
+    blinkin.set(.17);
+    }
 
-    // public void sinelonParty() {
-    // blinkin.set(.09);
-    // }
+    public void larsonscanner() {
+    blinkin.set(.19);
+    }
 
-    // public void sinelonOcean() {
-    // blinkin.set(.11);
-    // }
+    public void hotpink() {
+    blinkin.set(.57);
+    }
 
-    // public void sinelonLava() {
-    // blinkin.set(-.73);
-    // }
+    public void normsparkle() {
+    blinkin.set(.37);
+    }
 
-    // public void sinelonForest() {
-    // blinkin.set(-.71);
-    // }
+    public void crazysparkle() {
+    blinkin.set(.39);
+    }
 
-    // public void BPMRGB() {
-    // blinkin.set(-.69);
-    // }
+    public void crazyBPM() {
+    blinkin.set(.41);
+    }
 
-    // public void BPMParty() {
-    // blinkin.set(-.67);
-    // }
+    public void crazyblend() {
+    blinkin.set(.45);
+    }
 
-    // public void BPMOcean() {
-    // blinkin.set(-.65);
-    // }
+    public void blend() {
+    blinkin.set(.47);
+    }
+
+    public void setuppattern() {
+    blinkin.set(.49);
+    }
+
+    public void crazytwinkle() {
+    blinkin.set(.51);
+    }
+
+    public void colorwave() {
+    blinkin.set(.53);
+    }
+
+    public void sinelon() {
+    blinkin.set(.55);
+    }
 
     // public void BPMLava() {
     // blinkin.set(-.63);
