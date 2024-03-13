@@ -191,6 +191,11 @@ public class Blinkin {
         blinkin.set(-.15);
     }
 
+    public void solidblue() {
+        blinkin.set(.87);
+    }
+
+
     // public void rainbowRGB() {
     // blinkin.set(-.13);
     // }
