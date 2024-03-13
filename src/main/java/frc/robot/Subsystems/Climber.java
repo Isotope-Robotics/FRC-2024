@@ -48,17 +48,32 @@ public class Climber {
     // }
 
     // Climbers go up
-    public void extend() {
+    public void extendM(double s) {
         //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 60));
-        masterMotor.set(1.0);
-        followerMotor.set(1.0);
+        masterMotor.set(s);
+    }
+
+    public void extendF(double s) {
+        followerMotor.set(s);
+
     }
 
     // Climbers go down
-    public void retract() {
+    public void retractM(double s) {
         //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
-        masterMotor.set(-1.0);
-        followerMotor.set(-1.0);
+        
+            masterMotor.set(s);
+        
+        
+        blinkin.rainbowParty();
+    }
+
+    public void retractF(double s) {
+        //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
+        
+            followerMotor.set(s);
+        
+        
         blinkin.rainbowParty();
     }
 

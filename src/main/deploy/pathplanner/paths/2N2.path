@@ -3,45 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3707054194735169,
-        "y": 5.297451962425293
+        "x": 1.3381784483283943,
+        "y": 5.544193078907484
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.3707054194735169,
-        "y": 5.397451962425293
+        "x": 2.087565879392411,
+        "y": 4.917347980059369
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.046416523910742,
-        "y": 7.015965109624455
+        "x": 2.015554507299491,
+        "y": 4.0634988538147505
       },
       "prevControl": {
-        "x": 2.2830253179303357,
-        "y": 5.997518561453163
-      },
-      "nextControl": {
-        "x": 2.0237868823396092,
-        "y": 7.113370958126287
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.036129185040325,
-        "y": 6.995390431883621
-      },
-      "prevControl": {
-        "x": 1.578348898140908,
-        "y": 6.995390431883621
+        "x": 0.9662459425169483,
+        "y": 3.682867315609318
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "note 3 end"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -49,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note",
-      "waypointRelativePos": 1.25,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {
@@ -73,7 +57,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -178.3634229583833,
     "rotateFast": false
   },
   "reversed": false,

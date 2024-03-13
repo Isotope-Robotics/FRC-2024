@@ -3,29 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3707054194735169,
-        "y": 5.297451962425293
+        "x": 1.2337167531477924,
+        "y": 5.54487565115481
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.3707054194735169,
-        "y": 5.397451962425293
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.046416523910742,
-        "y": 7.015965109624455
-      },
-      "prevControl": {
-        "x": 2.2830253179303357,
-        "y": 5.997518561453163
-      },
-      "nextControl": {
-        "x": 2.0237868823396092,
-        "y": 7.113370958126287
+        "x": 1.336590141851963,
+        "y": 5.699185734211067
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +20,8 @@
         "y": 6.995390431883621
       },
       "prevControl": {
-        "x": 1.578348898140908,
-        "y": 6.995390431883621
+        "x": 2.3035999956711697,
+        "y": 6.429586794010681
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note",
-      "waypointRelativePos": 1.25,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {

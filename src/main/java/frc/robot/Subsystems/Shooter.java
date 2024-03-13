@@ -79,8 +79,8 @@ public class Shooter {
     }
 
     public void shoot2(double speed) {
-        shooterMotor1.set(speed);
-        shooterMotor2.set(speed);
+        shooterMotor1.set(-speed);
+        shooterMotor2.set(speed - 0.2);
         SmartDashboard.putNumber("Shooter 1 Speed", speed);
         SmartDashboard.putNumber("Shooter 2 Speed", speed);
     }

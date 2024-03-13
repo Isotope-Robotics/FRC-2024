@@ -291,24 +291,23 @@ public class Robot extends TimedRobot {
     }
 
     // One Button Shoot
-    if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.20) {
+    if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
       shooter.shoot(1.0);
       blinkin.wavesLava();
-    } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= .2) {
+    } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
       shooter.shoot2(1.0);
     } else {
       shooter.stop();
     }
     // Climber Extend
-    if (Constants.Controllers.driver2.getXButton()) {
-      climber.extend();
-      blinkin.wavesParty();
-
-    } else if (Constants.Controllers.driver2.getYButton()) {
-      climber.retract();
-    } else {
-      climber.stop();
+    if (Constants.Controllers.driver2.getRawAxis(1) > .1) {
+    climber.retractF(Constants.Controllers.driver2.getRawAxis(1));
     }
+    if (Constants.Controllers.driver2.getRawAxis(5) > .1) {
+    climber.retractM(Constants.Controllers.driver2.getRawAxis(5));
+    blinkin.fireMedium();
+    }
+    
   }
 
   private void RobotTelemetry() {
