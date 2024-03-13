@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
@@ -89,6 +90,14 @@ public class SwerveModule {
         return new SwerveModuleState(
                 Conversions.RPSToMPS(mDriveMotor.getVelocity().getValue(), Constants.Swerve.wheelCircumference),
                 Rotation2d.fromRotations(mAngleMotor.getPosition().getValue()));
+    }
+
+    public double getDriveCurrent() {
+        return mDriveMotor.getSupplyCurrent().getValueAsDouble();
+    }
+
+    public double getAngleCurrent() {
+        return mAngleMotor.getSupplyCurrent().getValueAsDouble();
     }
 
     public SwerveModulePosition getPosition() {
