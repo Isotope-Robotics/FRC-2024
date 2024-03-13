@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
         if (noteIntakedLeft.get()) {
             return false;
         } else {
-            blinkin.solidblue();
+            blinkin.hotpink();
             return true;
         }
     }
@@ -69,7 +69,7 @@ public class Intake extends SubsystemBase {
         if (noteIntakedRight.get()) {
             return false;
         } else {
-            blinkin.solidblue();
+            blinkin.hotpink();
             return true;
         }
     }
