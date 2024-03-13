@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
-  //NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  // NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-april");
   NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-note");
 
@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 
   PhotonCamera photon = new PhotonCamera("Microsoft_LifeCam_HD-3000");
 
-  //Photon Vision PID Setup
+  // Photon Vision PID Setup
   final double ANGULAR_P = 0.1;
   final double ANGULAR_D = 0.0;
   PIDController turnController = new PIDController(ANGULAR_P, 0, ANGULAR_D);
@@ -96,7 +96,6 @@ public class Robot extends TimedRobot {
     shooter.clearStickyFaults();
     climber.clearStickyFaults();
 
-
     // CameraServer.startAutomaticCapture(0);
   }
 
@@ -115,10 +114,10 @@ public class Robot extends TimedRobot {
     // Command Scheduler ONLY for Auto
     CommandScheduler.getInstance().run();
 
-    //SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-   // SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
+    // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+    // SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
-    //System.out.println(Intake.getInstance().wristEncoder1.getPosition());
+    // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
 
@@ -151,7 +150,6 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.schedule();
     }
 
-
   }
 
   /** This function is called periodically during autonomous. */
@@ -178,14 +176,14 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Driver1Controls();
     Driver2Controls();
-        System.out.println(intake.wristEncoder1.getPosition());
+    System.out.println(intake.wristEncoder1.getPosition());
 
     // AutomatedOverrides();
-     RobotTelemetry();
+    RobotTelemetry();
 
-     Shooter.pivotDown();
+    Shooter.pivotDown();
 
-     Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
+    Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
   }
 
   /** This function is called once when the robot is disabled. */
@@ -201,13 +199,13 @@ public class Robot extends TimedRobot {
   /** This function is called once when test mode is enabled. */
   @Override
   public void testInit() {
-    //CommandScheduler.getInstance().cancelAll();
+    // CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-   swerve.ke();
+    swerve.ke();
   }
 
   /** This function is called once when the robot is first started up. */
@@ -230,13 +228,13 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
       System.out.println("ROBOT CENTRIC not ENABLLEEEDDDDD!!");
-    
+
     } else if (Constants.Controllers.driver1.getRawButton(3)) {
       limelightAprilTagAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(4)) {
       limelightNoteAim(true);
-    //} else if (Constants.Controllers.driver1.getRawButton(4)) {
-    //  NoteAutoAim(true);
+      // } else if (Constants.Controllers.driver1.getRawButton(4)) {
+      // NoteAutoAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(5)) {
       SwerveLock();
     } else {
@@ -266,19 +264,18 @@ public class Robot extends TimedRobot {
     // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
       if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-        //System.out.println("bad");
+        // System.out.println("bad");
         intake.wristUp();
         intake.intakeStop();
-        //blinkin.chaseBlue();
+        // blinkin.chaseBlue();
       } else {
         intake.wristDown();
         intake.intakeStart(-0.75);
-         blinkin.rainbowRGB();
+        blinkin.rainbowRGB();
       }
     } else {
       intake.wristUp();
     }
-    
 
     // Wrist Manual Control
     if (Constants.Controllers.driver2.getStartButton()) {
@@ -287,8 +284,8 @@ public class Robot extends TimedRobot {
       intake.wristHalf();
     }
 
-    //one button intake half then shoot
-    if (Constants.Controllers.driver2.getBButton()){
+    // one button intake half then shoot
+    if (Constants.Controllers.driver2.getBButton()) {
       intake.wristHalf();
       intake.intakeStart(.1);
     }
@@ -307,7 +304,7 @@ public class Robot extends TimedRobot {
       climber.extend();
       blinkin.wavesParty();
 
-    }else if (Constants.Controllers.driver2.getYButton()) {
+    } else if (Constants.Controllers.driver2.getYButton()) {
       climber.retract();
     } else {
       climber.stop();
@@ -315,8 +312,8 @@ public class Robot extends TimedRobot {
   }
 
   private void RobotTelemetry() {
-   // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    //SmartDashboard.putBoolean("magnet", climber.getmagnet());
+    // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
+    // SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
@@ -332,7 +329,19 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("LimelightArea", area);
     System.out.println(intake.wristEncoder1.getPosition());
 
-   // SmartDashboard.putNumber("", swerve.);
+    SmartDashboard.putNumber("Intake Current", intake.getIntakeCurrent());
+    SmartDashboard.putNumber("Wrist Current", intake.getWristCurrent());
+
+    SmartDashboard.putNumber("Master Current", climber.getMasterCurrent());
+
+    SmartDashboard.putNumber("Follower Current", climber.getFollowerCurrent());
+
+    SmartDashboard.putNumber("Pivot Current", shooter.getPivotCurrent());
+
+    SmartDashboard.putNumber("Shooter 1 Current", shooter.getShooter1Current());
+
+    SmartDashboard.putNumber("Shooter 2 Current", shooter.getShooter2Current());
+
   }
 
   // To Drive With Controllers
@@ -350,25 +359,25 @@ public class Robot extends TimedRobot {
         Constants.Controllers.stickDeadband);
 
     // if (Constants.Controllers.driver1.getPOV() == 0) {
-    //   xSpeed = -.75;
+    // xSpeed = -.75;
     // } else if (Constants.Controllers.driver1.getPOV() == 90) {
-    //   ySpeed = .75;
+    // ySpeed = .75;
     // } else if (Constants.Controllers.driver1.getPOV() == 180) {
-    //   xSpeed = .75;
+    // xSpeed = .75;
     // } else if (Constants.Controllers.driver1.getPOV() == 270) {
-    //   ySpeed = -.75;
+    // ySpeed = -.75;
     // } else if (Constants.Controllers.driver1.getPOV() == 45) {
-    //   xSpeed = .5;
-    //   ySpeed = .5;
+    // xSpeed = .5;
+    // ySpeed = .5;
     // } else if (Constants.Controllers.driver1.getPOV() == 135) {
-    //   xSpeed = -.5;
-    //   ySpeed = .5;
+    // xSpeed = -.5;
+    // ySpeed = .5;
     // } else if (Constants.Controllers.driver1.getPOV() == 225) {
-    //   xSpeed = -.5;
-    //   ySpeed = -.5;
+    // xSpeed = -.5;
+    // ySpeed = -.5;
     // } else if (Constants.Controllers.driver1.getPOV() == 315) {
-    //   xSpeed = .5;
-    //   ySpeed = -.5;
+    // xSpeed = .5;
+    // ySpeed = -.5;
     // }
 
     // Drive Function
@@ -394,7 +403,7 @@ public class Robot extends TimedRobot {
       }
     }
     double tx = limelightAprilTable.getEntry("tx").getFloat(700);
-    //System.out.println("tx april: " + tx);
+    // System.out.println("tx april: " + tx);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
     double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
@@ -425,10 +434,11 @@ public class Robot extends TimedRobot {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    //System.out.println("raw angle: " + currentGyro + ", mapped angle: " + mappedAngle + ", april tag error: " + error);
+    // System.out.println("raw angle: " + currentGyro + ", mapped angle: " +
+    // mappedAngle + ", april tag error: " + error);
   }
 
-private void limelightNoteAim(boolean isFieldRel) {
+  private void limelightNoteAim(boolean isFieldRel) {
     double tx = limelightNoteTable.getEntry("tx").getFloat(0);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
@@ -436,7 +446,8 @@ private void limelightNoteAim(boolean isFieldRel) {
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
     double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
-    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
+    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being
+                                                  // 180 degrees away
     if (limelightNoteLastError == 0.0f) {
       limelightNoteLastError = tx;
     }
@@ -454,20 +465,21 @@ private void limelightNoteAim(boolean isFieldRel) {
     swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
-    //System.out.println("Note error: " + error);
+    // System.out.println("Note error: " + error);
   }
 
-  //uses photon vision, we are using limelight, keeping in case the code is useful later
-  public void NoteAutoAim(boolean isFieldRel){
+  // uses photon vision, we are using limelight, keeping in case the code is
+  // useful later
+  public void NoteAutoAim(boolean isFieldRel) {
     double steering_adjust;
     var result = photon.getLatestResult();
 
-    if (result.hasTargets()){
+    if (result.hasTargets()) {
       steering_adjust = -turnController.calculate(result.getBestTarget().getYaw(), 0);
     } else {
       steering_adjust = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
-        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
-        Constants.Controllers.stickDeadband);
+          * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+          Constants.Controllers.stickDeadband);
     }
 
     final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
@@ -482,25 +494,30 @@ private void limelightNoteAim(boolean isFieldRel) {
     swerve.lock();
   }
 
- /*  private void SwerveGyro0(boolean isFieldRel) {
-    final double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
-        Constants.Controllers.stickDeadband);
-    final double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
-        Constants.Controllers.stickDeadband);
-
-    double rot = 0;
-    // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20 ||
-    // photonCannon.getYawOfTargets() <= -20)) {
-
-    if (swerve.getRealYaw() >= 1 || swerve.getRealYaw() <= -1) {
-      rot = -swerve.getRealYaw() * 0.01;
-
-    }
-    // }
-
-    swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
-  }
-  */
+  /*
+   * private void SwerveGyro0(boolean isFieldRel) {
+   * final double xSpeed =
+   * MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1),
+   * Constants.Controllers.stickDeadband);
+   * final double ySpeed =
+   * MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0),
+   * Constants.Controllers.stickDeadband);
+   * 
+   * double rot = 0;
+   * // while (photonCannon.hasTargets() && (photonCannon.getYawOfTargets() >= 20
+   * ||
+   * // photonCannon.getYawOfTargets() <= -20)) {
+   * 
+   * if (swerve.getRealYaw() >= 1 || swerve.getRealYaw() <= -1) {
+   * rot = -swerve.getRealYaw() * 0.01;
+   * 
+   * }
+   * // }
+   * 
+   * swerve.drive(new Translation2d(xSpeed,
+   * ySpeed).times(Constants.Swerve.maxSpeed),
+   * rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+   * }
+   */
 
 }

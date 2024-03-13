@@ -72,6 +72,14 @@ public class Climber {
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
+    public  double getMasterCurrent() {
+        return masterMotor.getOutputCurrent();
+    }
+
+    public  double getFollowerCurrent() {
+        return followerMotor.getOutputCurrent();
+    }
+
     // Returns Instance Of Climber
     public static Climber getInstance() {
         if (m_Instance == null) {

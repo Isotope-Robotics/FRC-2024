@@ -14,8 +14,8 @@ import frc.robot.Constants;
 
 public class Shooter {
 
-    private CANSparkMax shooterMotor1;
-    private CANSparkMax shooterMotor2;
+    public static CANSparkMax shooterMotor1;
+    public static CANSparkMax shooterMotor2;
     public static CANSparkMax pivotMotor;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
@@ -136,6 +136,18 @@ public class Shooter {
     public static void pivotUp() {
       //  pivotMotor.setPosition(0);
 
+    }
+
+    public double getPivotCurrent() {
+        return pivotMotor.getOutputCurrent();
+    }
+
+    public  double getShooter1Current() {
+        return shooterMotor1.getOutputCurrent();
+    }
+
+    public  double getShooter2Current() {
+        return shooterMotor2.getOutputCurrent();
     }
 
     // Returns Instance Of Shooter

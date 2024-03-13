@@ -134,6 +134,14 @@ public class Intake extends SubsystemBase {
         wristMotor1.set(speed);      
     }
 
+    public  double getWristCurrent() {
+        return wristMotor1.getOutputCurrent();
+    }
+
+    public  double getIntakeCurrent() {
+        return intakeMotor.getOutputCurrent();
+    }
+
     // Returns Instance Of Intake
     public static Intake getInstance() {
         if (m_Instance == null) {
