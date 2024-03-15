@@ -10,7 +10,7 @@
     "Station 2"
   ],
   "defaultMaxVel": 3.9,
-  "defaultMaxAccel": 16.0,
+  "defaultMaxAccel": 10.0,
   "defaultMaxAngVel": 400.0,
   "defaultMaxAngAccel": 1500.0,
   "maxModuleSpeed": 3.9

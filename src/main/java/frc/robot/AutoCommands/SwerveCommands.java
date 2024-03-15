@@ -19,20 +19,21 @@ public class SwerveCommands {
             while(!m_Swerve.limelightNoteAim(true)) {}
         }, m_Swerve)
                 .andThen(
-                        Commands.waitSeconds(.5))
+                        Commands.waitSeconds(.05))
                 .andThen(
                         Commands.runOnce(() -> {
-                            m_Swerve.forward(false); 
                             m_Intake.intakeStart(-1);
-                        }, m_Swerve).andThen(Commands.waitSeconds(.5))
+                            m_Swerve.forward(false); 
+
+                        }, m_Swerve).andThen(Commands.waitSeconds(.35))
                 //do we need to stop going forwards here?
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Swerve.lock(); 
-                        }, m_Swerve).andThen(Commands.waitSeconds(.5))
+                        }, m_Swerve).andThen(Commands.waitSeconds(.05))
                 .andThen(
                         Commands.runOnce(() -> {
-                            while (!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) {
+                            while (!m_Intake.getNoteIntakedLeft() || !m_Intake.getNoteIntakedRight()) {
                                                           //  m_Intake.intakeStart(-1);
 
                             }

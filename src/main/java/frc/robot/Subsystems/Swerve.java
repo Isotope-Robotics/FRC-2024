@@ -208,7 +208,9 @@ public class Swerve extends SubsystemBase {
     public void ke() {
               for (SwerveModule mod : mSwerveMods) {
 
-                  SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANCoder().getDegrees());
+                  SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Drive Current", mod.getDriveCurrent());
+                                    SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle Current", mod.getAngleCurrent());
+
               }
     }
 
@@ -220,7 +222,7 @@ public class Swerve extends SubsystemBase {
     double kP = 2.0f; // should be between 0 and 1, but can be greater than 1 to go even faster
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
-    double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
+    double acceptable_error_threshold = 7.0f / 360.0f; // 15 degrees allowable
     error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
     if (limelightNoteLastError == 0.0f) {
       limelightNoteLastError = tx;
@@ -239,12 +241,12 @@ public class Swerve extends SubsystemBase {
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
     //System.out.println("Note error: " + error);
-    return closeenough;
+   return closeenough;
   }
 
   public void forward(boolean isFieldRel) {
     
-    final double xSpeed = -0.25;
+    final double xSpeed = -1;
     final double ySpeed = 0;
     final double rot = 0;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),

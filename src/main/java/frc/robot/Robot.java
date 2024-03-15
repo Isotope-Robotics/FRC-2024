@@ -120,6 +120,9 @@ public class Robot extends TimedRobot {
     // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
+    
+    RobotTelemetry();
+    swerve.ke();
 
   }
 
@@ -155,6 +158,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    RobotTelemetry();
   }
 
   /** This function is called once when teleop is enabled. */

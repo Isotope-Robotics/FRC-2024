@@ -45,11 +45,25 @@ public class CTREConfigs {
         swerveDriveFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
 
         /* Current Limiting */
+        swerveDriveFXConfig.CurrentLimits.StatorCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+        swerveDriveFXConfig.CurrentLimits.StatorCurrentLimit = Constants.Swerve.driveCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.driveCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.driveCurrentThreshold;
         swerveDriveFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.driveCurrentThresholdTime;
+        swerveModule0DriveConfig.CurrentLimits.StatorCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+        swerveModule0DriveConfig.CurrentLimits.StatorCurrentLimit = Constants.Swerve.driveCurrentLimit;
+        swerveModule0DriveConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+        swerveModule0DriveConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.driveCurrentLimit;
+        swerveModule0DriveConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.driveCurrentThreshold;
+        swerveModule0DriveConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.driveCurrentThresholdTime;
 
+        swerveDriveFXConfig1.CurrentLimits.StatorCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+        swerveDriveFXConfig1.CurrentLimits.StatorCurrentLimit = Constants.Swerve.driveCurrentLimit;
+        swerveDriveFXConfig1.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+        swerveDriveFXConfig1.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.driveCurrentLimit;
+        swerveDriveFXConfig1.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.driveCurrentThreshold;
+        swerveDriveFXConfig1.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.driveCurrentThresholdTime;
         /* PID Config */
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
