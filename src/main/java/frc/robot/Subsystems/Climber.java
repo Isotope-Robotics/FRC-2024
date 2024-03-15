@@ -30,7 +30,7 @@ public class Climber {
         masterMotor = new CANSparkMax(masterMotorID, MotorType.kBrushless);
         followerMotor = new CANSparkMax(followerMotorID, MotorType.kBrushless);
         // Follow Declaration
-        //followerMotor.follow(masterMotor);
+        followerMotor.follow(followerMotor);
         // Idle Mode Declarations
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
@@ -61,24 +61,29 @@ public class Climber {
     // Climbers go down
     public void retractM(double s) {
         //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
-        
-            masterMotor.set(s);
-        
-        
-        blinkin.rainbowParty();
+        if (Math.abs(s) < 0.1) {
+            s = 0;
+        }
+        masterMotor.set(s);
+       // blinkin.rainbowParty();
     }
 
     public void retractF(double s) {
-        //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));
-        
-            followerMotor.set(s);
-        
-        
-        blinkin.rainbowParty();
+        //masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0));\
+        if (Math.abs(s) < 0.1) {
+            s = 0;
+        }
+        followerMotor.set(s);
+       // blinkin.rainbowParty();
     }
 
-    public void stop(){
+    public void stopM(){
         masterMotor.set(0);
+    }
+
+    public void stopF() {
+    followerMotor.set(0);
+
     }
 
     public void clearStickyFaults(){

@@ -11,18 +11,33 @@ public class SwerveCommands {
 
 
         public static Swerve m_Swerve = Swerve.getInstance();
+        public static Intake m_Intake = Intake.getInstance();
 
 
     public static Command NoteAutoAim() {
-        return Commands.run(() -> {
-            m_Swerve.limelightNoteAim(true);
+        return Commands.runOnce(() -> {
+            while(!m_Swerve.limelightNoteAim(true)) {}
         }, m_Swerve)
                 .andThen(
-                        Commands.waitSeconds(1))
+                        Commands.waitSeconds(.5))
                 .andThen(
-                        Commands.run(() -> {
-                            m_Swerve.forward(false);
-                        }, m_Swerve).andThen(Commands.waitSeconds(.25)));
+                        Commands.runOnce(() -> {
+                            m_Swerve.forward(false); 
+                            m_Intake.intakeStart(-1);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.5))
+                //do we need to stop going forwards here?
+                .andThen(
+                        Commands.runOnce(() -> {
+                            m_Swerve.lock(); 
+                        }, m_Swerve).andThen(Commands.waitSeconds(.5))
+                .andThen(
+                        Commands.runOnce(() -> {
+                            while (!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) {
+                                                          //  m_Intake.intakeStart(-1);
+
+                            }
+                            m_Intake.intakeStop(); 
+                        }, m_Intake))));
 
     }
 

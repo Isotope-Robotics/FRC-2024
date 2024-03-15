@@ -128,13 +128,13 @@ public class Shooter {
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
-    public static void pivotDown() {
-      // pivotMotor.setPosition(-1);
+    public  void pivotDown() {
+        pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 0));
       SmartDashboard.putNumber("pivot", pivotEncoder.getPosition());
     }
 
-    public static void pivotUp() {
-      //  pivotMotor.setPosition(0);
+    public  void pivotUp() {
+        pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 17));
 
     }
 

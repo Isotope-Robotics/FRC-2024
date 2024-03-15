@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
+    //shooter.pivotUp();
     m_AutonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -181,9 +181,19 @@ public class Robot extends TimedRobot {
     // AutomatedOverrides();
     RobotTelemetry();
 
-    Shooter.pivotDown();
+  //  shooter.pivotUp();
 
-    Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
+   // shooter.pivotDown();
+
+    //Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
+
+    if (intake.noteUpLimit()) {
+      System.out.println("UP LIMIT");
+    } if (intake.noteDownLimit()) {
+      System.out.println("down limit");
+    }
+
+    SmartDashboard.putNumber("pivot", Shooter.pivotEncoder.getPosition());
   }
 
   /** This function is called once when the robot is disabled. */
@@ -292,21 +302,40 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
+    //  shooter.pivotUp();
       shooter.shoot(1.0);
       blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
+            shooter.pivotUp();
       shooter.shoot2(1.0);
     } else {
       shooter.stop();
     }
     // Climber Extend
-    if (Constants.Controllers.driver2.getRawAxis(1) > .1) {
     climber.retractF(Constants.Controllers.driver2.getRawAxis(1));
-    }
-    if (Constants.Controllers.driver2.getRawAxis(5) > .1) {
+    
     climber.retractM(Constants.Controllers.driver2.getRawAxis(5));
-    blinkin.fireMedium();
+   
+
+    if (Constants.Controllers.driver2.getPOV() == 0 && !intake.noteUpLimit()) {
+      intake.noteMotorUp();
+    } else if (Constants.Controllers.driver2.getPOV() == 180 && !intake.noteDownLimit()) {
+      intake.noteMotorDown();
+    } else {
+      intake.noteMotorStop();;
     }
+
+    // if (Constants.Controllers.driver2.getPOV() == 0) {
+    //   if (!intake.noteUpLimit()) {
+    //   intake.noteMotorUp();
+    //   } else if (!intake.noteDownLimit()) {
+    //     intake.noteMotorDown();
+    //   }
+    // } else {
+    //   intake.noteMotorStop();
+    // }
+
+   // intake.noteMotorUp();
     
   }
 

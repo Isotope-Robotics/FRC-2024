@@ -212,7 +212,8 @@ public class Swerve extends SubsystemBase {
               }
     }
 
-    public void limelightNoteAim(boolean isFieldRel) {
+    public boolean limelightNoteAim(boolean isFieldRel) {
+      boolean closeenough = false;
     double tx = limelightNoteTable.getEntry("tx").getFloat(0);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
@@ -230,6 +231,7 @@ public class Swerve extends SubsystemBase {
     if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
       steering_adjust = (kP * error + kD * error_derivative);
     }
+    else {closeenough = true;}
 
     final double xSpeed = 0;
     final double ySpeed = 0;
@@ -237,11 +239,12 @@ public class Swerve extends SubsystemBase {
         steering_adjust * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
     //System.out.println("Note error: " + error);
+    return closeenough;
   }
 
   public void forward(boolean isFieldRel) {
     
-    final double xSpeed = 0.25;
+    final double xSpeed = -0.25;
     final double ySpeed = 0;
     final double rot = 0;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),

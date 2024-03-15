@@ -13,13 +13,15 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     public static CANSparkMax wristMotor1;
-    // public static CANSparkMax wristMotor2;
+    public static CANSparkMax noteMotor;
     public static CANSparkMax intakeMotor;
     public RelativeEncoder wristEncoder1;
     // public static RelativeEncoder wristEncoder2;
     public static DigitalInput noteIntakedLeft;
     public static DigitalInput noteIntakedRight;
     public static DigitalInput wristLimit;
+    public static DigitalInput noteUpLimit;
+    public static DigitalInput noteDownLimit;
 
     private static Intake m_Instance = null;
 
@@ -28,19 +30,23 @@ public class Intake extends SubsystemBase {
 
     private final Blinkin blinkin = Blinkin.getInstance();
 
-    public Intake(int wristMotor1CANID, int intakeMotorCANID) {
+    public Intake(int wristMotor1CANID, int intakeMotorCANID, int noteMotorCANID) {
 
         // Motor Declarations
         wristMotor1 = new CANSparkMax(wristMotor1CANID, MotorType.kBrushless);
         intakeMotor = new CANSparkMax(intakeMotorCANID, MotorType.kBrushless);
+        noteMotor = new CANSparkMax(noteMotorCANID, MotorType.kBrushed);
 
         // Idle Mode Declarations
         wristMotor1.setIdleMode(Constants.Intake.Brake);
         intakeMotor.setIdleMode(Constants.Intake.Brake);
+        noteMotor.setIdleMode(Constants.Intake.Brake);
 
         // Limit Switch (Photo Eye) Declarations
         noteIntakedLeft = new DigitalInput(0);
         noteIntakedRight = new DigitalInput(1);
+        noteUpLimit = new DigitalInput(3);
+        noteDownLimit = new DigitalInput(2);
 
         wristLimit = new DigitalInput(5);
 
@@ -127,6 +133,7 @@ public class Intake extends SubsystemBase {
     public void clearStickyFaults(){
         intakeMotor.clearFaults();
         wristMotor1.clearFaults();
+        noteMotor.clearFaults();
         System.out.println("Clearing Intake Faults, If Any");
     }
 
@@ -142,10 +149,34 @@ public class Intake extends SubsystemBase {
         return intakeMotor.getOutputCurrent();
     }
 
+    public void noteMotorUp() {
+       
+        noteMotor.set(-1);
+        
+    }
+
+    public void noteMotorDown() {
+        
+        noteMotor.set(1);
+        
+    }
+
+    public void noteMotorStop() {
+        noteMotor.set(0);
+    }
+
+    public boolean noteUpLimit() {
+        return !noteUpLimit.get();
+    }
+
+    public boolean noteDownLimit() {
+        return !noteDownLimit.get();
+    }
+
     // Returns Instance Of Intake
     public static Intake getInstance() {
         if (m_Instance == null) {
-            m_Instance = new Intake(Constants.Intake.wristMotor1ID, Constants.Intake.intakeMotorID);
+            m_Instance = new Intake(Constants.Intake.wristMotor1ID, Constants.Intake.intakeMotorID, Constants.Intake.noteMotorID);
         }
 
         return m_Instance;

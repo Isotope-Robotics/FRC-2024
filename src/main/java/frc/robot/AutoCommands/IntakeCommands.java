@@ -45,7 +45,7 @@ public class IntakeCommands {
             m_Intake.intakeStart(-1);
         }, m_Intake)
                 .andThen(
-                        Commands.waitSeconds(0.05))
+                        Commands.waitSeconds(1))
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Intake.intakeStop();
@@ -55,7 +55,9 @@ public class IntakeCommands {
 
     public static Command stopIntake() {
         return Commands.runOnce(() -> {
-            m_Intake.intakeStop();
+                while (m_Intake.getNoteIntakedLeft() && m_Intake.getNoteIntakedRight()) {
+
+            m_Intake.intakeStop(); }
         });
     }
 
@@ -73,7 +75,7 @@ public class IntakeCommands {
                         Commands.waitSeconds(0.5))
                 .andThen(
                         Commands.runOnce(() -> {
-                            m_Intake.intakeStop();
+                           // m_Intake.intakeStop();
                         }));
     }
 }

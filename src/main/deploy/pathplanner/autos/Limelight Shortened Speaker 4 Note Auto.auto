@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.34,
-      "y": 5.547612425391122
+      "x": 1.2767919374701306,
+      "y": 5.6025530060538795
     },
     "rotation": 180.0
   },
@@ -45,12 +45,6 @@
           "type": "named",
           "data": {
             "name": "NoteAutoAim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeLess"
           }
         },
         {
@@ -102,12 +96,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "IntakeLess"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Drive From Note 2 To Speaker"
@@ -152,7 +140,7 @@
         {
           "type": "named",
           "data": {
-            "name": "IntakeLess"
+            "name": "NoteAutoAim"
           }
         },
         {
