@@ -29,7 +29,7 @@ public class SwerveCommands {
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Swerve.lock(); 
-                        }, m_Swerve).andThen(Commands.waitSeconds(.5))
+                        }, m_Swerve).andThen(Commands.waitSeconds(.05))
                 .andThen(
                         Commands.runOnce(() -> {
                             while (!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) {

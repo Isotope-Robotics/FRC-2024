@@ -30,7 +30,7 @@ public class IntakeCommands {
             m_Intake.wristDown();
             m_Intake.intakeStart(1.0);
         }, m_Intake).andThen(
-                Commands.waitSeconds(0.50)
+                Commands.waitSeconds(0.30)
                         .andThen(() -> {
                             m_Intake.wristUp();
                         }).andThen(Commands.waitSeconds(0.05))

@@ -30,7 +30,7 @@ public class Climber {
         masterMotor = new CANSparkMax(masterMotorID, MotorType.kBrushless);
         followerMotor = new CANSparkMax(followerMotorID, MotorType.kBrushless);
         // Follow Declaration
-        followerMotor.follow(followerMotor);
+      //  followerMotor.follow(followerMotor);
         // Idle Mode Declarations
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
