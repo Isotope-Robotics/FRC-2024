@@ -23,6 +23,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,6 +57,8 @@ public class Robot extends TimedRobot {
   private final Climber climber = Climber.getInstance();
 
   private final Limelight limelight = new Limelight();
+
+  public static Timer timer = new Timer();
 
   public Swerve swerve;
 
@@ -173,6 +176,7 @@ public class Robot extends TimedRobot {
 
     swerve.zeroHeading();
 
+    timer.start();
   }
 
   /** This function is called periodically during operator control. */
@@ -191,13 +195,13 @@ public class Robot extends TimedRobot {
 
     //Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
 
-    if (intake.noteUpLimit()) {
-      System.out.println("UP LIMIT");
-    } if (intake.noteDownLimit()) {
-      System.out.println("down limit");
-    }
+    // if (intake.noteUpLimit()) {
+    //   System.out.println("UP LIMIT");
+    // } if (intake.noteDownLimit()) {
+    //   System.out.println("down limit");
+    // }
 
-    SmartDashboard.putNumber("pivot", Shooter.pivotEncoder.getPosition());
+   // SmartDashboard.putNumber("pivot", Shooter.pivotEncoder.getPosition());
   }
 
   /** This function is called once when the robot is disabled. */
@@ -266,8 +270,20 @@ public class Robot extends TimedRobot {
   }
 
   private void Driver2Controls() {
+
+    if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
+    blinkin.hotpink();
+    } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
+    blinkin.confetti();
+    } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
+      blinkin.colorwave();
+    } else {
+      blinkin.crazyBPM();
+    }
+    
     // Intake Manual Control
-    if (Constants.Controllers.driver2.getLeftBumper()) {
+    if (Constants.Controllers.driver2.getLeftBumper() ) {
+      
       intake.intakeStart(-0.75);
     } else if (Constants.Controllers.driver2.getRightBumper()) {
       intake.intakeStart(0.75);
@@ -281,11 +297,15 @@ public class Robot extends TimedRobot {
         // System.out.println("bad");
         intake.wristUp();
         intake.intakeStop();
-        // blinkin.chaseBlue();
+        //blinkin.hotpink();
+      } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
+        intake.wristUp();
+        intake.intakeStop();
+        //blinkin.lime();
       } else {
         intake.wristDown();
         intake.intakeStart(-0.75);
-        blinkin.rainbowRGB();
+        //blinkin.fireMedium();
       }
     } else {
       intake.wristUp();
@@ -308,17 +328,17 @@ public class Robot extends TimedRobot {
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
     //  shooter.pivotUp();
       shooter.shoot(1.0);
-      blinkin.wavesLava();
+      //blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
-            shooter.pivotUp();
+           // shooter.pivotUp();
       shooter.shoot2(1.0);
     } else {
       shooter.stop();
     }
     // Climber Extend
-    climber.retractF(Constants.Controllers.driver2.getRawAxis(1));
+    climber.retractM(-Constants.Controllers.driver2.getRawAxis(1));
     
-    climber.retractM(Constants.Controllers.driver2.getRawAxis(5));
+    climber.retractF(Constants.Controllers.driver2.getRawAxis(5));
    
 
     if (Constants.Controllers.driver2.getPOV() == 0 && !intake.noteUpLimit()) {
@@ -368,7 +388,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Follower Current", climber.getFollowerCurrent());
 
-    SmartDashboard.putNumber("Pivot Current", shooter.getPivotCurrent());
+   // SmartDashboard.putNumber("Pivot Current", shooter.getPivotCurrent());
 
     SmartDashboard.putNumber("Shooter 1 Current", shooter.getShooter1Current());
 

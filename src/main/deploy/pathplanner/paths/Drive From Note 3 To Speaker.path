@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.2008241172880445,
-        "y": 6.99346460304295
+        "x": 2.307817317056435,
+        "y": 7.149091075433336
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.434263825873623,
-        "y": 5.573373042480683
+        "x": 2.29801752979125,
+        "y": 6.338731552375505
       },
       "isLocked": false,
-      "linkedName": "note 3 end"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Stop Intake",
-      "waypointRelativePos": 0.95,
+      "name": "Up Intake",
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "StopIntake"
+                "name": "UpIntake"
               }
             }
           ]
@@ -50,7 +50,7 @@
     },
     {
       "name": "Intake Less",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0.15,
       "command": {
         "type": "parallel",
         "data": {

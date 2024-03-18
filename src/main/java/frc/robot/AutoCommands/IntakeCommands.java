@@ -30,7 +30,7 @@ public class IntakeCommands {
             m_Intake.wristDown();
             m_Intake.intakeStart(1.0);
         }, m_Intake).andThen(
-                Commands.waitSeconds(0.50)
+                Commands.waitSeconds(0.30)
                         .andThen(() -> {
                             m_Intake.wristUp();
                         }).andThen(Commands.waitSeconds(0.05))
@@ -69,13 +69,13 @@ public class IntakeCommands {
 
     public static Command IntakeLess() {
         return Commands.runOnce(() -> {
-            m_Intake.intakeStart(-0.25);
+            m_Intake.intakeStart(-1);
         }, m_Intake)
         .andThen(
                         Commands.waitSeconds(0.5))
                 .andThen(
                         Commands.runOnce(() -> {
-                           // m_Intake.intakeStop();
+                            m_Intake.intakeStop();
                         }));
     }
 }

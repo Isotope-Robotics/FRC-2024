@@ -14,18 +14,6 @@
         {
           "type": "named",
           "data": {
-            "name": "EternalShoot"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "Shoot"
           }
         },
@@ -33,6 +21,12 @@
           "type": "named",
           "data": {
             "name": "DropIntake"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.1
           }
         },
         {
@@ -44,7 +38,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.05
+            "waitTime": 0.2
           }
         },
         {
@@ -60,15 +54,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 0.05
+            "waitTime": 0.2
           }
         },
         {
@@ -96,27 +84,15 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.05
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Drive From Note 2 To Speaker"
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 0.05
+            "waitTime": 0.2
           }
         },
         {
@@ -138,12 +114,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.05
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "NoteAutoAim"
@@ -156,15 +126,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 0.05
+            "waitTime": 0.2
           }
         },
         {
