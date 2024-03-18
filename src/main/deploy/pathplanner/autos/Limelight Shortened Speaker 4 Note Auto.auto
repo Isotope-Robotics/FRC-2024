@@ -26,7 +26,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.2
+            "waitTime": 0.1
           }
         },
         {
@@ -51,12 +51,6 @@
           "type": "path",
           "data": {
             "pathName": "Drive From Note 1 To Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
           }
         },
         {
@@ -90,21 +84,9 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.2
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Drive From Note 2 To Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
           }
         },
         {
@@ -132,12 +114,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "NoteAutoAim"
@@ -147,12 +123,6 @@
           "type": "path",
           "data": {
             "pathName": "Drive From Note 3 To Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "UpIntake"
           }
         },
         {

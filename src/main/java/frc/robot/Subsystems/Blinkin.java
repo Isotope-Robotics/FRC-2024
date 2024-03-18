@@ -197,7 +197,7 @@ public class Blinkin {
     }
 
     public void lightchase() {
-        blinkin.set(.01);
+        blinkin.set(.21);
     }
 
     public void Heartbeatslow() {
@@ -274,6 +274,10 @@ public class Blinkin {
 
     public void sinelon() {
     blinkin.set(.55);
+    }
+
+    public void lime() {
+        blinkin.set(.73);
     }
 
     // public void BPMLava() {

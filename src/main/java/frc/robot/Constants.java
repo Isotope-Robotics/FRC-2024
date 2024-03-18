@@ -35,7 +35,7 @@ public class Constants {
     public static final class Shooter {
         public static final int shooterMotor1ID = 40;
         public static final int shooterMotor2ID = 3;
-        public static final int pivotMotorID = 5;
+       // public static final int pivotMotorID = 5;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;

@@ -16,10 +16,10 @@ public class Shooter {
 
     public static CANSparkMax shooterMotor1;
     public static CANSparkMax shooterMotor2;
-    public static CANSparkMax pivotMotor;
+   // public static CANSparkMax pivotMotor;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
-    public static RelativeEncoder pivotEncoder;
+   // public static RelativeEncoder pivotEncoder;
     public static DigitalInput noteDetected;
     public static DigitalOutput relay;
 	
@@ -27,33 +27,33 @@ public class Shooter {
 
     private static Shooter m_Instance = null;
 
-    public static final PIDController pivotPID = new PIDController(Constants.Shooter.kP2, Constants.Shooter.kI2,
-            Constants.Shooter.kD2);
+    //public static final PIDController pivotPID = new PIDController(Constants.Shooter.kP2, Constants.Shooter.kI2,
+        //    Constants.Shooter.kD2);
 
     private final Blinkin blinkin = Blinkin.getInstance();
 
 
-    public Shooter(int shooter1CANID, int shooter2CANID, int pivotMotorID) {
+    public Shooter(int shooter1CANID, int shooter2CANID) {
         // Motor Declarations
         shooterMotor1 = new CANSparkMax(shooter1CANID, MotorType.kBrushless);
         shooterMotor2 = new CANSparkMax(shooter2CANID, MotorType.kBrushless);
-        pivotMotor = new CANSparkMax(pivotMotorID, MotorType.kBrushless);
+       // pivotMotor = new CANSparkMax(pivotMotorID, MotorType.kBrushless);
 
 
         // Idle Mode Declarations
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
-        pivotMotor.setIdleMode(Constants.Shooter.Brake);
+       // pivotMotor.setIdleMode(Constants.Shooter.Brake);
 
         // Set Direction of the Motors
         shooterMotor1.setInverted(false);
         shooterMotor2.setInverted(false);
-        pivotMotor.setInverted(false);
+       // pivotMotor.setInverted(false);
 
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        pivotEncoder = pivotMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+       // pivotEncoder = pivotMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         //noteDetected = new DigitalInput(1);
         relay = new DigitalOutput(8);
     }
@@ -105,7 +105,7 @@ public class Shooter {
         // Zero Out Encoder Positions
         shooter1Encoder.setPosition(0);
         shooter2Encoder.setPosition(0);
-        pivotEncoder.setPosition(0);
+       // pivotEncoder.setPosition(0);
         System.err.println("Zeroed Shooter Encoders");
     }
 
@@ -124,23 +124,23 @@ public class Shooter {
     public void clearStickyFaults(){
         shooterMotor1.clearFaults();
         shooterMotor2.clearFaults();
-        pivotMotor.clearFaults();
+       // pivotMotor.clearFaults();
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
-    public  void pivotDown() {
-        pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 0));
-      SmartDashboard.putNumber("pivot", pivotEncoder.getPosition());
-    }
+    // public  void pivotDown() {
+    //     pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 0));
+    //   SmartDashboard.putNumber("pivot", pivotEncoder.getPosition());
+    // }
 
-    public  void pivotUp() {
-        pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 17));
+    // public  void pivotUp() {
+    //     pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 17));
 
-    }
+    // }
 
-    public double getPivotCurrent() {
-        return pivotMotor.getOutputCurrent();
-    }
+    // public double getPivotCurrent() {
+    //     return pivotMotor.getOutputCurrent();
+    // }
 
     public  double getShooter1Current() {
         return shooterMotor1.getOutputCurrent();
@@ -153,7 +153,7 @@ public class Shooter {
     // Returns Instance Of Shooter
     public static Shooter getInstance() {
         if (m_Instance == null) {
-            m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID, Constants.Shooter.pivotMotorID);
+            m_Instance = new Shooter(Constants.Shooter.shooterMotor1ID, Constants.Shooter.shooterMotor2ID);
         }
         return m_Instance;
     }

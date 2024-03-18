@@ -69,13 +69,13 @@ public class IntakeCommands {
 
     public static Command IntakeLess() {
         return Commands.runOnce(() -> {
-            m_Intake.intakeStart(-0.25);
+            m_Intake.intakeStart(-1);
         }, m_Intake)
         .andThen(
                         Commands.waitSeconds(0.5))
                 .andThen(
                         Commands.runOnce(() -> {
-                           // m_Intake.intakeStop();
+                            m_Intake.intakeStop();
                         }));
     }
 }
