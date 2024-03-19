@@ -341,13 +341,13 @@ public class Robot extends TimedRobot {
     climber.retractF(Constants.Controllers.driver2.getRawAxis(5));
    
 
-    if (Constants.Controllers.driver2.getPOV() == 0 && !intake.noteUpLimit()) {
-      intake.noteMotorUp();
-    } else if (Constants.Controllers.driver2.getPOV() == 180 && !intake.noteDownLimit()) {
-      intake.noteMotorDown();
-    } else {
-      intake.noteMotorStop();;
-    }
+    // if (Constants.Controllers.driver2.getPOV() == 0 && !intake.noteUpLimit()) {
+    //   intake.noteMotorUp();
+    // } else if (Constants.Controllers.driver2.getPOV() == 180 && !intake.noteDownLimit()) {
+    //   intake.noteMotorDown();
+    // } else {
+    //   intake.noteMotorStop();;
+    // }
 
     // if (Constants.Controllers.driver2.getPOV() == 0) {
     //   if (!intake.noteUpLimit()) {

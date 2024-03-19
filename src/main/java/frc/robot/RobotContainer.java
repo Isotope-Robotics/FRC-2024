@@ -33,7 +33,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("IntakeLess", IntakeCommands.IntakeLess());
         NamedCommands.registerCommand("StopWrist", IntakeCommands.StopWrist());
         NamedCommands.registerCommand("NoteAutoAim", SwerveCommands.NoteAutoAim());
-        NamedCommands.registerCommand("EternalShoot", ShooterCommands.shootAll());
+      //  NamedCommands.registerCommand("EternalShoot", ShooterCommands.shootAll());
 
 
 
