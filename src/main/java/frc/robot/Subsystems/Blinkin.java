@@ -280,6 +280,12 @@ public class Blinkin {
         blinkin.set(.73);
     }
 
+    public void aqua(){
+        blinkin.set(.81);
+    }
+
+
+
     // public void BPMLava() {
     // blinkin.set(-.63);
     // }

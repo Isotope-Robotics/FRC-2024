@@ -274,7 +274,7 @@ public class Robot extends TimedRobot {
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
     blinkin.hotpink();
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
-    blinkin.confetti();
+    blinkin.aqua();
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
       blinkin.colorwave();
     } else {
