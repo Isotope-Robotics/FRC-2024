@@ -272,7 +272,7 @@ public class Robot extends TimedRobot {
   private void Driver2Controls() {
 
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-    blinkin.hotpink();
+    blinkin.green();
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
     blinkin.aqua();
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {

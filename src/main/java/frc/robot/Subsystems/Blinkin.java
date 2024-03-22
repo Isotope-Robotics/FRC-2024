@@ -276,6 +276,10 @@ public class Blinkin {
     blinkin.set(.55);
     }
 
+    public void green() {
+        blinkin.set(.71);
+    }
+
     public void lime() {
         blinkin.set(.73);
     }
