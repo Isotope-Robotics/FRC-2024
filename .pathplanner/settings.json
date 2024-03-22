@@ -4,10 +4,11 @@
   "holonomicMode": true,
   "pathFolders": [],
   "autoFolders": [
-    "Station 3",
+    "Speaker South Side",
     "Speaker",
     "Station 1",
-    "Station 2"
+    "Station 2",
+    "Station 3"
   ],
   "defaultMaxVel": 3.9,
   "defaultMaxAccel": 10.0,

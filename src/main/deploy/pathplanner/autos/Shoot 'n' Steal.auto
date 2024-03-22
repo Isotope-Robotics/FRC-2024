@@ -1,0 +1,61 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6117582451704074,
+      "y": 4.3507145948482435
+    },
+    "rotation": 119.51816830157962
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 6"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Speaker South Side",
+  "choreoAuto": false
+}
