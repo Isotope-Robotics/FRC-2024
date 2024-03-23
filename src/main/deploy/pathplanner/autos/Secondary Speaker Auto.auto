@@ -1,0 +1,91 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6782004541452696,
+      "y": 4.413268375408932
+    },
+    "rotation": 121.15930450834439
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "To Middle Note 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "NoteAutoAim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "From Middle Note 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "To Middle Note 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "NoteAutoAim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "From Middle Note 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "To Middle Note 1"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
