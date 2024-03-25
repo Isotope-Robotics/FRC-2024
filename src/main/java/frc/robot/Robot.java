@@ -554,10 +554,16 @@ public class Robot extends TimedRobot {
   public void HammerDrive() {
     boolean loop = true;
     hTimer.restart();
-    swerve.forward(false);
+    while (!loop) {
+      swerve.forward(false);
+      if (hTimer.hasElapsed(1)) {
+        loop = true;
+      }
+    }
+    hTimer.restart();
     while (loop) {
       swerve.backward(false);
-      if (hTimer.hasElapsed(1)) {
+      if (hTimer.hasElapsed(.5)) {
         loop = false;
       }
     }
