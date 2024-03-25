@@ -63,6 +63,10 @@ public class Robot extends TimedRobot {
 
   public static Timer hTimer = new Timer();
 
+  public static Timer shootTimer = new Timer();
+
+  public static boolean bop = false;
+
   public Swerve swerve;
 
   // NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -277,7 +281,11 @@ public class Robot extends TimedRobot {
   private void Driver2Controls() {
 
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-    blinkin.green();
+      if (shootTimer.hasElapsed(2)) {
+        blinkin.green();
+      } else {
+    blinkin.hotpink();
+      }
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
     blinkin.aqua();
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
@@ -331,13 +339,17 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
-    //  shooter.pivotUp();
+      if (bop == true) {
+      shootTimer.restart();
+      bop = false;
+      }
       shooter.shoot(1.0);
       //blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
            // shooter.pivotUp();
       shooter.shoot2(1.0);
     } else {
+      bop = true;
       shooter.stop();
     }
     // Climber Extend
