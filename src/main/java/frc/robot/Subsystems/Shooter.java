@@ -49,7 +49,7 @@ public class Shooter {
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        //noteDetected = new DigitalInput(1);
+        noteDetected = new DigitalInput(9);
     }
 
    
@@ -70,7 +70,6 @@ public class Shooter {
 
     public boolean getNoteDetected() {
         if (!noteDetected.get()) {
-           // blinkin.rainbowRGB();
             return true;
         } else {
             return false;
