@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7715000588285681,
+      "y": 4.30929679893214
+    },
+    "rotation": 125.15107369090332
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Gather 1"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Speaker South Side",
+  "choreoAuto": false
+}
