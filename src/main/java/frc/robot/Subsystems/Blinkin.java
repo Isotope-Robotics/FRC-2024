@@ -288,6 +288,12 @@ public class Blinkin {
         blinkin.set(.81);
     }
 
+    public void orange(){
+        blinkin.set(.65);
+    }
+
+
+
 
 
     // public void BPMLava() {

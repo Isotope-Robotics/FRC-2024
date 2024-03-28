@@ -64,9 +64,22 @@ public class SwerveCommands {
 
     }
 
+    public static Command Hammer() {
+        return Commands.run(() -> {
+            m_Swerve.forward(false);
+        }, m_Swerve)
+                .andThen(
+                        Commands.waitSeconds(.5))
+                .andThen(
+                        Commands.run(() -> {
+                            m_Swerve.backward(false);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.3)));
+        }
+    }
+
   
 
 
     
     
-}
+

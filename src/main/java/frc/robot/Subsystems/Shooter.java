@@ -21,7 +21,6 @@ public class Shooter {
     public static RelativeEncoder shooter2Encoder;
    // public static RelativeEncoder pivotEncoder;
     public static DigitalInput noteDetected;
-    public static DigitalOutput relay;
 	
 
 
@@ -37,39 +36,23 @@ public class Shooter {
         // Motor Declarations
         shooterMotor1 = new CANSparkMax(shooter1CANID, MotorType.kBrushless);
         shooterMotor2 = new CANSparkMax(shooter2CANID, MotorType.kBrushless);
-       // pivotMotor = new CANSparkMax(pivotMotorID, MotorType.kBrushless);
 
 
         // Idle Mode Declarations
         shooterMotor1.setIdleMode(Constants.Shooter.Brake);
         shooterMotor2.setIdleMode(Constants.Shooter.Brake);
-       // pivotMotor.setIdleMode(Constants.Shooter.Brake);
 
         // Set Direction of the Motors
         shooterMotor1.setInverted(false);
         shooterMotor2.setInverted(false);
-       // pivotMotor.setInverted(false);
 
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-       // pivotEncoder = pivotMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        //noteDetected = new DigitalInput(1);
-        relay = new DigitalOutput(8);
+        noteDetected = new DigitalInput(9);
     }
 
-    public void lightsOn() {
-        relay.set(true);
-        System.out.println("lights onn!!");
-       }
-
-       public void lightsOff() {
-      
-        relay.set(false);
-                System.out.println("lights offfffffffff!!");
-
-       }
-
+   
     // Set both shooter motors to shoot (adjust the speed as needed)
     public void shoot(double speed) {
         shooterMotor1.set(-1.0f*speed);
@@ -85,14 +68,13 @@ public class Shooter {
         SmartDashboard.putNumber("Shooter 2 Speed", speed);
     }
 
-    // public boolean getNoteDetected() {
-    //     if (!noteDetected.get()) {
-    //        // blinkin.rainbowRGB();
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+    public boolean getNoteDetected() {
+        if (!noteDetected.get()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // Stop both shooter motors
     public void stop() {
@@ -105,7 +87,6 @@ public class Shooter {
         // Zero Out Encoder Positions
         shooter1Encoder.setPosition(0);
         shooter2Encoder.setPosition(0);
-       // pivotEncoder.setPosition(0);
         System.err.println("Zeroed Shooter Encoders");
     }
 
@@ -124,23 +105,9 @@ public class Shooter {
     public void clearStickyFaults(){
         shooterMotor1.clearFaults();
         shooterMotor2.clearFaults();
-       // pivotMotor.clearFaults();
         System.out.println("Clearing Shooter Faults, If Any");
     }
 
-    // public  void pivotDown() {
-    //     pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 0));
-    //   SmartDashboard.putNumber("pivot", pivotEncoder.getPosition());
-    // }
-
-    // public  void pivotUp() {
-    //     pivotMotor.set(pivotPID.calculate(pivotEncoder.getPosition(), 17));
-
-    // }
-
-    // public double getPivotCurrent() {
-    //     return pivotMotor.getOutputCurrent();
-    // }
 
     public  double getShooter1Current() {
         return shooterMotor1.getOutputCurrent();

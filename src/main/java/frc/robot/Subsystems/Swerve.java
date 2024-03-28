@@ -254,6 +254,16 @@ public class Swerve extends SubsystemBase {
 
   }
 
+  public void backward(boolean isFieldRel) {
+    
+    final double xSpeed = 1;
+    final double ySpeed = 0;
+    final double rot = 0;
+    drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+
+  }
+
   public void limelightAprilTagAim(boolean isFieldRel) {
     double currentGyro = gyro.getAngle();
     double mappedAngle = 0.0f;

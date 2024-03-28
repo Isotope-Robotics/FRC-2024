@@ -13,17 +13,16 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.AutoCommands.ShooterCommands;
 import frc.robot.Subsystems.Blinkin;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,6 +58,12 @@ public class Robot extends TimedRobot {
   private final Limelight limelight = new Limelight();
 
   public static Timer timer = new Timer();
+
+  public static Timer hTimer = new Timer();
+
+  public static Timer shootTimer = new Timer();
+
+  public static boolean bop = false;
 
   public Swerve swerve;
 
@@ -255,6 +260,8 @@ public class Robot extends TimedRobot {
       // NoteAutoAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(5)) {
       SwerveLock();
+    } else if (Constants.Controllers.driver1.getRawButton(6)) {
+      HammerDrive();
     } else {
       SwerveDrive(true);
     }
@@ -272,7 +279,15 @@ public class Robot extends TimedRobot {
   private void Driver2Controls() {
 
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-    blinkin.green();
+      if (shootTimer.hasElapsed(2)) {
+        if (shooter.getNoteDetected()){
+          blinkin.orange();
+        } else {
+        blinkin.green();
+      }}
+      else {
+    blinkin.hotpink();
+      }
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
     blinkin.aqua();
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
@@ -326,13 +341,17 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
-    //  shooter.pivotUp();
+      if (bop == true) {
+      shootTimer.restart();
+      bop = false;
+      } 
       shooter.shoot(1.0);
       //blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
            // shooter.pivotUp();
       shooter.shoot2(1.0);
     } else {
+      bop = true;
       shooter.stop();
     }
     // Climber Extend
@@ -544,6 +563,24 @@ public class Robot extends TimedRobot {
 
   public void SwerveLock() {
     swerve.lock();
+  }
+
+  public void HammerDrive() {
+    boolean loop = true;
+    hTimer.restart();
+    while (!loop) {
+      swerve.forward(false);
+      if (hTimer.hasElapsed(1)) {
+        loop = true;
+      }
+    }
+    hTimer.restart();
+    while (loop) {
+      swerve.backward(false);
+      if (hTimer.hasElapsed(.5)) {
+        loop = false;
+      }
+    }
   }
 
   /*
