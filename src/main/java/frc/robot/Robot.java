@@ -13,18 +13,16 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.AutoCommands.ShooterCommands;
 import frc.robot.Subsystems.Blinkin;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -282,8 +280,12 @@ public class Robot extends TimedRobot {
 
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
       if (shootTimer.hasElapsed(2)) {
+        if (shooter.getNoteDetected()){
+          blinkin.orange();
+        } else {
         blinkin.green();
-      } else {
+      }}
+      else {
     blinkin.hotpink();
       }
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
@@ -342,7 +344,7 @@ public class Robot extends TimedRobot {
       if (bop == true) {
       shootTimer.restart();
       bop = false;
-      }
+      } 
       shooter.shoot(1.0);
       //blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
