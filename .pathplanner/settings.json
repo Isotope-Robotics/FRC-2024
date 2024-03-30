@@ -10,7 +10,7 @@
     "Station 2",
     "Station 3"
   ],
-  "defaultMaxVel": 3.9,
+  "defaultMaxVel": 5.21,
   "defaultMaxAccel": 10.0,
   "defaultMaxAngVel": 400.0,
   "defaultMaxAngAccel": 1500.0,

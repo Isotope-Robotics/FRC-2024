@@ -29,8 +29,8 @@ public class Swerve extends SubsystemBase {
     public Pigeon2 gyro;
     public Field2d field = new Field2d();
 
-      NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-april");
-  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-note");
+      NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-note");
+  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-april");
 
   double limelightAprilTagLastError;
   double limelightNoteLastError;
@@ -246,7 +246,7 @@ public class Swerve extends SubsystemBase {
 
   public void forward(boolean isFieldRel) {
     
-    final double xSpeed = -1;
+    final double xSpeed = -0.7;
     final double ySpeed = 0;
     final double rot = 0;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
@@ -323,7 +323,7 @@ public class Swerve extends SubsystemBase {
 
   public void lock() {
     for (SwerveModule mod : mSwerveMods) {
-      if (mod.moduleNumber == 0 || mod.moduleNumber == 3) {
+      if (mod.moduleNumber == 1 || mod.moduleNumber == 3) {
 mod.setDesiredState(sw, false);
       } else {
         mod.setDesiredState(sw2, false);

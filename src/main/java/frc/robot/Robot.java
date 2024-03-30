@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
 
     blinkin.rainbowParty();
 
-    swerve.zeroHeading();
+   // swerve.zeroHeading();
 
     timer.start();
   }
@@ -189,7 +189,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Driver1Controls();
     Driver2Controls();
-    System.out.println(intake.wristEncoder1.getPosition());
+    //System.out.println(intake.wristEncoder1.getPosition());
 
     // AutomatedOverrides();
     RobotTelemetry();
@@ -425,7 +425,7 @@ public class Robot extends TimedRobot {
     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0)
         * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
-    double rot = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+    double rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3) //we made it unnegatived
         * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
         Constants.Controllers.stickDeadband);
 

@@ -50,11 +50,28 @@ public class SwerveModule {
             mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
             mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig1);
             mDriveMotor.getConfigurator().setPosition(0.0);
-          //  mAngleMotor.setInverted(true);
-        }else {
+            mAngleMotor.setInverted(true);//TODO: try .getconfigurator
+            mDriveMotor.setInverted(true);
+        } else if (this.moduleNumber == 1) {
+            
             mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
             mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
             mDriveMotor.getConfigurator().setPosition(0.0);
+            mAngleMotor.setInverted(true);
+            mDriveMotor.setInverted(false);
+
+        }   else if (this.moduleNumber == 2) {
+            mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
+            mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
+            mDriveMotor.getConfigurator().setPosition(0.0);
+            mDriveMotor.setInverted(false);
+            mAngleMotor.setInverted(true);
+        }   else if (this.moduleNumber == 3) {
+            mDriveMotor = new TalonFX(moduleConstants.driveMotorId);
+            mDriveMotor.getConfigurator().apply(Robot.ctreConfigs.swerveDriveFXConfig);
+            mDriveMotor.getConfigurator().setPosition(0.0);
+            mDriveMotor.setInverted(false);
+            mAngleMotor.setInverted(true);
         }
 
     }
