@@ -37,10 +37,7 @@ public class Robot extends TimedRobot {
   private Command m_AutonomousCommand;
   private RobotContainer robotContainer;
 
-  // controller
-  // private XboxController controller;
-  // private CANSparkMax leftShooterMotor;
-  // private CANSparkMax rightShooterMotor;
+
 
   // Swerve Varibles
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
@@ -63,7 +60,7 @@ public class Robot extends TimedRobot {
 
   public static Timer shootTimer = new Timer();
 
-  public static boolean bop = false;
+  public static boolean bop = false; // DO NOT TELL AIDEN ABOUT THIS
 
   public Swerve swerve;
 
@@ -92,8 +89,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     swerve = Swerve.getInstance();
 
-    // CameraServer.startAutomaticCapture();
-
     // Robot Container for Auto Commands
     robotContainer = new RobotContainer();
 
@@ -104,7 +99,6 @@ public class Robot extends TimedRobot {
     shooter.clearStickyFaults();
     climber.clearStickyFaults();
 
-    // CameraServer.startAutomaticCapture(0);
   }
 
   /**
@@ -122,15 +116,12 @@ public class Robot extends TimedRobot {
     // Command Scheduler ONLY for Auto
     CommandScheduler.getInstance().run();
 
-    // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    // SmartDashboard.putBoolean("Shooter Got Note", shooter.getNoteDetected());
 
-    // System.out.println(Intake.getInstance().wristEncoder1.getPosition());
 
     limelight.updateLimelightData();
     
     RobotTelemetry();
-    swerve.ke();
+    swerve.swerveCurrents();
 
   }
 
@@ -172,16 +163,16 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-    // Destory Auto Commands When Switching To TeleOP
+    // Destroy Auto Commands When Switching To TeleOP
     if (m_AutonomousCommand != null) {
       m_AutonomousCommand.cancel();
     }
 
-    blinkin.rainbowParty();
 
-   // swerve.zeroHeading();
+    swerve.zeroHeading();
 
     timer.start();
+    hTimer.start();
   }
 
   /** This function is called periodically during operator control. */
@@ -189,24 +180,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Driver1Controls();
     Driver2Controls();
-    //System.out.println(intake.wristEncoder1.getPosition());
 
     // AutomatedOverrides();
     RobotTelemetry();
-
-  //  shooter.pivotUp();
-
-   // shooter.pivotDown();
-
-    //Shooter.pivotMotor.set(Constants.Controllers.driver2.getRawAxis(1));
-
-    // if (intake.noteUpLimit()) {
-    //   System.out.println("UP LIMIT");
-    // } if (intake.noteDownLimit()) {
-    //   System.out.println("down limit");
-    // }
-
-   // SmartDashboard.putNumber("pivot", Shooter.pivotEncoder.getPosition());
   }
 
   /** This function is called once when the robot is disabled. */
@@ -228,7 +204,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    swerve.ke();
+    swerve.swerveCurrents();
   }
 
   /** This function is called once when the robot is first started up. */
@@ -245,25 +221,26 @@ public class Robot extends TimedRobot {
     // Back to robot centric while button seven is pushed
     if (Constants.Controllers.driver1.getRawButton(2)) {
       swerve.zeroHeading();
-      System.out.println("RESET GYRO!!!!!!!");
+      System.out.println("Gyro reset");
     }
 
     if (Constants.Controllers.driver1.getRawButton((1))) {
       SwerveDrive(false);
-      System.out.println("ROBOT CENTRIC not ENABLLEEEDDDDD!!");
-
+      System.out.println("Robot Centric Enabled");
     } else if (Constants.Controllers.driver1.getRawButton(3)) {
       limelightAprilTagAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(4)) {
       limelightNoteAim(true);
-      // } else if (Constants.Controllers.driver1.getRawButton(4)) {
-      // NoteAutoAim(true);
     } else if (Constants.Controllers.driver1.getRawButton(5)) {
       SwerveLock();
     } else if (Constants.Controllers.driver1.getRawButton(6)) {
-      HammerDrive();
+      Vibrate();
     } else {
       SwerveDrive(true);
+    }
+
+    if (!Constants.Controllers.driver1.getRawButton(6)) {
+      hTimer.reset();
     }
 
     if (!(Constants.Controllers.driver1.getRawButton(3))) {
@@ -309,18 +286,14 @@ public class Robot extends TimedRobot {
     // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
       if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-        // System.out.println("bad");
         intake.wristUp();
         intake.intakeStop();
-        //blinkin.hotpink();
       } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
         intake.wristUp();
         intake.intakeStop();
-        //blinkin.lime();
       } else {
         intake.wristDown();
         intake.intakeStart(-0.75);
-        //blinkin.fireMedium();
       }
     } else {
       intake.wristUp();
@@ -346,45 +319,18 @@ public class Robot extends TimedRobot {
       bop = false;
       } 
       shooter.shoot(1.0);
-      //blinkin.wavesLava();
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
-           // shooter.pivotUp();
-      shooter.shoot2(1.0);
+        shooter.shoot(-Constants.Controllers.driver2.getLeftTriggerAxis()); // suck in
     } else {
       bop = true;
       shooter.stop();
     }
-    // Climber Extend
+    // Climber Control
     climber.retractM(-Constants.Controllers.driver2.getRawAxis(1));
-    
     climber.retractF(Constants.Controllers.driver2.getRawAxis(5));
-   
-
-    // if (Constants.Controllers.driver2.getPOV() == 0 && !intake.noteUpLimit()) {
-    //   intake.noteMotorUp();
-    // } else if (Constants.Controllers.driver2.getPOV() == 180 && !intake.noteDownLimit()) {
-    //   intake.noteMotorDown();
-    // } else {
-    //   intake.noteMotorStop();;
-    // }
-
-    // if (Constants.Controllers.driver2.getPOV() == 0) {
-    //   if (!intake.noteUpLimit()) {
-    //   intake.noteMotorUp();
-    //   } else if (!intake.noteDownLimit()) {
-    //     intake.noteMotorDown();
-    //   }
-    // } else {
-    //   intake.noteMotorStop();
-    // }
-
-   // intake.noteMotorUp();
-    
   }
 
   private void RobotTelemetry() {
-    // SmartDashboard.putBoolean("Note Intaked", intake.getNoteIntaked());
-    // SmartDashboard.putBoolean("magnet", climber.getmagnet());
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
@@ -398,7 +344,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);
-    System.out.println(intake.wristEncoder1.getPosition());
+    
+    System.out.println(intake.wristEncoder1.getPosition()); // Yes I actually do use this, David
 
     SmartDashboard.putNumber("Intake Current", intake.getIntakeCurrent());
     SmartDashboard.putNumber("Wrist Current", intake.getWristCurrent());
@@ -406,8 +353,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Master Current", climber.getMasterCurrent());
 
     SmartDashboard.putNumber("Follower Current", climber.getFollowerCurrent());
-
-   // SmartDashboard.putNumber("Pivot Current", shooter.getPivotCurrent());
 
     SmartDashboard.putNumber("Shooter 1 Current", shooter.getShooter1Current());
 
@@ -548,7 +493,7 @@ public class Robot extends TimedRobot {
     if (result.hasTargets()) {
       steering_adjust = -turnController.calculate(result.getBestTarget().getYaw(), 0);
     } else {
-      steering_adjust = MathUtil.applyDeadband(-Constants.Controllers.driver1.getRawAxis(3)
+      steering_adjust = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3)
           * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
           Constants.Controllers.stickDeadband);
     }
@@ -565,21 +510,14 @@ public class Robot extends TimedRobot {
     swerve.lock();
   }
 
-  public void HammerDrive() {
-    boolean loop = true;
-    hTimer.restart();
-    while (!loop) {
+  public void Vibrate() {
+    double period = .07; //PERIOD in seconds
+    if (hTimer.get() < period* 0.6) {
       swerve.forward(false);
-      if (hTimer.hasElapsed(1)) {
-        loop = true;
-      }
-    }
-    hTimer.restart();
-    while (loop) {
+    } else if ((hTimer.get() >= period * 0.6) && (hTimer.get() <= period)){
       swerve.backward(false);
-      if (hTimer.hasElapsed(.5)) {
-        loop = false;
-      }
+     } else {
+       hTimer.reset();
     }
   }
 

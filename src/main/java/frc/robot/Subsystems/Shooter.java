@@ -5,10 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkRelativeEncoder;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
@@ -16,20 +13,15 @@ public class Shooter {
 
     public static CANSparkMax shooterMotor1;
     public static CANSparkMax shooterMotor2;
-   // public static CANSparkMax pivotMotor;
     public static RelativeEncoder shooter1Encoder;
     public static RelativeEncoder shooter2Encoder;
-   // public static RelativeEncoder pivotEncoder;
     public static DigitalInput noteDetected;
 	
 
 
     private static Shooter m_Instance = null;
 
-    //public static final PIDController pivotPID = new PIDController(Constants.Shooter.kP2, Constants.Shooter.kI2,
-        //    Constants.Shooter.kD2);
 
-    private final Blinkin blinkin = Blinkin.getInstance();
 
 
     public Shooter(int shooter1CANID, int shooter2CANID) {
@@ -90,16 +82,6 @@ public class Shooter {
         System.err.println("Zeroed Shooter Encoders");
     }
 
-    // Set both shooter motors to intake through the source (adjust the speed as
-    // needed)
-
-    public void sourceIntake(double motor1Speed, double motor2Speed) {
-        shooterMotor1.set(-motor1Speed);
-        shooterMotor2.set(-motor2Speed);
-        SmartDashboard.putNumber("Shooter 1 Speed", motor1Speed);
-        SmartDashboard.putNumber("Shooter 2 Speed", motor2Speed);
-
-    }
 
     //Clear Sticky Faults
     public void clearStickyFaults(){
@@ -124,6 +106,5 @@ public class Shooter {
         }
         return m_Instance;
     }
-    //setting the angle
     
         }

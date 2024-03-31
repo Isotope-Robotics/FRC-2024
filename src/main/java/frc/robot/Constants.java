@@ -35,15 +35,11 @@ public class Constants {
     public static final class Shooter {
         public static final int shooterMotor1ID = 40;
         public static final int shooterMotor2ID = 3;
-       // public static final int pivotMotorID = 5;
 
         public static final double kP = 0.015;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
 
-        public static final double kP2 = 0.01;
-        public static final double kI2 = 0.0;
-        public static final double kD2 = 0.0001;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
@@ -63,12 +59,11 @@ public class Constants {
 
     public static final class Intake {
         public static final int wristMotor1ID = 44;
-        // public static final int noteMotorID = 7;
         public static final int intakeMotorID = 45;
 
-        public static final double kP = 0.1;//0.1;
+        public static final double kP = 0.1;
         public static final double kI = 0.0;
-        public static final double kD = 0.00001;//0.00001;
+        public static final double kD = 0.00001;
 
         public static final IdleMode Brake = IdleMode.kBrake;
         public static final IdleMode Coast = IdleMode.kCoast;
@@ -106,7 +101,7 @@ public class Constants {
         public static final Translation2d flModuleOffset = new Translation2d(wheelBase / 2.0, trackWidth / 2.0);
 
         // Swerve Kinematics
-        //TODO: david changed this cause he thinks x and y are swapped accidentally. this function is x,y -> +right, +forwards
+        //Instead of each module being like a quadrant on a plane, the center being the origin, +x is front, +y is left, cause we did our modules counter-clockwise
         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
                 new Translation2d(wheelBase / 2.0, -trackWidth / 2.0), //mod 0 front right
                 //new Translation2d(wheelBase / 2.0, -trackWidth / 2.0), //mod1 front left

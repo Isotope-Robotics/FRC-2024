@@ -205,7 +205,7 @@ public class Swerve extends SubsystemBase {
         }
     }
 
-    public void ke() {
+    public void swerveCurrents() {
               for (SwerveModule mod : mSwerveMods) {
 
                   SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Drive Current", mod.getDriveCurrent());
@@ -246,9 +246,11 @@ public class Swerve extends SubsystemBase {
 
   public void forward(boolean isFieldRel) {
     
-    final double xSpeed = -0.7;
+    final double xSpeed = -1;
     final double ySpeed = 0;
-    final double rot = 0;
+    final double rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3)
+    * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+    Constants.Controllers.stickDeadband);
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
@@ -258,7 +260,9 @@ public class Swerve extends SubsystemBase {
     
     final double xSpeed = 1;
     final double ySpeed = 0;
-    final double rot = 0;
+    final double rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3)
+    * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+    Constants.Controllers.stickDeadband);;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 
