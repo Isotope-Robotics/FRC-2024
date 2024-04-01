@@ -17,6 +17,7 @@ public class Intake extends SubsystemBase {
     public RelativeEncoder wristEncoder1;
     public static DigitalInput noteIntakedLeft;
     public static DigitalInput noteIntakedRight;
+    public static DigitalInput noteIntakedMid;
 
 
     private static Intake m_Instance = null;
@@ -38,6 +39,7 @@ public class Intake extends SubsystemBase {
         // Limit Switch (Photo Eye) Declarations
         noteIntakedLeft = new DigitalInput(0);
         noteIntakedRight = new DigitalInput(1);
+        noteIntakedMid  = new DigitalInput(4);
 
         // Encoders Declarations
         wristEncoder1 = wristMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
@@ -55,6 +57,9 @@ public class Intake extends SubsystemBase {
         }
     }
 
+
+    }
+
     public boolean getNoteIntakedRight() {
         if (noteIntakedRight.get()) {
             return false;
@@ -62,6 +67,21 @@ public class Intake extends SubsystemBase {
             return true;
         }
     }
+
+    public boolean getNoteIntakedMid(){
+        if (noteIntakedLeft.get()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+         //Intake sensor func
+         public void sens(){
+            if (getNoteIntakedLeft() && getNoteIntakedRight() && getNoteIntakedMid());
+            
+         }
+
 
 
 
@@ -80,6 +100,7 @@ public class Intake extends SubsystemBase {
         wristEncoder1.setPosition(0.0);
         System.err.println("Zeroed Intake Encoders");
     }
+   
 
     // Wrist up movement control
     public void wristUp() {
@@ -119,6 +140,7 @@ public class Intake extends SubsystemBase {
     public  double getIntakeCurrent() {
         return intakeMotor.getOutputCurrent();
     }
+
 
 
 
