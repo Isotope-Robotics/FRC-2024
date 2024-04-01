@@ -258,9 +258,9 @@ public class Robot extends TimedRobot {
     if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
       if (shootTimer.hasElapsed(2)) {
         if (shooter.getNoteDetected()){
-          blinkin.orange();
+          blinkin.green();
         } else {
-        blinkin.green();
+        blinkin.orange();
       }}
       else {
     blinkin.hotpink();
@@ -314,15 +314,18 @@ public class Robot extends TimedRobot {
 
     // One Button Shoot
     if (Constants.Controllers.driver2.getRightTriggerAxis() >= 0.10) {
-      if (bop == true) {
-      shootTimer.restart();
-      bop = false;
-      } 
+      shootTimer.start();
+    
+       
       shooter.shoot(1.0);
+      if (shootTimer.get() > 0.8) {
+        blinkin.orange();
+      }
+      if ()
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
         shooter.shoot(-Constants.Controllers.driver2.getLeftTriggerAxis()); // suck in
     } else {
-      bop = true;
+      shootTimer.reset();
       shooter.stop();
     }
     // Climber Control
@@ -511,7 +514,7 @@ public class Robot extends TimedRobot {
   }
 
   public void Vibrate() {
-    double period = .07; //PERIOD in seconds
+    double period = .1; //PERIOD in seconds
     if (hTimer.get() < period* 0.6) {
       swerve.forward(false);
     } else if ((hTimer.get() >= period * 0.6) && (hTimer.get() <= period)){
