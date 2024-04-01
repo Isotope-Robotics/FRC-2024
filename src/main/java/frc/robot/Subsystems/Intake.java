@@ -58,7 +58,7 @@ public class Intake extends SubsystemBase {
     }
 
 
-    }
+    
 
     public boolean getNoteIntakedRight() {
         if (noteIntakedRight.get()) {
@@ -68,22 +68,32 @@ public class Intake extends SubsystemBase {
         }
     }
 
-    public boolean getNoteIntakedMid(){
-        if (noteIntakedLeft.get()) {
+    public boolean getNoteIntakedMid() {
+        if (noteIntakedMid.get()) {
             return false;
         } else {
             return true;
         }
     }
 
-         //Intake sensor func
-         public void sens(){
-            if (getNoteIntakedLeft() && getNoteIntakedRight() && getNoteIntakedMid());
-            
-         }
+    //Intake sensor function
+    public boolean sens() {
+    if (getNoteIntakedLeft() && getNoteIntakedRight() && getNoteIntakedMid()) {
+        //blinkin?
+        return true;
+    } else {
+        //
+        return false;
+    }
+    }
 
-
-
+    public boolean anySens() {
+    if (getNoteIntakedLeft() || getNoteIntakedRight() || getNoteIntakedMid()) {
+        return true;
+    } else {
+        return false;
+    }
+    }
 
     // Stops intake motors
     public void intakeStop() {

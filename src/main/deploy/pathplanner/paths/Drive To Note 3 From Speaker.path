@@ -44,7 +44,13 @@
       "linkedName": "note 3 end"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.6,
+      "rotationDegrees": 180.0,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
@@ -69,7 +75,7 @@
     "maxVelocity": 5.21,
     "maxAcceleration": 5.21,
     "maxAngularVelocity": 400.0,
-    "maxAngularAcceleration": 1500.0
+    "maxAngularAcceleration": 400.0
   },
   "goalEndState": {
     "velocity": 0,

@@ -30,7 +30,7 @@ public class SwerveCommands {
                         Commands.runOnce(() -> {
                             m_Swerve.forward(false); 
                             m_Intake.intakeStart(-1);
-                        }, m_Swerve).andThen(Commands.waitSeconds(.6))
+                        }, m_Swerve).andThen(Commands.waitSeconds(.35))
                 //do we need to stop going forwards here?
                 .andThen(
                         Commands.runOnce(() -> {

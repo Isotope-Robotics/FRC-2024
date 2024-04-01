@@ -223,7 +223,7 @@ public class Swerve extends SubsystemBase {
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
     double acceptable_error_threshold = 7.0f / 360.0f; // 15 degrees allowable
-    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
+    error = (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
     if (limelightNoteLastError == 0.0f) {
       limelightNoteLastError = tx;
     }

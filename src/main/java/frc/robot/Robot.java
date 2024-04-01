@@ -183,6 +183,8 @@ public class Robot extends TimedRobot {
 
     // AutomatedOverrides();
     RobotTelemetry();
+        System.out.println("Left: " + intake.getNoteIntakedLeft() + " Mid: " + intake.getNoteIntakedMid() + " Right: " + intake.getNoteIntakedRight());
+
   }
 
   /** This function is called once when the robot is disabled. */
@@ -205,6 +207,8 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     swerve.swerveCurrents();
+    System.out.println("Left: " + intake.getNoteIntakedLeft() + " Mid: " + intake.getNoteIntakedMid() + " Right: " + intake.getNoteIntakedRight());
+    
   }
 
   /** This function is called once when the robot is first started up. */
@@ -254,18 +258,24 @@ public class Robot extends TimedRobot {
   }
 
   private void Driver2Controls() {
-
-    if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
-      if (shootTimer.hasElapsed(2)) {
-        if (shooter.getNoteDetected()){
+    
+    //make this color change take place in the sens function
+    if (intake.sens()) {
+      if (shootTimer.hasElapsed(2))
+      {
+        if (shooter.getNoteDetected())
+        {
           blinkin.green();
-        } else {
-        blinkin.orange();
-      }}
+        }
+        else
+        {
+          blinkin.orange();
+        }
+      }
       else {
     blinkin.hotpink();
       }
-    } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
+    } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight() || intake.getNoteIntakedMid()) {
     blinkin.aqua();
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
       blinkin.colorwave();
@@ -283,12 +293,13 @@ public class Robot extends TimedRobot {
       intake.intakeStop();
     }
 
+    //TODO: this is doing the same thing as the code above
     // One Button Intake
     if (Constants.Controllers.driver2.getAButton()) {
       if (intake.getNoteIntakedLeft() && intake.getNoteIntakedRight()) {
         intake.wristUp();
         intake.intakeStop();
-      } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
+      } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight() || intake.getNoteIntakedMid()) {
         intake.wristUp();
         intake.intakeStop();
       } else {
@@ -306,6 +317,7 @@ public class Robot extends TimedRobot {
       intake.wristHalf();
     }
 
+    //TODO: maybe make this some auxially button???
     // one button intake half then shoot
     if (Constants.Controllers.driver2.getBButton()) {
       intake.wristHalf();
@@ -318,10 +330,12 @@ public class Robot extends TimedRobot {
     
        
       shooter.shoot(1.0);
-      if (shootTimer.get() > 0.8) {
+      if (shootTimer.get() > 0.8 && !shooter.getNoteDetected()) {
         blinkin.orange();
       }
-      if ()
+      if (shooter.getNoteDetected()) {
+        blinkin.green();
+      }
     } else if (Constants.Controllers.driver2.getLeftTriggerAxis() >= 0.10) {
         shooter.shoot(-Constants.Controllers.driver2.getLeftTriggerAxis()); // suck in
     } else {
