@@ -158,6 +158,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     RobotTelemetry();
+    swerve.swerveOdometry.update(swerve.getGyroYaw(), swerve.getModulePositions());
+
   }
 
   /** This function is called once when teleop is enabled. */
@@ -178,6 +180,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+        swerve.swerveOdometry.update(swerve.getPosGyroYaw(), swerve.getModulePositions());
+
     Driver1Controls();
     Driver2Controls();
 
@@ -258,7 +262,6 @@ public class Robot extends TimedRobot {
   }
 
   private void Driver2Controls() {
-    
     //make this color change take place in the sens function
     if (intake.sens()) {
       if (shootTimer.hasElapsed(2))

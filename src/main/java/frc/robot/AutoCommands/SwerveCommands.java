@@ -18,6 +18,12 @@ public class SwerveCommands {
         public static boolean tooLong = false;
         public static Timer timer = new Timer();
 
+    // public static Command schizo4Note() {
+    //     return Commands.runOnce(() -> {
+    //         //lock on while driving forwards until note is intaken or timer is hit
+    //         while(!m_Swerve.schizoNoteAim(timer)) {}
+    //     });
+    // }
 
     public static Command NoteAutoAim() {
         timer.reset();
@@ -29,8 +35,8 @@ public class SwerveCommands {
                 .andThen(
                         Commands.runOnce(() -> {
                             m_Swerve.forward(false); 
-                            m_Intake.intakeStart(-1);
-                        }, m_Swerve).andThen(Commands.waitSeconds(.35))
+                            m_Intake.intakeStart(-0.8);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.45))
                 //do we need to stop going forwards here?
                 .andThen(
                         Commands.runOnce(() -> {
@@ -47,6 +53,7 @@ public class SwerveCommands {
                             }
                             m_Blinkin.hotpink();
                             m_Intake.intakeStop(); 
+                            tooLong = false;
                         }, m_Intake))));
 
     }

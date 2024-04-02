@@ -39,7 +39,7 @@ public class Intake extends SubsystemBase {
         // Limit Switch (Photo Eye) Declarations
         noteIntakedLeft = new DigitalInput(0);
         noteIntakedRight = new DigitalInput(1);
-        noteIntakedMid  = new DigitalInput(4);
+        noteIntakedMid  = new DigitalInput(9);
 
         // Encoders Declarations
         wristEncoder1 = wristMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);

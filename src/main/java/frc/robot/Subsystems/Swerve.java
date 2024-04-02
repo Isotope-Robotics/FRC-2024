@@ -133,7 +133,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void setPose(Pose2d pose) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
+        swerveOdometry.resetPosition(getPosGyroYaw(), getModulePositions(), pose);
     }
 
     public Rotation2d getHeading() {
@@ -141,23 +141,27 @@ public class Swerve extends SubsystemBase {
     }
 
     public void setHeading(Rotation2d heading) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(),
+        swerveOdometry.resetPosition(getPosGyroYaw(), getModulePositions(),
                 new Pose2d(getPose().getTranslation(), heading));
     }
 
     public void zeroHeading() {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(),
+        swerveOdometry.resetPosition(getPosGyroYaw(), getModulePositions(),
                 new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
     // Returns Gyro as a Rotation2d
     public Rotation2d getGyroYaw() {
+        return Rotation2d.fromDegrees(-gyro.getYaw().getValue());
+    }
+
+    public Rotation2d getPosGyroYaw() {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
     // For Telementry Info, Returns as a Double Value
     public double getRealYaw() {
-        return gyro.getYaw().getValue();
+        return -gyro.getYaw().getValue();
     }
 
     public ChassisSpeeds getSpeeds() {
@@ -191,7 +195,9 @@ public class Swerve extends SubsystemBase {
 
     @Override
     public void periodic() {
-        swerveOdometry.update(getGyroYaw(), getModulePositions());
+
+      
+      //  swerveOdometry.update(getPosGyroYaw(), getModulePositions());
 
         
         field.setRobotPose(getPose());

@@ -41,7 +41,7 @@ public class Shooter {
         // Encoders Declarations
         shooter1Encoder = shooterMotor1.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
         shooter2Encoder = shooterMotor2.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
-        noteDetected = new DigitalInput(9);
+        noteDetected = new DigitalInput(3);
     }
 
    
