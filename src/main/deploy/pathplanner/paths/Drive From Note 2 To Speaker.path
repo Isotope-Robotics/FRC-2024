@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6453682536994707,
-        "y": 4.139730672623739
+        "x": 2.353014392638472,
+        "y": 4.128036518181299
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9844987325302283,
-        "y": 5.718441522353131
+        "x": 2.493344245947751,
+        "y": 5.964018765644369
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 5.5430292057165325
       },
       "prevControl": {
-        "x": 1.3295264775269156,
-        "y": 5.547767832279703
+        "x": 2.247767002656512,
+        "y": 5.5196408968316515
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,19 +35,7 @@
       "rotateFast": true
     }
   ],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 400.0,
-        "maxAngularAcceleration": 400.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Up Intake",
@@ -60,23 +48,6 @@
               "type": "named",
               "data": {
                 "name": "UpIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Intake Less",
-      "waypointRelativePos": 0.15,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeLess"
               }
             }
           ]

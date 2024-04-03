@@ -65,8 +65,8 @@ public class Robot extends TimedRobot {
   public Swerve swerve;
 
   // NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-april");
-  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-note");
+  NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-note");
+  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-april");
 
   double limelightAprilTagLastError;
   double limelightNoteLastError;
@@ -170,6 +170,7 @@ public class Robot extends TimedRobot {
       m_AutonomousCommand.cancel();
     }
 
+    shooter.stop();
 
     swerve.zeroHeading();
 
@@ -295,6 +296,8 @@ public class Robot extends TimedRobot {
     } else {
       intake.intakeStop();
     }
+
+      
 
     //TODO: this is doing the same thing as the code above
     // One Button Intake
@@ -482,7 +485,7 @@ public class Robot extends TimedRobot {
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
     double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
-    error = -1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being
+    error = 1.0 * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being
                                                   // 180 degrees away
     if (limelightNoteLastError == 0.0f) {
       limelightNoteLastError = tx;

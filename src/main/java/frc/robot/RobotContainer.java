@@ -20,7 +20,7 @@ public class RobotContainer {
     private final Command DRIVE_LINE_AUTO = blue.Speaker2NoteAuto();
 
     private final Command dropToPickUp = new MoveWristPID(37.5, Intake.getInstance());
-    private final Command upIntake = new MoveWristPID(1.0, Intake.getInstance());
+    private final Command upIntake = new MoveWristPID(0, Intake.getInstance());
 
 
     public RobotContainer() {
@@ -33,7 +33,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("IntakeLess", IntakeCommands.IntakeLess());
         NamedCommands.registerCommand("StopWrist", IntakeCommands.StopWrist());
         NamedCommands.registerCommand("NoteAutoAim", SwerveCommands.NoteAutoAim());
-      //  NamedCommands.registerCommand("EternalShoot", ShooterCommands.shootAll());
+        NamedCommands.registerCommand("LessNoteAutoAim", SwerveCommands.LessNoteAutoAim());
+        NamedCommands.registerCommand("Shoot2", ShooterCommands.shoot2());
+
 
 
 

@@ -27,10 +27,27 @@ public class ShooterCommands {
                     while (!m_Shooter.getNoteDetected()) {
                     m_Intake.intakeStart(1);
                     }
-                }).andThen(Commands.waitSeconds(0.5)
+                }).andThen(Commands.waitSeconds(0.2)
                         .andThen(Commands.runOnce(() -> {
-                            m_Intake.intakeStop();
-                            m_Shooter.stop();
+                         //   m_Intake.intakeStop();
+                           // m_Shooter.stop();
+                        }))));
+    }
+
+    public static Command shoot2() {
+        return Commands.runOnce(() -> {
+            m_Blinkin.sinelonRGB();
+            m_Shooter.shoot(1.0);
+        })
+                .andThen(Commands.waitSeconds(0))
+                .andThen(Commands.runOnce(() -> {
+                    while (!m_Shooter.getNoteDetected()) {
+                    m_Intake.intakeStart(1);
+                    }
+                }).andThen(Commands.waitSeconds(0.2)
+                        .andThen(Commands.runOnce(() -> {
+                         //   m_Intake.intakeStop();
+                           // m_Shooter.stop();
                         }))));
     }
 

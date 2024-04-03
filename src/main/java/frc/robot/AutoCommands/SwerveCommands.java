@@ -26,13 +26,77 @@ public class SwerveCommands {
     // }
 
     public static Command NoteAutoAim() {
-        timer.reset();
         return Commands.runOnce(() -> {
-            while(!m_Swerve.limelightNoteAim(true)) {}
+            timer.restart();
+            tooLong = false;
+            while(!m_Swerve.limelightNoteAim(true) && !tooLong) {
+                if (timer.hasElapsed(1)) {
+                                        tooLong = true;
+                                    }
+            }
         }, m_Swerve)
                 .andThen(
-                        Commands.waitSeconds(.5))
+                        Commands.waitSeconds(.05))
                 .andThen(
+                        Commands.runOnce(() -> {
+                            timer.reset();
+                            tooLong = false;
+                            m_Swerve.forward(false); 
+                            m_Intake.intakeStart(-1);
+                        }, m_Swerve).andThen(Commands.waitSeconds(.35))
+                //do we need to stop going forwards here?
+                .andThen(
+                        Commands.runOnce(() -> {
+                            m_Swerve.lock(); 
+                        }, m_Swerve).andThen(Commands.waitSeconds(.01))
+                .andThen(
+                        Commands.runOnce(() -> {
+                            timer.start();
+                            while ((!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) && !tooLong) {
+                                                          //  m_Intake.intakeStart(-1);
+                                    if (timer.hasElapsed(.2)) {
+                                        tooLong = true;
+                                    }
+                            }
+                            m_Blinkin.hotpink();
+                           // m_Intake.intakeStop(); 
+                            tooLong = false;
+                        }, m_Intake))));
+
+    }
+
+    public static Command LessNoteAutoAim() {
+        timer.reset();
+        return Commands.runOnce(() -> {
+            m_Intake.intakeStart(-1);
+                            timer.reset();
+                            tooLong = false;
+                            m_Swerve.forward(false); 
+                        }, m_Intake).andThen(Commands.waitSeconds(.25))
+                //do we need to stop going forwards here?
+                .andThen(
+                        Commands.runOnce(() -> {
+                            m_Swerve.lock(); 
+                        }, m_Swerve).andThen(Commands.waitSeconds(.01))
+                .andThen(
+                        Commands.runOnce(() -> {
+                            timer.start();
+                            while ((!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) && !tooLong) {
+                                                          //  m_Intake.intakeStart(-1);
+                                    if (timer.hasElapsed(0.1)) {
+                                        tooLong = true;
+                                    }
+                            }
+                            m_Blinkin.hotpink();
+                           // m_Intake.intakeStop(); 
+                            tooLong = false;
+                        }, m_Intake)));
+
+    }
+
+    public static Command FakeAutoAim() {
+        timer.reset();
+        return 
                         Commands.runOnce(() -> {
                             m_Swerve.forward(false); 
                             m_Intake.intakeStart(-0.8);
@@ -47,14 +111,14 @@ public class SwerveCommands {
                             timer.start();
                             while ((!m_Intake.getNoteIntakedLeft() && !m_Intake.getNoteIntakedRight()) && !tooLong) {
                                                           //  m_Intake.intakeStart(-1);
-                                    if (timer.hasElapsed(1.5)) {
+                                    if (timer.hasElapsed(1)) {
                                         tooLong = true;
                                     }
                             }
                             m_Blinkin.hotpink();
                             m_Intake.intakeStop(); 
                             tooLong = false;
-                        }, m_Intake))));
+                        }, m_Intake)));
 
     }
 

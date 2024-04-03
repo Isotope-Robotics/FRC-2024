@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.307817317056435,
-        "y": 7.149091075433336
+        "x": 2.5050384003901907,
+        "y": 6.993104356579084
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.388096855965791,
-        "y": 6.034183692299009
+        "x": 2.585317939299547,
+        "y": 5.878196973444757
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.1989787012749378,
-        "y": 5.583099697005081
+        "x": 0.973104168430559,
+        "y": 5.566417514601411
       },
       "prevControl": {
-        "x": 1.9203306782681937,
-        "y": 5.578111669043852
+        "x": 1.694456145423815,
+        "y": 5.561429486640182
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,23 +48,6 @@
               "type": "named",
               "data": {
                 "name": "UpIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Intake Less",
-      "waypointRelativePos": 0.15,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeLess"
               }
             }
           ]

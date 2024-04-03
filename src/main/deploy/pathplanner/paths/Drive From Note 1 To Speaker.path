@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.53,
-        "y": 5.55
+        "x": 2.107437149347233,
+        "y": 5.553919733431884
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.73,
-        "y": 5.55
+        "x": 1.9554131415955136,
+        "y": 5.5430292057165325
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.2573386284213324,
+        "x": 1.2186814117217974,
         "y": 5.553919733431884
       },
       "prevControl": {
-        "x": 1.1573386284213323,
-        "y": 5.553919733431884
+        "x": 1.2303755661642377,
+        "y": 5.5430292057165325
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +30,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.25,
       "rotationDegrees": 180.0,
       "rotateFast": true
     }
@@ -48,23 +48,6 @@
               "type": "named",
               "data": {
                 "name": "UpIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Intake Less",
-      "waypointRelativePos": 0.15,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeLess"
               }
             }
           ]
