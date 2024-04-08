@@ -264,9 +264,17 @@ public class Swerve extends SubsystemBase {
     
     final double xSpeed = 1;
     final double ySpeed = 0;
-    final double rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3)
-    * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
-    Constants.Controllers.stickDeadband);;
+    final double rot = 0;
+    drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+        rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
+
+  }
+
+   public void forward2(boolean isFieldRel) {
+    
+    final double xSpeed = -1;
+    final double ySpeed = 0;
+    final double rot = 0;
     drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
         rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
 

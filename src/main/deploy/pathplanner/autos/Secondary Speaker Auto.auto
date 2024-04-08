@@ -2,43 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6782004541452696,
-      "y": 4.413268375408932
+      "x": 0.5521146085027211,
+      "y": 4.151424827066179
     },
-    "rotation": 121.15930450834439
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "DropIntake"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "To Middle Note 1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "NoteAutoAim"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "From Middle Note 1"
+            "pathName": "WOOHOO"
           }
         },
         {
@@ -56,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "To Middle Note 2"
+            "pathName": "WOOHOO PART 2"
           }
         },
         {
@@ -68,19 +44,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "From Middle Note 2"
+            "pathName": "Threewho"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "To Middle Note 1"
+            "name": "Shoot2"
           }
         }
       ]

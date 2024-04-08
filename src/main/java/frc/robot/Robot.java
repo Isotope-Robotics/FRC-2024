@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
 
   public Swerve swerve;
 
+  public boolean intook;
+
   // NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-note");
   NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-april");
@@ -186,6 +188,8 @@ public class Robot extends TimedRobot {
     Driver1Controls();
     Driver2Controls();
 
+    SmartDashboard.putBoolean("Intook", intook);
+
     // AutomatedOverrides();
     RobotTelemetry();
         System.out.println("Left: " + intake.getNoteIntakedLeft() + " Mid: " + intake.getNoteIntakedMid() + " Right: " + intake.getNoteIntakedRight());
@@ -267,24 +271,23 @@ public class Robot extends TimedRobot {
     if (intake.sens()) {
       if (shootTimer.hasElapsed(2))
       {
-        if (shooter.getNoteDetected())
-        {
-          blinkin.green();
-        }
-        else
-        {
+        
           blinkin.orange();
         }
-      }
+      
       else {
+        intook = true;
     blinkin.hotpink();
       }
-    } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight() || intake.getNoteIntakedMid()) {
-    blinkin.aqua();
+    
+    } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
+    blinkin.darkBlue();
+intook = false;
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
-      blinkin.colorwave();
+    blinkin.colorwave();
     } else {
-      blinkin.crazyBPM();
+    blinkin.lime();
+     intook = false;
     }
     
     // Intake Manual Control
@@ -298,6 +301,9 @@ public class Robot extends TimedRobot {
     }
 
       
+    if (Constants.Controllers.driver2.getXButton()) {
+      Flippy();
+    }
 
     //TODO: this is doing the same thing as the code above
     // One Button Intake
@@ -388,13 +394,13 @@ public class Robot extends TimedRobot {
     // Controller Deadbands (Translation, Strafe, Rotation)
 
     double xSpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(1)
-        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        * (Constants.Controllers.driver1.getRawAxis(2)),
         Constants.Controllers.stickDeadband);
     double ySpeed = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(0)
-        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        * (Constants.Controllers.driver1.getRawAxis(2)),
         Constants.Controllers.stickDeadband);
     double rot = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3) //we made it unnegatived
-        * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+        * (Constants.Controllers.driver1.getRawAxis(2)),
         Constants.Controllers.stickDeadband);
 
     // if (Constants.Controllers.driver1.getPOV() == 0) {
@@ -450,7 +456,7 @@ public class Robot extends TimedRobot {
     double steering_adjust = 0.0f;
     double acceptable_error_threshold = 10.0f / 360.0f; // 15 degrees allowable
     if (tx != 0.0f) { // use the limelight if it recognizes anything, and use the gyro otherwise
-      error = -1.0f * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1
+      error = 1.0f * (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1
                                                      // being 180 degrees away
     } else {
       error = mappedAngle / 180.0f; // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees
@@ -517,7 +523,7 @@ public class Robot extends TimedRobot {
       steering_adjust = -turnController.calculate(result.getBestTarget().getYaw(), 0);
     } else {
       steering_adjust = MathUtil.applyDeadband(Constants.Controllers.driver1.getRawAxis(3)
-          * ((Constants.Controllers.driver1.getRawAxis(2) + 1) / 2),
+          * (Constants.Controllers.driver1.getRawAxis(2)),
           Constants.Controllers.stickDeadband);
     }
 
@@ -534,11 +540,22 @@ public class Robot extends TimedRobot {
   }
 
   public void Vibrate() {
-    double period = .1; //PERIOD in seconds
+    double period = .6; //PERIOD in seconds
     if (hTimer.get() < period* 0.6) {
-      swerve.forward(false);
+      swerve.forward2(false);
     } else if ((hTimer.get() >= period * 0.6) && (hTimer.get() <= period)){
       swerve.backward(false);
+     } else {
+       hTimer.reset();
+    }
+  }
+
+  public void Flippy() {
+    double period = .1; //PERIOD in seconds
+    if (hTimer.get() < period* 0.6) {
+      intake.wristMotor1.set(1);
+    } else if ((hTimer.get() >= period * 0.6) && (hTimer.get() <= period)){
+      intake.wristMotor1.set(-1);
      } else {
        hTimer.reset();
     }

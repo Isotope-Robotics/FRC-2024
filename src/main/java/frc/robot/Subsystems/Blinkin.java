@@ -1,5 +1,7 @@
 package frc.robot.Subsystems;
 
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
 
@@ -8,16 +10,22 @@ public class Blinkin {
 
     public static Spark blinkin;
 
+  //  public static AddressableLED led;
+
+   // public static AddressableLEDBuffer ledBuffer;
+
     private static Blinkin m_Instance = null;
 
 
     public Blinkin() {
-        blinkin = new Spark(Constants.Blinkin.blinkinPort);
-
+       blinkin = new Spark(Constants.Blinkin.blinkinPort);
+        
     }
 
     // Blinkin color/pattern values -
     // https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
+
+    
 
 
     public void rainbowRGB() {
@@ -238,6 +246,7 @@ public class Blinkin {
 
     public void hotpink() {
     blinkin.set(.57);
+    
     }
 
     public void normsparkle() {
@@ -281,16 +290,26 @@ public class Blinkin {
     }
 
     public void lime() {
-        blinkin.set(.73);
+        blinkin.set(.75);
     }
 
     public void aqua(){
         blinkin.set(.81);
+       
     }
 
     public void orange(){
         blinkin.set(.65);
     }
+
+     public void black(){
+        blinkin.set(.91);
+    }
+
+    public void darkBlue(){
+        blinkin.set(.85);
+    }
+
 
 
 

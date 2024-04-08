@@ -12,9 +12,27 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DropIntake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "To Middle Note 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "NoteAutoAim"
           }
         },
         {
@@ -26,7 +44,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TMN1 Extedned"
+            "pathName": "Something 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Something 6"
           }
         }
       ]

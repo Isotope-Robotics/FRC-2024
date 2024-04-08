@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class Limelight {
-    private NetworkTable table;
+    private static NetworkTable table;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;
@@ -57,5 +57,14 @@ public class Limelight {
       return targetingForwardSpeed;
     }
 
+    public static  void ledOn(boolean isOn) {
+        if (isOn) {
+        table.getEntry("ledMode").setNumber(3);
+
+        } else {
+                    table.getEntry("ledMode").setNumber(1);
+
+        }
+    } 
 
 }

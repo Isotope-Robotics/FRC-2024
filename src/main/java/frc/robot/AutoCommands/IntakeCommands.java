@@ -48,7 +48,7 @@ public class IntakeCommands {
                         Commands.waitSeconds(1))
                 .andThen(
                         Commands.runOnce(() -> {
-                            m_Intake.intakeStop();
+                           // m_Intake.intakeStop();
                         }));
 
     }

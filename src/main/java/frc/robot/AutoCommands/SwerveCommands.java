@@ -29,8 +29,8 @@ public class SwerveCommands {
         return Commands.runOnce(() -> {
             timer.restart();
             tooLong = false;
-            while(!m_Swerve.limelightNoteAim(true) && !tooLong) {
-                if (timer.hasElapsed(1)) {
+            while(!m_Swerve.limelightNoteAim(true) && !tooLong && (!m_Intake.getNoteIntakedLeft() || !m_Intake.getNoteIntakedRight())) {
+                if (timer.hasElapsed(.7)) {
                                         tooLong = true;
                                     }
             }
@@ -72,7 +72,7 @@ public class SwerveCommands {
                             timer.reset();
                             tooLong = false;
                             m_Swerve.forward(false); 
-                        }, m_Intake).andThen(Commands.waitSeconds(.25))
+                        }, m_Intake).andThen(Commands.waitSeconds(.15))
                 //do we need to stop going forwards here?
                 .andThen(
                         Commands.runOnce(() -> {

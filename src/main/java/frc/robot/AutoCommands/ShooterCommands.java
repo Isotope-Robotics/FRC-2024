@@ -5,11 +5,14 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Blinkin;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ShooterCommands {
     public static Shooter m_Shooter = Shooter.getInstance();
     public static Intake m_Intake = Intake.getInstance();
     public static Blinkin m_Blinkin = Blinkin.getInstance();
+
+    public static Timer timer = new Timer();
 
     private ShooterCommands() {
         throw new UnsupportedOperationException("This is a utility class");
@@ -24,7 +27,8 @@ public class ShooterCommands {
         })
                 .andThen(Commands.waitSeconds(0.5))
                 .andThen(Commands.runOnce(() -> {
-                    while (!m_Shooter.getNoteDetected()) {
+                    timer.restart();
+                    while (!m_Shooter.getNoteDetected() && !timer.hasElapsed(1)) {
                     m_Intake.intakeStart(1);
                     }
                 }).andThen(Commands.waitSeconds(0.2)
@@ -41,7 +45,8 @@ public class ShooterCommands {
         })
                 .andThen(Commands.waitSeconds(0))
                 .andThen(Commands.runOnce(() -> {
-                    while (!m_Shooter.getNoteDetected()) {
+                    timer.restart();
+                    while (!m_Shooter.getNoteDetected() && !timer.hasElapsed(1)) {
                     m_Intake.intakeStart(1);
                     }
                 }).andThen(Commands.waitSeconds(0.2)

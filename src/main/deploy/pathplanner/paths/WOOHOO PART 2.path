@@ -3,32 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2069872572793579,
-        "y": 5.507946742389212
+        "x": 0.8210801606796532,
+        "y": 4.525637769225312
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9554131415955136,
-        "y": 5.5430292057165325
+        "x": 0.5755029173876011,
+        "y": 2.5844081317792273
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "WOOHOO END"
     },
     {
       "anchor": {
-        "x": 2.0138839138077134,
-        "y": 4.116342363738859
+        "x": 7.568607273966684,
+        "y": 0.7601200387585969
       },
       "prevControl": {
-        "x": 1.5344235816676757,
-        "y": 3.9994008193144586
+        "x": 6.568607273966684,
+        "y": 0.7601200387585969
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "TWOHOO End"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,13 +45,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 180.0,
+    "rotation": 119.9816393690504,
     "velocity": 0
   },
   "useDefaultConstraints": true

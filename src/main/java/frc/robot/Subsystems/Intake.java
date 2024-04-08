@@ -12,7 +12,7 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
-    public static CANSparkMax wristMotor1;
+    public  CANSparkMax wristMotor1;
     public static CANSparkMax intakeMotor;
     public RelativeEncoder wristEncoder1;
     public static DigitalInput noteIntakedLeft;
@@ -38,7 +38,7 @@ public class Intake extends SubsystemBase {
 
         // Limit Switch (Photo Eye) Declarations
         noteIntakedLeft = new DigitalInput(0);
-        noteIntakedRight = new DigitalInput(1);
+        noteIntakedRight = new DigitalInput(2);
         noteIntakedMid  = new DigitalInput(9);
 
         // Encoders Declarations
@@ -78,7 +78,7 @@ public class Intake extends SubsystemBase {
 
     //Intake sensor function
     public boolean sens() {
-    if (getNoteIntakedLeft() && getNoteIntakedRight() && getNoteIntakedMid()) {
+    if (getNoteIntakedLeft() && getNoteIntakedRight()) {
         //blinkin?
         return true;
     } else {
@@ -88,7 +88,7 @@ public class Intake extends SubsystemBase {
     }
 
     public boolean anySens() {
-    if (getNoteIntakedLeft() || getNoteIntakedRight() || getNoteIntakedMid()) {
+    if (getNoteIntakedLeft() || getNoteIntakedRight()) {
         return true;
     } else {
         return false;
@@ -114,7 +114,7 @@ public class Intake extends SubsystemBase {
 
     // Wrist up movement control
     public void wristUp() {
-        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 1.0));
+        wristMotor1.set(wristPID.calculate(wristEncoder1.getPosition(), 0.0));
     }
 
     public void wristHalf() {
