@@ -1,10 +1,11 @@
 package frc.robot.Subsystems.Vision;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class Limelight {
@@ -66,5 +67,11 @@ public class Limelight {
 
         }
     } 
+    //uses network tables the get the botpose
+    protected NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
+    public Pose2d getLimelightPose(){
+        Double[] limelightBotPose = limelightTable.getEntry("botpose_wpiblue").getDoubleArray(new Double[6]);
+        return new Pose2d(limelightBotPose[0], limelightBotPose[1], Rotation2d.fromDegrees(limelightBotPose[5]));
+    }
 }

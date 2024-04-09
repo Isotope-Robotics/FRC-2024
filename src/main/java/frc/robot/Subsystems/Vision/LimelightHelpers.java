@@ -774,6 +774,7 @@ public class LimelightHelpers {
         if (profileJSON) {
             System.out.printf("lljson: %.2f\r\n", millis);
         }
+        
 
         return results;
     }
