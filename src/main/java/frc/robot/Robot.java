@@ -23,6 +23,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
+import frc.robot.Subsystems.Vision.LimelightHelpers;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -187,6 +188,7 @@ public class Robot extends TimedRobot {
 
     Driver1Controls();
     Driver2Controls();
+  
 
     SmartDashboard.putBoolean("Intook", intook);
 
@@ -281,13 +283,15 @@ public class Robot extends TimedRobot {
       }
     
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
-    blinkin.darkBlue();
+      LimelightHelpers.setLEDMode_ForceBlink("limelight-april");
+      blinkin.darkBlue();
 intook = false;
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
     blinkin.colorwave();
     } else {
     blinkin.lime();
      intook = false;
+     LimelightHelpers.setLEDMode_ForceOff("limelight-april");
     }
     
     // Intake Manual Control
