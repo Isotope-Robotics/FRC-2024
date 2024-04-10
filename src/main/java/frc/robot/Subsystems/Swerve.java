@@ -5,7 +5,6 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -22,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.SwerveModule;
+import frc.robot.Subsystems.Vision.Limelight;
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
@@ -75,6 +75,12 @@ public class Swerve extends SubsystemBase {
         PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
         SmartDashboard.putData("Field", field);
+    }
+
+    private Limelight limelight;
+
+    public Swerve (Limelight limelight){
+      this.limelight = limelight;
     }
 
     public void drive(Translation2d translation, double rotation, boolean isFieldRel, boolean isOpenLoop) {
