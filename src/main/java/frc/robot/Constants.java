@@ -128,8 +128,8 @@ public class Constants {
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
-        public static final int driveCurrentLimit = 50;
-        public static final int driveCurrentThreshold = 60;
+        public static final int driveCurrentLimit = 100;
+        public static final int driveCurrentThreshold = 120;
         public static final double driveCurrentThresholdTime = 0.1;
         public static final boolean driveEnableCurrentLimit = true;
 

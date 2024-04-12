@@ -23,6 +23,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
+import frc.robot.Subsystems.Vision.LimelightHelpers;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -216,7 +217,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     swerve.swerveCurrents();
-    System.out.println("Left: " + intake.getNoteIntakedLeft() + " Mid: " + intake.getNoteIntakedMid() + " Right: " + intake.getNoteIntakedRight());
+    //System.out.println("Left: " + intake.getNoteIntakedLeft() + " Mid: " + intake.getNoteIntakedMid() + " Right: " + intake.getNoteIntakedRight());
     
   }
 
@@ -267,7 +268,7 @@ public class Robot extends TimedRobot {
   }
 
   private void Driver2Controls() {
-    //make this color change take place in the sens function
+    // blinkin patterns
     if (intake.sens()) {
       if (shootTimer.hasElapsed(2))
       {
@@ -279,10 +280,15 @@ public class Robot extends TimedRobot {
         intook = true;
     blinkin.hotpink();
       }
+
+      System.out.println(Climber.getMasterPos());
+      System.out.println(Climber.getFollowerPos());
+
     
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
     blinkin.darkBlue();
-intook = false;
+      
+    intook = false;
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
     blinkin.colorwave();
     } else {
@@ -559,6 +565,40 @@ intook = false;
      } else {
        hTimer.reset();
     }
+  }
+
+  private void SwerveAprilDrive(boolean isFieldRel) {
+    // Controller Deadbands (Translation, Strafe, Rotation)
+
+    // double xSpeed = drivePID.calculate(limelight.getALimelight(), driveOffset);
+    // double ySpeed = strafePID.calculate(limelight.getXLimelight(), strafeOffset);
+    // double rot = rotationPID.calculate(limelight.getYaw(), rotationOffset);
+
+    // if (Constants.Controllers.driver1.getPOV() == 0) {
+    // xSpeed = -.75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 90) {
+    // ySpeed = .75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 180) {
+    // xSpeed = .75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 270) {
+    // ySpeed = -.75;
+    // } else if (Constants.Controllers.driver1.getPOV() == 45) {
+    // xSpeed = .5;
+    // ySpeed = .5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 135) {
+    // xSpeed = -.5;
+    // ySpeed = .5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 225) {
+    // xSpeed = -.5;
+    // ySpeed = -.5;
+    // } else if (Constants.Controllers.driver1.getPOV() == 315) {
+    // xSpeed = .5;
+    // ySpeed = -.5;
+    // }
+
+    // Drive Function
+    // swerve.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
+    //     rot * Constants.Swerve.maxAngularVelocity, isFieldRel, false);
   }
 
   /*

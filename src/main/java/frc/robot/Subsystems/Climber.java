@@ -1,6 +1,8 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkRelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,6 +15,8 @@ public class Climber {
 
     public static CANSparkMax masterMotor;
     public static CANSparkMax followerMotor;
+    public static RelativeEncoder masterEncoder;
+    public static RelativeEncoder followerEncoder;
     public static DigitalInput climberSwitch1;
     public static DigitalInput climberSwitch2;
 
@@ -28,6 +32,9 @@ public class Climber {
         // Idle Mode Declarations
         masterMotor.setIdleMode(Constants.Intake.Brake);
         followerMotor.setIdleMode(Constants.Intake.Brake);
+
+        masterEncoder = masterMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
+        followerEncoder = followerMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, Constants.Encoders.NEO_ENCODER_COUNTS);
     }
 
 
@@ -56,19 +63,36 @@ public class Climber {
         followerMotor.set(s);
     }
 
-    public void stopM(){
+    public void stopM() {
         masterMotor.set(0);
     }
 
     public void stopF() {
     followerMotor.set(0);
+    }
 
+    public void FUp() {
+    followerMotor.set(motionPID.calculate(followerEncoder.getPosition(), 10.0));
+    }
+
+    public void MUp() {
+    masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 10.0));
+    }
+
+    public void MDown() {
+    masterMotor.set(motionPID.calculate(masterEncoder.getPosition(), 0.0));
+    }
+
+    public void FDown() {
+    followerMotor.set(motionPID.calculate(followerEncoder.getPosition(), 0.0));
     }
 
     public void clearStickyFaults(){
         masterMotor.clearFaults();
         followerMotor.clearFaults();
-        System.out.println("Clearing Shooter Faults, If Any");
+        masterEncoder.setPosition(0);
+        followerEncoder.setPosition(0);
+        System.out.println("Clearing Climber Faults, If Any");
     }
 
     public  double getMasterCurrent() {
@@ -77,6 +101,16 @@ public class Climber {
 
     public  double getFollowerCurrent() {
         return followerMotor.getOutputCurrent();
+    }
+
+    public static double getFollowerPos() {
+        return followerEncoder.getPosition();
+    }
+
+    public static double 
+    
+    getMasterPos() {
+        return masterEncoder.getPosition();
     }
 
     // Returns Instance Of Climber

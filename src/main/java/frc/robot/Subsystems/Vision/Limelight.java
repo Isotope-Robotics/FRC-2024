@@ -68,9 +68,9 @@ public class Limelight {
         }
     } 
     //uses network tables the get the botpose
-    protected NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    protected static NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight-april");
 
-    public Pose2d getLimelightPose(){
+    public static Pose2d getLimelightPose(){
         Double[] limelightBotPose = limelightTable.getEntry("botpose_wpiblue").getDoubleArray(new Double[6]);
         return new Pose2d(limelightBotPose[0], limelightBotPose[1], Rotation2d.fromDegrees(limelightBotPose[5]));
     }
