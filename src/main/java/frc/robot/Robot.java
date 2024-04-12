@@ -23,8 +23,6 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Vision.Limelight;
-import frc.robot.Subsystems.Vision.LimelightHelpers;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -68,8 +66,8 @@ public class Robot extends TimedRobot {
   public boolean intook;
 
   // NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-note");
-  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-april");
+  NetworkTable limelightAprilTable = NetworkTableInstance.getDefault().getTable("limelight-april");
+  NetworkTable limelightNoteTable = NetworkTableInstance.getDefault().getTable("limelight-note");
 
   double limelightAprilTagLastError;
   double limelightNoteLastError;
