@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8210801606796532,
-        "y": 4.525637769225312
+        "x": 1.6658581184460945,
+        "y": 3.102802793283311
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.5755029173876011,
-        "y": 2.5844081317792273
+        "x": 1.704764736543692,
+        "y": 3.112529447807709
       },
       "isLocked": false,
       "linkedName": "WOOHOO END"
     },
     {
       "anchor": {
-        "x": 7.568607273966684,
-        "y": 0.7601200387585969
+        "x": 7.336497706170768,
+        "y": 4.08519490024762
       },
       "prevControl": {
-        "x": 6.568607273966684,
-        "y": 0.7601200387585969
+        "x": 7.336497706170768,
+        "y": 4.046288282150023
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,29 +30,29 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.3,
-      "rotationDegrees": 0,
-      "rotateFast": false
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 120.0,
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.21,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 400.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 120.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 119.9816393690504,
+    "rotation": 120.0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

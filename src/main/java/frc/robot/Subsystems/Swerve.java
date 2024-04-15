@@ -231,10 +231,10 @@ public class Swerve extends SubsystemBase {
     double tx = limelightNoteTable.getEntry("tx").getFloat(0);
     double tx_max = 30.0f; // detemined empirically as the limelights field of view
     double error = 0.0f;
-    double kP = 0.8f; // should be between 0 and 1, but can be greater than 1 to go even faster
+    double kP = 0.6f; // should be between 0 and 1, but can be greater than 1 to go even faster
     double kD = 0.0f; // should be between 0 and 1
     double steering_adjust = 0.0f;
-    double acceptable_error_threshold = 5.0f / 360.0f; // 15 degrees allowable
+    double acceptable_error_threshold = 7.0f / 360.0f; // 15 degrees allowable
     error = (tx / tx_max) * (31.65 / 180); // scaling error between -1 and 1, with 0 being dead on, and 1 being 180 degrees away
     if (limelightNoteLastError == 0.0f) {
       limelightNoteLastError = tx;
@@ -243,7 +243,8 @@ public class Swerve extends SubsystemBase {
     limelightNoteLastError = tx; // setting limelightlasterror for next loop
 
     if (Math.abs(error) > acceptable_error_threshold) { // PID with a setpoint threshold
-      steering_adjust = (kP * error + kD * error_derivative);
+      steering_adjust = -1 * (kP * error + kD * error_derivative);
+      closeenough = false;
     }
     else {closeenough = true;}
 

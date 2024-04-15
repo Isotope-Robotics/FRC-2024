@@ -40,7 +40,7 @@ public class FalconSwerveConstants {
                 double wheelDiameter = Units.inchesToMeters(4.0);
                 double angleGearRatio = ((150.0 / 7.0) / 1.0);
 
-                double angleKP = 100.0;
+                double angleKP = 100; //was 100
                 double angleKI = 0.0;
                 double angleKD = 0.0;
 

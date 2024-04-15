@@ -279,9 +279,9 @@ public class Robot extends TimedRobot {
     blinkin.hotpink();
       }
 
-      System.out.println(Climber.getMasterPos());
-      System.out.println(Climber.getFollowerPos());
-
+     // System.out.println(Climber.getMasterPos());
+     // System.out.println(Climber.getFollowerPos());
+     // System.out.println(limelight.getLimelightPose());
     
     } else if (intake.getNoteIntakedLeft() || intake.getNoteIntakedRight()) {
     blinkin.darkBlue();
