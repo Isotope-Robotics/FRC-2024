@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8444684695637196,
-      "y": 6.595503105536126
+      "x": 0.8561626240061597,
+      "y": 6.548726487766366
     },
-    "rotation": -119.19748604606438
+    "rotation": -122.90524292298788
   },
   "command": {
     "type": "sequential",
@@ -15,6 +15,12 @@
           "type": "named",
           "data": {
             "name": "Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side 1"
           }
         }
       ]

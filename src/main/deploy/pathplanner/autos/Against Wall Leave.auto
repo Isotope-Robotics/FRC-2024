@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3576779647621067,
-      "y": 5.61
+      "x": 0.5287262996178413,
+      "y": 2.8533736839553465
     },
     "rotation": 180.0
   },
@@ -12,15 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "speakerl plast line"
+            "pathName": "Against Wall 1"
           }
         }
       ]
