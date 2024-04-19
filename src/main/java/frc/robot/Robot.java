@@ -288,9 +288,9 @@ public class Robot extends TimedRobot {
       
     intook = false;
     } else if (Constants.Controllers.driver2.getAButton() && (!intake.getNoteIntakedLeft() && !intake.getNoteIntakedRight())) {
-    blinkin.colorwave();
+    blinkin.rainbowRGB();
     } else {
-    blinkin.lime();
+    blinkin.colorwave();
      intook = false;
     }
     
