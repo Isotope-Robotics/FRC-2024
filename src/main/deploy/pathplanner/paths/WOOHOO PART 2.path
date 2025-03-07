@@ -1,5 +1,5 @@
 {
-  "version": 1.0,
+  "version": "2025.0",
   "waypoints": [
     {
       "anchor": {
@@ -8,8 +8,13 @@
       },
       "prevControl": null,
       "nextControl": {
+<<<<<<< Updated upstream
         "x": 1.704764736543692,
         "y": 3.112529447807709
+=======
+        "x": 0.575502917387601,
+        "y": 2.5844081317792273
+>>>>>>> Stashed changes
       },
       "isLocked": false,
       "linkedName": "WOOHOO END"
@@ -20,8 +25,13 @@
         "y": 4.08519490024762
       },
       "prevControl": {
+<<<<<<< Updated upstream
         "x": 7.336497706170768,
         "y": 4.046288282150023
+=======
+        "x": 6.568607273966684,
+        "y": 0.760120038758597
+>>>>>>> Stashed changes
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,21 +40,30 @@
   ],
   "rotationTargets": [
     {
+<<<<<<< Updated upstream
       "waypointRelativePos": 0.5,
       "rotationDegrees": 120.0,
       "rotateFast": true
+=======
+      "waypointRelativePos": 0.3,
+      "rotationDegrees": 0.0
+>>>>>>> Stashed changes
     }
   ],
   "constraintZones": [],
+  "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 1.0,
     "maxAcceleration": 1.0,
     "maxAngularVelocity": 400.0,
-    "maxAngularAcceleration": 400.0
+    "maxAngularAcceleration": 400.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
+<<<<<<< Updated upstream
     "rotation": 120.0,
     "rotateFast": false
   },
@@ -53,6 +72,15 @@
   "previewStartingState": {
     "rotation": 120.0,
     "velocity": 0
+=======
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 120.65066795705292
+>>>>>>> Stashed changes
   },
   "useDefaultConstraints": false
 }

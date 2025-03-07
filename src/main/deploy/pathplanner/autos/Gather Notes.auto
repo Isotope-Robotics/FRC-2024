@@ -1,12 +1,5 @@
 {
-  "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 0.7715000588285681,
-      "y": 4.30929679893214
-    },
-    "rotation": 125.15107369090332
-  },
+  "version": "2025.0",
   "command": {
     "type": "sequential",
     "data": {
@@ -32,6 +25,7 @@
       ]
     }
   },
+  "resetOdom": true,
   "folder": "Speaker South Side",
   "choreoAuto": false
 }
